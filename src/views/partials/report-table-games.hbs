@@ -1,0 +1,43 @@
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Grupo o fase</th>
+      <th scope="col">Total por marcador</th>
+      <th scope="col">Total por L-E-V</th>
+      <th scope="col">Total por Local</th>
+      <th scope="col">Total por Visitante</th>
+      <th scope="col">Total por ganador</th>
+      <th scope="col">TOTAL </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each dataTableGame}}
+    <tr>
+      <th scope="row">{{#if dataFlags.phase }} {{dataFlags.phase}} {{else}} {{dataTablePoint.group}}{{/if}}</th>
+      <td>{{dataTablePoint.totalScore}}</td>
+      <td>{{dataTablePoint.totalAnalog}}</td>
+      {{#if dataFlags.renderLocalEqual}}<td>{{dataTablePoint.totalLocalEqual}}</td>
+      {{else}}
+      <td class="table-secondary"></td>
+      {{/if}}
+      {{#if dataFlags.renderLocalEqual}}<td>{{dataTablePoint.totalVisitEqual}} </td>
+      {{else}}<td class="table-secondary"></td>
+      {{/if}}
+      {{#if dataFlags.dataGamePhantom}}
+      <td>{{dataFlags.dataGamePhantom.total}}</td>
+      {{else}}<td class="table-secondary"></td>
+      {{/if}}
+      <td class="table-success"> {{dataTablePoint.total}}</td>
+    </tr>
+    {{#if dataFlags.totalizerGame}}
+    <tr>
+      <th scope="row" colspan="6">TOTAL</th>
+      <td ><h4>{{dataFlags.totalizerGame}}</h4></td>
+    </tr>
+    {{/if}}
+
+    {{/each}}
+  </tbody>
+</table>

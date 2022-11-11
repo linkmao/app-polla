@@ -1,0 +1,123 @@
+{{#each dataGameAndBet}}
+<a name="{{dataBet.idBet}}"></a>
+<div class="card">
+  {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+    <div class="card-body">
+    <h6 class="card-title">Juego número: {{dataGame.gameNumber}}</h6>
+    <div class="row">
+      <div class="col">
+        <img src="/img/flags/{{dataGame.localFlag}}" alt="flag" width="100%">
+      </div>
+      <div class="col">
+        <p class="card-text">{{dataGame.localTeam}}</p>
+      </div>
+      <div class="col">
+        <h5 class="card-text">{{dataGame.localScore}}</h5>
+      </div>
+      <div class="col">
+        <h5>{{dataGame.analogScore}}</h5>
+      </div>
+      <div class="col">
+        <h5 class="card-text">{{dataGame.visitScore}}</h5>
+      </div>
+       <div class="col">
+        <p class="card-text">{{dataGame.visitTeam}}</p>
+      </div>
+        <div class="col">
+        <img src="/img/flags/{{dataGame.visitFlag}}" alt="flag" width="100%">
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{{!-- INICIO RENDERIZADO DE LA APUESTA --}}
+<div class="card" style="width: 200 px;">
+  {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+  <div class="card-body">
+      <h6 class="card-title">Mi apuesta</h6>
+    <div class="row">
+      <div class="col"><img src="/img/flags/{{dataBet.localFlag}}" alt="flag" width="50%"></div>
+      <div class="col">
+        <p class="card-text justify-left">{{dataBet.localTeam}}</p>
+      </div>
+     
+      <div class="col">
+        <p class="card-text">{{dataBet.visitTeam}}</p>
+      </div>
+       <div class="col"><img src="/img/flags/{{dataBet.visitFlag}}" alt="flag" width="50%"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="card-text text-end">{{dataBet.localScore}}</h2>
+      </div>
+      <div class="col text-center">
+        <h2>{{dataBet.analogScore}}</h2>
+      </div>
+      <div class="col">
+        <h2 class="card-text text-start">{{dataBet.visitScore}}</h2>
+      </div>
+    </div>
+    <div class="row">
+    <p class="mb-0 small">Puntaje por marcador: {{dataBet.pointByScore}}</p>
+    <p class="mb-0 small">Puntos por L-E-V: {{dataBet.pointByAnalogScore}}</p>
+    <h6 class="mb-0">PUNTAJE TOTAL {{dataBet.totalScore}}</h6>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="container">
+      <form action="../api/bet-games/me/group/bet/{{dataBet.idBet}}/{{dataBet.group}}/?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              {{!-- <label for="exampleFormControlInput1" class="form-label">Goles local</label> --}}
+              <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles local"
+                name="localScore" required>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="mb-3">
+              {{!-- <label for="select" class="form-label">Apuesta L-E-V</label> --}}
+              <select class="form-select" aria-label="Default select example" id="select" name="analogScore" required>
+                <option value="L">Local</option>
+                <option value="E">Empate</option>
+                <option value="V">Visitante</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="mb-3">
+              {{!-- <label for="exampleFormControlInput1" class="form-label">Goles visitante</label> --}}
+              <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles visitante"
+                name="visitScore" required>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <div class="row">
+          <button type="submit" href="#ancla" class="btn btn-primary mb-3">Apuesta!!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+{{else}}
+<div class="row "><h5>Selecciona un grupo para realizar apuestas</h5></div>
+
+
+
+{{/each}}

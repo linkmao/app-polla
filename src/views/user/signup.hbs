@@ -1,0 +1,36 @@
+<div class="container">
+  <form action="/auth/signup" method="POST">
+    <div class="mb-2">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" value="{{localInputName}}">
+    </div>
+    <div class="mb-2">
+      <label for="lastname" class="form-label">Apellidos</label>
+      <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Tus apellidos" value="{{localInputLastName}}">
+    </div>
+    <div class="mb-2">
+      <label for="phone" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="phone" name="phone" placeholder="Tu celular" value="{{phone}}">
+    </div>
+    <div class="mb-2">
+      <label for="email" class="form-label">Correo</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Tu correo" value="{{email}}">
+    </div>
+    <div class="mb-2">
+      <label for="pass" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="pass" name="pass" placeholder="Crea tu contraseña" value="{{pass}}">
+    </div>
+    <div class="mb-2">
+      <label for="pass-verify" class="form-label">Verifica contraseña</label>
+      <input type="password" class="form-control" id="pass-verify" name="passVerify" placeholder="Repite tu contraseña" value="{{passVerify}}">
+    </div>
+    <div class="mb-2">
+      <label for="key" class="form-label"><h6>Llave de registro</h6></label>
+      <input type="text" class="form-control" id="key" name="key" placeholder="Llave de registro " value="{{key}}">
+    </div>
+
+    <div class="row">
+      <button type ="submit" class="btn btn-primary mb-3">Registro</button>
+     </div>
+  </form> 
+</div>

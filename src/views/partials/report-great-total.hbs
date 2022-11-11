@@ -1,0 +1,18 @@
+{{#each dataPoint}}
+<div class="card" style="width: 23rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title">Puntajes generales</h2>
+    <br>
+    <p class="card-text">Puntaje total por juegos fase grupos: {{totalByGameGroups}}</p>
+    <p class="card-text">Puntaje total por clasificaciones fase grupos: {{totalByClassification}}</p>
+    <h5 class="card-title">Total de puntaje fase de grupos: {{totalPointGroups}}</h5>
+    <br>
+    <p class="card-text">Puntaje total por juegos fases eliminatorias: {{totalByGamePhases}}</p>
+    <p class="card-text">Puntaje total por clasificacion final: {{totalByClassificationFinal}}</p>
+    <h5 class="card-title">Total de puntaje fase eliminatorias: {{totalPointPhases}}</h5>
+    <br>
+    <h2 class="card-title">Gran total: {{greatTotalPoint}}</h2>
+  </div>
+</div>
+{{/each}}

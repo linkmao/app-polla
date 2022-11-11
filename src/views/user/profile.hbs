@@ -1,0 +1,23 @@
+<div class="container">
+<form action="api/users/me/profile/?_method=PUT" method="POST">
+<input type="hidden" name="_method" value="PUT">
+<div class="row">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre" value="{{localName}}" name="name">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Apellido" value="{{localLastName}}" name="lastName">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Telefono</label>
+  <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Telefono" value="{{localPhone}}" name="phone">
+</div>
+</div>
+
+ <div class="row">
+      <button type ="submit" class="btn btn-primary mb-3">Aceptar</button>
+     </div>
+</form>
+</div>

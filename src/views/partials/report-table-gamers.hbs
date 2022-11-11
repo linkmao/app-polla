@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">Pos</th>
+      <th scope="col" style="text-align: center">Jugador</th>
+      <th scope="col" colspan="2"  style="text-align: center">Grupos</th>
+      <th scope="col" colspan="2"  style="text-align: center">Fases</th>
+      <th scope="col" style="text-align: center">TOTAL </th>
+    </tr>
+      <tr>
+      <th scope="col" ></th>
+      <th scope="col" ></th>
+      <th scope="col"style="text-align: center">Por juegos</th>
+      <th scope="col"style="text-align: center">Por clasificación</th>
+      <th scope="col"style="text-align: center">Por juegos</th>
+      <th scope="col"style="text-align: center">Por clasificación</th>
+      
+    </tr>
+  </thead>
+  {{#each data}}
+  <tbody>
+    <tr>
+      <td></td>
+      <td scope="col"style="text-align: center">{{name}}</td>
+      <td scope="col"style="text-align: center">{{puntajePorJuegosGrupos}}</td>
+      <td scope="col"style="text-align: center">{{puntajePorJuegosFases}}</td>
+      <td scope="col"style="text-align: center">{{puntajePorClasificacionGrupos}}</td>
+      <td scope="col"style="text-align: center">{{puntajePorClasificacionFinal}}</td>
+      <td scope="col"style="text-align: center">{{totalJugador}}</td>
+
+
+    </tr>  
+  </tbody>
+  {{/each}}
+
+</table>
