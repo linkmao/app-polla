@@ -258,3 +258,77 @@ PRIORIDAD POSTERIOR
 - Permitir recuperacion de contraseña
 - Banderas en juegos de octavos
 - SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
+
+
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="/img/iconos/game-by-group.png" alt="">
+          </a>
+
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="/img/iconos/game-by-phase.png" width="15%" alt="">
+          </a>
+
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="/img/iconos/point.png" width="15%" alt="">
+          </a>
+
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="/img/iconos/profile.png" width="15%" alt="">
+          </a>
+
+
+
+
+
+         
+ <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+    <li class="nav-item dropdown">
+ 
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            {{localName}}
+          </a>
+
+        
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/routegames">Mis juegos</a></li>
+            <li><a class="dropdown-item " href="/eighth">Mis apuestas octavos</a></li>
+            {{#if octavosCompleted}}
+            <li><a class="dropdown-item" href="/fourth">Mis apuestas cuartos</a></li>
+            {{else}}
+            <li><a class="dropdown-item disabled" href="/fourth">Mis apuestas cuartos</a></li>
+            {{/if}}
+            {{#if cuartosCompleted}}
+            <li><a class="dropdown-item" href="/semi">Mis apuestas semifinal</a></li>
+            {{else}}
+            <li><a class="dropdown-item disabled" href="/semi">Mis apuestas semifinal</a></li>
+            {{/if}}
+            {{#if semiCompleted}}
+            <li><a class="dropdown-item" href="/finals">Mis apuestas final</a></li>
+            {{else}}
+            <li><a class="dropdown-item disabled" href="/finals">Mis apuestas final</a></li>
+            {{/if}}
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/detailpoints">Detalle puntaje</a></li>
+            <li><a class="dropdown-item" href="/detailpointsgamers">Detalle puntaje jugadores</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
+            <li><a class="dropdown-item" href="/password">Cambiar contraseña</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/auth/logout">Cerrar sesion</a></li>
+          </ul>
+        </li>
+         
+      </ul>
