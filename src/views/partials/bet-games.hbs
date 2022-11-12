@@ -1,3 +1,8 @@
+{{#each dataPoint}}
+<br>
+<h4 class="text-center">Apuestas del grupo {{dataPointGames.group}}</h4>
+{{/each}}
+
 {{#each dataGameAndBet}}
 <a name="{{dataBet.idBet}}"></a>
 <div class="card">
@@ -78,7 +83,7 @@
             <div class="mb-3">
               {{!-- <label for="exampleFormControlInput1" class="form-label">Goles local</label> --}}
               <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles local"
-                name="localScore" required>
+                name="localScore" min="0"  required>
             </div>
           </div>
 
@@ -97,7 +102,7 @@
             <div class="mb-3">
               {{!-- <label for="exampleFormControlInput1" class="form-label">Goles visitante</label> --}}
               <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles visitante"
-                name="visitScore" required>
+                name="visitScore" min="0" required>
             </div>
           </div>
 

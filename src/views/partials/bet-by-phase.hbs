@@ -1,3 +1,8 @@
+{{#each dataPoint}}
+<br>
+<h4 class="text-center">Apuestas de la fase {{dataFlags.phase}}</h4>
+{{/each}}
+
 {{#each dataGameAndBet}}
 <section class="bet-games">
 {{!-- RENDERIZADO DEL GAME --}}
@@ -84,7 +89,7 @@
               <div class="mb-3">
                 {{!-- <label for="exampleFormControlInput1" class="form-label">Goles local</label> --}}
                 <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles local"
-                  name="localScore" required>
+                  name="localScore" min="0" required>
               </div>
             </div>
 
@@ -103,7 +108,7 @@
               <div class="mb-3">
                 {{!-- <label for="exampleFormControlInput1" class="form-label">Goles visitante</label> --}}
                 <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles visitante"
-                  name="visitScore" required>
+                  name="visitScore" min="0" required>
               </div>
             </div>
 
@@ -230,7 +235,7 @@
               <div class="mb-3">
                 {{!-- <label for="exampleFormControlInput1" class="form-label">Goles local</label> --}}
                 <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles local"
-                  name="localScore" required>
+                  name="localScore" min="0" required>
               </div>
             </div>
 
@@ -250,7 +255,7 @@
               <div class="mb-3">
                 {{!-- <label for="exampleFormControlInput1" class="form-label">Goles visitante</label> --}}
                 <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Goles visitante"
-                  name="visitScore" required>
+                  name="visitScore" min="0" required>
               </div>
             </div>
 
@@ -288,10 +293,8 @@
 
 {{!-- FIN DE BET 2 --}}
 </section>
-</br>
-</br>
-</br>
-</br>
+
+
 
 {{else}}
 <h1>NO HAY JUEGOS POR MOSTRAR</h1>

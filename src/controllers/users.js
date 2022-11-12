@@ -26,7 +26,7 @@ const updateUser  = async (req, res)=>{
 const updateMe= async(req, res)=>{
 const meUpdate=await User.findByIdAndUpdate(req.user.id, req.body,{new:true} )
 // res.status(200).json(meUpdate)
-res.status(200).redirect('/games')
+res.status(200).redirect('/routegames')
 }
 
 const deleteUser = async (req, res)=>{
@@ -52,7 +52,7 @@ const updatePassword = async (req,res)=>{
         const passUpdated=await User.findByIdAndUpdate(req.user.id, {pass: await User.encryptPass(pass)},{new:true} )
           // res.status(200).json(passUpdated)
          req.flash('mensajeOk', 'Contraseña cambiada exitosamente')
-         res.status(200).redirect('/games')
+         res.status(200).redirect('/routegames')
        } // si la contraseña coincide, se devuleve el usuario
       else {
         console.log("NO puede cambiar contraseña")

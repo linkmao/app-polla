@@ -1,10 +1,8 @@
 {{#each dataBetClassification}}
 <a name ="class"></a>
 <section class="bet-classification">
-  <br>
-  <br>
-  <br>
-    <form action="../api/bet-classifications/me/bet/group/{{group}}/?_method=PUT" method="POST">
+
+   <form action="../api/bet-classifications/me/bet/group/{{group}}/?_method=PUT" method="POST">
     <input type="hidden" name="_method" value="PUT">
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">

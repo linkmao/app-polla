@@ -1,6 +1,6 @@
 // Contiene elementos generales de la configuracion del juego
 module.exports = {secretword:"Palabra que solo yo conozco",
-tokenDuration:60*60,  // Duracion en segundos (1 hora)
+tokenDuration:60*24*60*60,  // Duracion en segundos (2 meses hora)
 pointByScore : 3,
 pointByAnalogScore:2,
 pointByClassificationOrder:3,

@@ -228,3 +228,33 @@ Abrir la app
 
 Reinciar la app en heroku
     heroku restart --app [nombre-app]
+
+
+# LOG PRUEBAS AND PRINCIPAL TASKS
+PRIORIDADES PARA LANZAMIENTO
+- (OK SIN NOVEDAD)  COLOCAR EXPIRACION TOKEN ADMON POR 2 MESES
+- (OK SIN NOVEDAD)  HABLITAR DE NUEVO POR FRONTEND EL CAMBIO DE CONTRASEÑA
+- (OK SIN NOVEDAD)  HABILITAR DE NUEVO EL CAMBIO DE PERIL POR FRONTEND
+- (OK SIN NOVEDAD)  VERIFICAR QUE TODAS LAS RUTAS SE ACCEDAN DESDE EL FRONTEND
+- (OK SIN NOVEDAD)  DESHABILITAR MANUALMENTA OCTAVOS
+- (OK SIN NOVEDAD)  Que se vea el nombre del grupo que se está apostando.
+- (OK SIN NOVEDAD)  colocar en la parte superior el nombre de la fase que se está apostando
+- Poner el balon que dice MIla
+- modificar menú por iconos (si es posible)
+- (OK SIN NOVEDAD) Quitar la opcion en el marcador de valres negativos.
+- HACER COPIA DE SEGURIDAD DE LA BASE DE DATOS DE LA PRUEBA
+- SETEAR EL JUEGO (INCLUYE KEY)
+- HACER MANUEAL DE USO Y ENVIAR A CHAT
+- COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
+
+
+PRIORIDAD POSTERIOR
+- Correción de errores EN LA PRUEBA REALIZADA EL VIERNES
+- coleres en las tarjetas dependiendo si se ha jugado el juego  (aplica tambien a juego tercer y cuarto y final)
+- VAriable de entorno para eliminar la posibiidad de apostar (o data en BD o nuevo despliegue)
+- VAriable de entorno para deshabilitar octavos (o data en BD o nuevo despliegue)
+- en los juegos de la fase final, cambiar la palabra clasifica por ganador en la eleccion del equipo que gana
+- persitencia en el forulario de registro
+- Permitir recuperacion de contraseña
+- Banderas en juegos de octavos
+- SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
