@@ -122,7 +122,7 @@ Para que estos dos ultimos juegos tengan la misma estructura de ganar 3 puntos s
 # Fase de despliegue
 
 # Apuntes técnicos para este y otros proyectos
-## Exportacion de la base de datos
+## Exportacion de la base de datos local
 Cuando se desarrolla en local la base de datos tambien es en local, llevar esa base de datos a la nube, en este caso a mongo atlas se siguien los siguientes pasos
 
 1. Exportar la base de datos de local
@@ -136,6 +136,16 @@ $ mongorestore --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongod
 (En <Paswword> se copia el password del cluster)
 
 y listo
+
+## Exportación de la base de datos de mongo atlas
+En caso que se requiera hacer copia de seguridad de la base de datos de atlas, entonces se exporta así
+
+### Cuando se quiere exportar una colección en particular 
+mongoexport --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
+
+### Cuando se quiere exportar toda la base de datos
+mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> 
+
 
 ## Despliegue en Heroku
 Para el despliegue hay dos formas de hacerlo.
@@ -239,10 +249,10 @@ PRIORIDADES PARA LANZAMIENTO
 - (OK SIN NOVEDAD)  DESHABILITAR MANUALMENTA OCTAVOS
 - (OK SIN NOVEDAD)  Que se vea el nombre del grupo que se está apostando.
 - (OK SIN NOVEDAD)  colocar en la parte superior el nombre de la fase que se está apostando
-- Poner el balon que dice MIla
-- modificar menú por iconos (si es posible)
+- (OK SIN NOVEDAD) Poner el balon que dice MIla
+- (OK SIN NOVEDAD) modificar menú por iconos (si es posible)
 - (OK SIN NOVEDAD) Quitar la opcion en el marcador de valres negativos.
-- HACER COPIA DE SEGURIDAD DE LA BASE DE DATOS DE LA PRUEBA
+- (OK SIN NOVEDAD) HACER COPIA DE SEGURIDAD DE LA BASE DE DATOS DE LA PRUEBA
 - SETEAR EL JUEGO (INCLUYE KEY)
 - HACER MANUEAL DE USO Y ENVIAR A CHAT
 - COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
@@ -259,76 +269,3 @@ PRIORIDAD POSTERIOR
 - Banderas en juegos de octavos
 - SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
 
-
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="/img/iconos/game-by-group.png" alt="">
-          </a>
-
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="/img/iconos/game-by-phase.png" width="15%" alt="">
-          </a>
-
-
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="/img/iconos/point.png" width="15%" alt="">
-          </a>
-
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="/img/iconos/profile.png" width="15%" alt="">
-          </a>
-
-
-
-
-
-         
- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-    <li class="nav-item dropdown">
- 
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            {{localName}}
-          </a>
-
-        
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/routegames">Mis juegos</a></li>
-            <li><a class="dropdown-item " href="/eighth">Mis apuestas octavos</a></li>
-            {{#if octavosCompleted}}
-            <li><a class="dropdown-item" href="/fourth">Mis apuestas cuartos</a></li>
-            {{else}}
-            <li><a class="dropdown-item disabled" href="/fourth">Mis apuestas cuartos</a></li>
-            {{/if}}
-            {{#if cuartosCompleted}}
-            <li><a class="dropdown-item" href="/semi">Mis apuestas semifinal</a></li>
-            {{else}}
-            <li><a class="dropdown-item disabled" href="/semi">Mis apuestas semifinal</a></li>
-            {{/if}}
-            {{#if semiCompleted}}
-            <li><a class="dropdown-item" href="/finals">Mis apuestas final</a></li>
-            {{else}}
-            <li><a class="dropdown-item disabled" href="/finals">Mis apuestas final</a></li>
-            {{/if}}
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="/detailpoints">Detalle puntaje</a></li>
-            <li><a class="dropdown-item" href="/detailpointsgamers">Detalle puntaje jugadores</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>
-            <li><a class="dropdown-item" href="/password">Cambiar contraseña</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="/auth/logout">Cerrar sesion</a></li>
-          </ul>
-        </li>
-         
-      </ul>
