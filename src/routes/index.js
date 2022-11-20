@@ -1,19 +1,39 @@
 const { Router } = require('express')
 const router = Router()
-const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal } = require('../controllers/index')
+const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassPhases } = require('../controllers/index')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
 
 // Ejemplo para el envio de datos (borrar cuando sea necesario)
 // router.get('/',(req,res)=> res.render('index',{message:"Radiohead Home", name:"Maolink"}) )
-router.get('/', (req, res) => res.render('index'))
-
+router.get('/', (req, res) => {
+const enableRegisterButton= config.renderButtonRegister  
+const dataFlags=[{enableRegisterButton}]  
+res.render('index',{dataFlags})}
+)
 router.get('/about', (req, res) => res.render('about'))
+
+router.get('/passrestore', (req, res) => res.render('user/pass-forget'))
+
+router.get('/verifygamesgroups/:id', async (req, res)=>{
+  const data= await verifyGamesGroups(req.params.id)
+  res.status(200).json({message: data}) 
+})
+
+router.get('/verifygamesphases/:id', async (req, res)=>{
+  const data= await verifyGamesPhases(req.params.id)
+  res.status(200).json({message: data}) 
+})
+
+router.get('/verifyclassgroups/:id', async (req, res)=>{
+  const data= await verifyClassGroups(req.params.id)
+  res.status(200).json({message: data}) 
+})
 
 router.get('/signup', (req, res) => res.render('user/signup'))
 
 router.get('/routegames', validar.isAuth, async (req, res) => {
-  res.render('games')
+ res.render('games')
 })
 
 router.get('/groups/:g', validar.isAuth, async (req, res) => {
@@ -25,7 +45,7 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   // Pequelo código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i] })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], dataFlagViewBet:config.renderBetRoundGroup, dataFlagViewButton:config.renderViewOtherBetGroup })
   })
   // Dattos para el tratamiento de los puntajes
   const dataPointGames = await getPointGameGroup(req.params.g, req.user.id)
@@ -43,7 +63,7 @@ router.get('/eighth', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i] })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],  renderTableByLocalAndVisit:false, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
   })
   const dataPointGames = await getPointGamePhase(config.phaseEighth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
@@ -63,11 +83,11 @@ router.get('/fourth', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i] })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
   })
   const dataPointGames = await getPointGamePhase(config.phaseFourth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
-  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Cuartos", total } }]
+  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true,renderPhase: true, phase: "Cuartos", total } }]
   res.render('games-by-phase', { dataGameAndBet, dataPoint })
 })
 
@@ -82,11 +102,11 @@ router.get('/semi', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i] })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
   })
   const dataPointGames = await getPointGamePhase(config.phaseSemiFinals, req.user.id)
   const total = sumTotalPoint([dataPointGames])
-  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Semifinal", total } }]
+  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true,  renderPhase: true, phase: "Semifinal", total } }]
   res.render('games-by-phase', { dataGameAndBet, dataPoint })
 })
 
@@ -98,17 +118,18 @@ router.get('/finals', validar.isAuth, async (req, res) => {
     res.redirect('/semi')}
   // data para juegos de final
   const dataGame = await getGameByPhaseFinal(config.phaseFinal, [63,64])
+
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i] })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
   })
   const dataBetClassification = await getBetClassificationByGroup("FINAL", req.user.id)
   const dataPointGames = await getPointGamePhase(config.phaseFinal, req.user.id)
   const dataPointClass = await getPointClassification("FINAL", req.user.id)
   const dataPointGamePhantom = await getPointGamePhantom(config.gamePhantom, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass, dataPointGamePhantom])
-  const dataPoint = [{ dataPointGames, dataPointClass, dataPointGamePhantom, dataFlags: { renderClassification: true, renderEqualTeam: true, renderGamePhantom: true, renderPhase: true, phase: "Final", total } }]
+  const dataPoint = [{ dataPointGames, dataPointClass, dataPointGamePhantom, dataFlags: { renderClassification: true, renderEqualTeam: true,  renderGamePhantom: true, renderPhase: true, phase: "Final", total } }]
   res.render('games-by-phase', { dataGameAndBet, dataBetClassification, dataPoint })
 })
 
@@ -122,6 +143,32 @@ router.get('/detailpoints', validar.isAuth, async (req, res) => {
 router.get('/detailpointsgamers', validar.isAuth, async (req, res) => {
   data = await getAllGamersPoint()
   res.render('detail-points-gamers', { data })
+})
+
+// Ruta para mostrar el detalle de una apuesta, de un solo juego,
+router.get('/detailpointbygame/:idgame', validar.isAuth, async(req, res)=>{
+const dataGame = await getOneGame(req.params.idgame)
+const dataBet=await getAllBetTheOneGame(req.params.idgame)
+res.render('detail-point-by-game', {dataGame, dataBet})
+})
+
+router.get('/detailpointbygamephases/:idgame', validar.isAuth, async(req, res)=>{
+  const dataGame = await getOneGame(req.params.idgame)
+  const dataBet=await getAllBetTheOneGamePhases(req.params.idgame)
+  res.render('detail-point-by-game-phases', {dataGame, dataBet})
+  })
+
+router.get('/detailpointbyclassification/:group', validar.isAuth, async(req, res)=>{
+  const dataClassification = await getClassification(req.params.group)
+  const dataBetClassification=await getBetClassificationAllUsers(req.params.group)
+  const dataFlag=[]
+  if(req.params.group=='FINAL'){
+     dataFlag.push({renderFinal:true})
+  } else {
+    dataFlag.push({renderFinal:false})
+  }
+
+  res.render('detail-point-by-classification', {dataClassification, dataBetClassification, dataFlag})
 })
 
 router.get('/profile', validar.isAuth, async (req, res) => {

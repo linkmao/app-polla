@@ -1,0 +1,63 @@
+      {{#each dataClassification}}
+       <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Detalle de clasificaciones del grupo {{group}}</h5>
+        
+        <div class="row">
+          <div class="col">
+            <p>Orden</p>
+          </div>
+          <div class="col">
+            <p>Equipo</p>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <h5>1</h5>
+          </div>
+          <div class="col">
+            <img src="/img/flags/{{firstFlag}}" alt="flag" width="20%">
+          </div>
+          <div class="col">
+            <h5>{{firstTeam}}</h5>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <h5>2</h5>
+          </div>
+          <div class="col">
+            <img src="/img/flags/{{secondFlag}}" alt="flag" width="20%">
+          </div>
+          <div class="col">
+            <h5>{{secondTeam}}</h5>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <h5>3</h5>
+          </div>
+          <div class="col">
+            <img src="/img/flags/{{thirdFlag}}" alt="flag" width="20%">
+          </div>
+          <div class="col">
+            <h5>{{thirdTeam}}</h5>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col">
+            <h5>4</h5>
+          </div>
+          <div class="col">
+            <img src="/img/flags/{{fourthFlag}}" alt="flag" width="20%">
+          </div>
+          <div class="col">
+            <h5>{{fourthTeam}}</h5>
+          </div>
+        </div>
+      </div>
+      </div>
+  {{/each}}

@@ -14,15 +14,19 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/routegames">
-            <img src="/img/iconos/game-by-group.png" alt="" width="18%"> Apuesta grupos
+            <img src="/img/iconos/game-by-group.png" alt="" width="15%"> Apuesta grupos
           </a>
         </li>
    
 
      
 
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown ">
+          {{#if enableMenuPhases}}
+          <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{else}}
           <a class="nav-link disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{/if}}  
             <img src="/img/iconos/game-by-phase.png" width="15%" alt=""> Apuesta fases
           </a>
           <ul class="dropdown-menu ">
@@ -53,8 +57,8 @@
             <img src="/img/iconos/point.png" width="15%" alt=""> Puntajes
           </a>
           <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/detailpoints">Detalle puntaje</a></li>
-            <li><a class="dropdown-item" href="/detailpointsgamers">Detalle puntaje apostadores</a></li>
+          <li><a class="dropdown-item" href="/detailpoints">Mi puntaje</a></li>
+            <li><a class="dropdown-item" href="/detailpointsgamers">Puntaje otros apostadores</a></li>
           </ul>
         </li>
 
@@ -62,7 +66,7 @@
 
        <li class="nav-item dropdown">
           <a class="nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="/img/iconos/profile.png" width="18%" alt=""> Apostador
+            <img src="/img/iconos/profile.png" width="15%" alt=""> {{localName}}
           </a>
           <ul class="dropdown-menu">
            <li><a class="dropdown-item" href="/profile">Editar perfil</a></li>

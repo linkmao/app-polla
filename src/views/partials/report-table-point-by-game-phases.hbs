@@ -1,0 +1,95 @@
+
+{{#each dataGame}}
+<div class="card">
+  {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+    <div class="card-body">
+    <h6 class="card-title">Juego número: {{gameNumber}}</h6>
+    <div class="row">
+      <div class="col">
+        <img src="/img/flags/{{localFlag}}" alt="flag" width="100%">
+      </div>
+      <div class="col">
+        <p class="card-text">{{localTeam}}</p>
+      </div>
+      <div class="col">
+        <h2 class="card-text">{{localScore}}</h2>
+      </div>
+      <div class="col">
+        <h2>{{analogScore}}</h2>
+      </div>
+      <div class="col">
+        <h2 class="card-text">{{visitScore}}</h2>
+      </div>
+       <div class="col">
+        <p class="card-text">{{visitTeam}}</p>
+      </div>
+        <div class="col">
+        <img src="/img/flags/{{visitFlag}}" alt="flag" width="100%">
+      </div>
+      
+    </div>
+  </div>
+</div>
+{{/each}}
+
+<br><br>  
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">Pos</th>
+      <th scope="col" style="text-align: center">Jugador</th>
+      <th scope="col" style="text-align: center">Local apostado</th>
+      <th scope="col" style="text-align: center">Visitante apostado</th>
+      <th scope="col" style="text-align: center">Local</th>
+      <th scope="col" style="text-align: center">L-E-V</th>
+      <th scope="col" style="text-align: center">Visitante</th>
+      <th scope="col" style="text-align: center">Pts por marcador</th>
+      <th scope="col" style="text-align: center">Pts por L-E-V</th>
+      <th scope="col" style="text-align: center">Pts por local</th>
+      <th scope="col" style="text-align: center">Pts por visitante</th>
+      <th scope="col" style="text-align: center">TOTAL </th>
+    </tr>
+  </thead>
+
+  {{#each dataBet}}
+  <tbody>
+    <tr>
+      <td></td>
+      <td scope="col"style="text-align: center">{{name}}</td>
+      <td scope="col"style="text-align: center">
+          <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{localFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{localTeam}}
+          </div>
+        </div>
+
+      </td>
+      <td scope="col"style="text-align: center">
+          <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{visitFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{visitTeam}}
+          </div>
+        </div>
+
+      </td>
+      <td scope="col"style="text-align: center">{{localScore}}</td>
+      <td scope="col"style="text-align: center">{{analogScore}}</td>
+      <td scope="col"style="text-align: center">{{visitScore}}</td>
+      <td scope="col"style="text-align: center">{{pointByScore}}</td>
+      <td scope="col"style="text-align: center">{{pointByAnalogScore}}</td>
+      <td scope="col"style="text-align: center">{{pointByLocalEqual}}</td>
+      <td scope="col"style="text-align: center">{{pointByVisitEqual}}</td>
+      <td scope="col"style="text-align: center">{{totalByGame}}</td>
+    </tr>  
+  </tbody>
+  {{/each}}
+
+</table>
+

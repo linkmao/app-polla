@@ -140,11 +140,17 @@ y listo
 ## Exportación de la base de datos de mongo atlas
 En caso que se requiera hacer copia de seguridad de la base de datos de atlas, entonces se exporta así
 
+### Cuando se quiere exportar toda la base de datos
+mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> 
+
 ### Cuando se quiere exportar una colección en particular 
 mongoexport --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
 
-### Cuando se quiere exportar toda la base de datos
-mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> 
+
+
+
+
+
 
 
 ## Despliegue en Heroku
@@ -253,19 +259,71 @@ PRIORIDADES PARA LANZAMIENTO
 - (OK SIN NOVEDAD) modificar menú por iconos (si es posible)
 - (OK SIN NOVEDAD) Quitar la opcion en el marcador de valres negativos.
 - (OK SIN NOVEDAD) HACER COPIA DE SEGURIDAD DE LA BASE DE DATOS DE LA PRUEBA
-- SETEAR EL JUEGO (INCLUYE KEY)
-- HACER MANUEAL DE USO Y ENVIAR A CHAT
-- COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
+- (OK SIN NOVEDAD)SETEAR EL JUEGO (INCLUYE KEY)
+- (OK SIN NOVEDAD) HACER MANUEAL DE USO Y ENVIAR A CHAT
+****LANZAMIENTO****
+Se hace lanzamiento de la app-polla el domiingo 13 de noviembre de 2022!!!
 
+
+
+- (OK SIN NOVEDAD)VISUALIZACION DEL SISTEMA DE APUESTA DE CADA JUGADOR EN EL JUEGO RESPECTIVO
+- (OK SIN NOVEDAD)VISUALIZACION DE LA APUESTA POR CLASIFICACION DE CADA JUGADOR
+- (OK SIN NOVEDAD) COLOCAR EL NOMBRE DEL APOSTADOR EN EL MENÚ 
+- (OK SIN NOVEDAD) VAriable de entorno para eliminar la posibiidad de apostar (o data en BD o nuevo despliegue)
+- (OK SIN NOVEDAD) VAriable de entorno para deshabilitar octavos (o data en BD o nuevo despliegue)
+- SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
+- YA ESTÁ PARA LA FASE INICIAL, DEBO LUEGO HACER LA FASE FINAL
+
+- INSTRUCCIONES DE JUEGO EN LA APP
+- COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
 
 PRIORIDAD POSTERIOR
 - Correción de errores EN LA PRUEBA REALIZADA EL VIERNES
+- Foto o avatar
 - coleres en las tarjetas dependiendo si se ha jugado el juego  (aplica tambien a juego tercer y cuarto y final)
-- VAriable de entorno para eliminar la posibiidad de apostar (o data en BD o nuevo despliegue)
-- VAriable de entorno para deshabilitar octavos (o data en BD o nuevo despliegue)
 - en los juegos de la fase final, cambiar la palabra clasifica por ganador en la eleccion del equipo que gana
 - persitencia en el forulario de registro
 - Permitir recuperacion de contraseña
 - Banderas en juegos de octavos
-- SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
+- Poner cronometro de cierre de apuestas
+- Cronometro de inicio de torneo
+- Fecha y hora de los juegos
+pass
+$2a$10$Bvc/AVRGNXgJBaBj8AL/8u4YMVFGqq.kXcnJkHzf2ohaMyOLqwzXa
+
+
+Seguimiento a diligeciamiento de la polla
+
+
+
+
+
+
+Juan Guillero...ok
+Olga... ok
+Luz Densi ...ok
+Edilma...ok
+Gladys... ok
+Juan CArlos ok
+Elmer Ok
+Lucho OK
+Cesar OK
+Pablo Emilio  OK
+Jackelinne OK
+camilo Buritica OK
+Jorge Ok
+Juan Daniel Ok
+Yohana ... Ok
+Diego Collazos OK
+Vilma ... OK
+Sara .... OK
+Luza ...ok
+Juan Jose..ok
+testing...ok
+Ana Maria ...ok
+
+
+
+
+
 

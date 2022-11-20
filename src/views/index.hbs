@@ -1,3 +1,4 @@
+{{#each dataFlags}}
 <div class="row bg-dark">
   <div class="col-5 m-0 p-0">
     <form action="/auth/signin" method="POST">
@@ -9,10 +10,15 @@
         <label for="pass" class="form-label">Contraseña</label>
         <input type="password" class="form-control" name="password" placeholder="Contraseña">
       </div>
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mt-3">
         <div class="col text-center"><button type="submit" class="btn btn-primary mb-1 container">Ingresa</button></div>
+        {{#if enableRegisterButton}}
         <div class="col text-center"><a class="btn btn-primary mb-1 container" href="signup">Registro</a></div>
+        {{/if}}
       </div>
+       <div class="row justify-content-center mt-3">
+        {{!-- <a href="passrestore">¿Olvidó su contraseña?</a> --}}
+       </div>
     </form>
   </div>
 
@@ -24,5 +30,6 @@
     
   </div>
 </div>
+{{/each}}
 
 

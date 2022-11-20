@@ -1,11 +1,11 @@
 const User = require('../models/User')
+const Classification = require('../models/Classification')
 const Game = require('../models/Game')
 const BetGame = require('../models/Bet-game')
 const BetClassification = require('../models/Bet-classification')
 const Team = require('../models/Team')
 const config = require('../config/config')
-
-
+const { phaseInitial } = require('../config/config')
 
 // Controlador para juegos por grupos (phase 1)
 const getGameAndBet = async (group, idUser) => {//phase,
@@ -69,9 +69,10 @@ const getGameByPhase = async (phase, gameStruct) => {
   const games = await Game.find({ phase })
   const teams = await Team.find()
   data = []
+
   gameStruct.forEach(g => {
     const gameNumber1 = g[0]
-    gameNumber2 = g[1]
+    const gameNumber2 = g[1]
 
     // Datos de game 1
     let localScore1=null
@@ -81,7 +82,8 @@ const getGameByPhase = async (phase, gameStruct) => {
     let localFlag1 = null
     let visitTeam1 = null
     let visitFlag1 = null
-
+    
+    const idGame1 = games.find(game=>game.gameNumber==gameNumber1)._id
     const idTeamLocal1 = games.find(game => game.gameNumber == gameNumber1).localTeam
     const idTeamVisit1 = games.find(game => game.gameNumber == gameNumber1).visitTeam
     localScore1 = games.find(game => game.gameNumber == gameNumber1).localScore
@@ -113,6 +115,7 @@ const getGameByPhase = async (phase, gameStruct) => {
     let localScore2=null
     let visitScore2=null
     let analogScore2=null
+    const idGame2 = games.find(game=>game.gameNumber==gameNumber2)._id
     const idTeamLocal2 = games.find(game => game.gameNumber == gameNumber2).localTeam
     const idTeamVisit2 = games.find(game => game.gameNumber == gameNumber2).visitTeam
     localScore2 = games.find(game => game.gameNumber == gameNumber2).localScore
@@ -135,7 +138,7 @@ const getGameByPhase = async (phase, gameStruct) => {
       visitFlag2 = teams.find(t => t._id == idTeamVisit2).flag
     }
 
-    data.push({ gameNumber1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1, gameNumber2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
+    data.push({ idGame1, gameNumber1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1,idGame2,  gameNumber2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
   })
   return data
 }
@@ -147,6 +150,8 @@ const getGameByPhaseFinal = async (phase, gameStruct) => {
   data = []
   const gameNumber1 = gameStruct[0]
   const gameNumber2 = gameStruct[1]
+  const idGame1 = games.find(game => game.gameNumber == gameNumber1)._id
+  const idGame2 = games.find(game => game.gameNumber == gameNumber2)._id
 
   let localScore1=null
   let visitScore1=null
@@ -214,7 +219,7 @@ const getGameByPhaseFinal = async (phase, gameStruct) => {
   }
 
 
-  data.push({ gameNumber1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1, gameNumber2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
+  data.push({ idGame1, gameNumber1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1, idGame2, gameNumber2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
 
   return data
 }
@@ -325,8 +330,15 @@ const getBetClassificationByGroup = async (group, idUser) => {
     e.earnedScore.forEach(s => totalScore += s)
     let renderFinal
     { group == "FINAL" ? renderFinal = true : renderFinal = false }
-
-    data.push({ group, idUser, betFirstTeam, flagFirstTeam, betSecondTeam, flagSecondTeam, betThirdTeam, flagThirdTeam, betFourthTeam, flagFourthTeam, teamOne, teamOneId, teamTwo, teamTwoId, teamThree, teamThreeId, teamFour, teamFourId, pointByFirst, pointBySecond, pointByThirdh, pointByFourth, totalScore, renderFinal })
+    const renderBetRoundGroup= config.renderBetRoundGroup // Renderiza o no la zona de apuestas por clasificacion para la ronda de grupos
+    let renderButtonViewOtherBetGroup=null
+    if (group!='FINAL'){
+    renderButtonViewOtherBetGroup= config.renderViewOtherBetGroup
+    }else{
+    renderButtonViewOtherBetGroup= config.renderViewOtherBetClassFinal  
+    }
+  
+    data.push({ group, idUser, betFirstTeam, flagFirstTeam, betSecondTeam, flagSecondTeam, betThirdTeam, flagThirdTeam, betFourthTeam, flagFourthTeam, teamOne, teamOneId, teamTwo, teamTwoId, teamThree, teamThreeId, teamFour, teamFourId, pointByFirst, pointBySecond, pointByThirdh, pointByFourth, totalScore, renderFinal, renderBetRoundGroup, renderButtonViewOtherBetGroup })
   }) // fin del método
 
   return data
@@ -449,6 +461,9 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
     const idGame2 = games.find(g => g.gameNumber == gameStruct[3])._id // Id juego final
     const gameNumber2 = gameStruct[3]
 
+  console.log("ID GAME 1", idGame1)
+  console.log("ID GAME 2", idGame2)
+
 
     let localTeamId1 = null, visitTeamId1 = null, localTeamId2 = null, visitTeamId2 = null
 
@@ -535,7 +550,9 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
     const renderPoint = true  // flag para mostrar el puntaje por local y visitante coincidente
     const rederPointVirtualGame = true // flag para mostrar puntaje por ganador de 3y4 y final 
 
-    data.push({ phase, idNextGame, gameNumber1, localTeamId1, localTeam1, localFlag1, visitTeamId1, visitTeam1, visitFlag1, gameNumber2, localTeamId2, localTeam2, localFlag2, visitTeamId2, visitTeam2, visitFlag2, idBet1, localScore1, visitScore1, analogScore1, earnedScore1, idBet2, localScore2, visitScore2, analogScore2, earnedScore2, betLocalTeam, betLocalFlag, betVisitTeam, betVisitFlag, pointByScore1, pointByAnalogScore1, pointByLocalEqual1, pointByVisitEqual1, totalScore1, pointByScore2, pointByAnalogScore2, pointByLocalEqual2, pointByVisitEqual2, totalScore2, pointByWin1, pointByWin2, renderPoint, rederPointVirtualGame })
+    data.push({ phase, idNextGame, idGame1, gameNumber1, localTeamId1, localTeam1, localFlag1, visitTeamId1, visitTeam1, visitFlag1, idGame2, gameNumber2, localTeamId2, localTeam2, localFlag2, visitTeamId2, visitTeam2, visitFlag2, idBet1, localScore1, visitScore1, analogScore1, earnedScore1, idBet2, localScore2, visitScore2, analogScore2, earnedScore2, betLocalTeam, betLocalFlag, betVisitTeam, betVisitFlag, pointByScore1, pointByAnalogScore1, pointByLocalEqual1, pointByVisitEqual1, totalScore1, pointByScore2, pointByAnalogScore2, pointByLocalEqual2, pointByVisitEqual2, totalScore2, pointByWin1, pointByWin2, renderPoint, rederPointVirtualGame })
+
+    console.log(data)
     return data
   }
   catch (err) {
@@ -544,10 +561,203 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
   }
 }
 
+//CONTROLADOR PARA OBTENER UN SOLO JUEGO, LAS APUESTAS DE ESE ÚNICO JUEGO Y LOS RPUNTAJES DE ESE ÚNICO JUEGO
+const getOneGame = async (idGame) => {
+  const data=[]
+  console.log(idGame)
+  const game = await Game.find({ _id:idGame }).lean() 
+  const teams= await Team.find().lean()
+  const idLocalTeam = game[0].localTeam
+  const idVisitTeam= game[0].visitTeam
+  let localScore=null, analogScore=null, visitScore=null
+  const gameNumber=game[0].gameNumber
+  const localTeam = teams.find(t => t._id == idLocalTeam).name
+  const localFlag = teams.find(t => t._id == idLocalTeam).flag
+  localScore =  game[0].localScore
+  analogScore = game[0].analogScore
+  visitScore = game[0].visitScore
+  const visitFlag = teams.find(t => t._id == idVisitTeam).flag
+  const visitTeam = teams.find(t => t._id == idVisitTeam).name
+  {localScore==-1?localScore="-":localScore}
+  {analogScore=='-1'?analogScore="-":analogScore}
+  {visitScore==-1?visitScore="-":visitScore}
+  data.push({gameNumber, localTeam, localFlag, localScore, analogScore, visitScore,  visitTeam, visitFlag})
+  return data
+}
+
+// Se eencarga de traer todas las apuestas hechas de un mismo juego (y los puntajes)
+const getAllBetTheOneGame= async(idGame)=>{
+const data=[] 
+const betGame = await BetGame.find({idGame}).lean()
+const user= await User.find().lean()
+
+for (bet of betGame){
+  const name = user.find(u=>u._id==bet.idUser).name
+  let localScore= bet.localScore
+  let analogScore=bet.analogScore
+  let visitScore=bet.visitScore
+  {localScore==-1?localScore='-':localScore}
+  {analogScore=='-1'?analogScore='-':analogScore}
+  {visitScore==-1?visitScore='-':visitScore}
+  const pointByScore=bet.earnedScore[config.xPointByScore]
+  const pointByAnalogScore=bet.earnedScore[config.xPointByAnalogScore]
+  const totalByGame=pointByScore +pointByAnalogScore
+  data.push({name, localScore, analogScore, visitScore, pointByScore, pointByAnalogScore, totalByGame})
+}
+
+return data
+}
 
 
+// Se eencarga de traer todas las apuestas hechas de un mismo juego (y los puntajes) de los partidos rondaphases
+const getAllBetTheOneGamePhases= async(idGame)=>{
+  const msgDefault="-"
+  const flagDefault="no-flag.png"
+  const data=[] 
+  const betGame = await BetGame.find({idGame}).lean()
+  const user= await User.find().lean()
+  const teams= await Team.find().lean()
+  // console.log(betGame)
+
+  for (bet of betGame){
+    let localTeam=null, visitTeam=null, localFlag=null, visitFlag=null
+    const name = user.find(u=>u._id==bet.idUser).name
+    const idLocalTeam= bet.betLocalTeam
+    const idVisitTeam= bet.betVisitTeam
 
 
+    // console.log("IDE DDEL LOCAL TEMA", idLocalTeam)
+
+    if (idLocalTeam!="NO-BET"){
+      localTeam= teams.find(t=>t._id==idLocalTeam).name
+      localFlag= teams.find(t=>t._id==idLocalTeam).flag
+    } else {
+      localTeam=msgDefault
+      localFlag=flagDefault
+    }
+
+    if (idVisitTeam!="NO-BET"){
+      visitTeam= teams.find(t=>t._id==idVisitTeam).name
+      visitFlag= teams.find(t=>t._id==idVisitTeam).flag
+    } else {
+      visitTeam=msgDefault
+      visitFlag=flagDefault
+    }
+
+    let localScore= bet.localScore
+    let analogScore=bet.analogScore
+    let visitScore=bet.visitScore
+    {localScore==-1?localScore='-':localScore}
+    {analogScore=='-1'?analogScore='-':analogScore}
+    {visitScore==-1?visitScore='-':visitScore}
+    const pointByScore=bet.earnedScore[config.xPointByScore]
+    const pointByAnalogScore=bet.earnedScore[config.xPointByAnalogScore]
+    const pointByLocalEqual=bet.earnedScore[config.xPointByLocalEqual]
+    const pointByVisitEqual=bet.earnedScore[config.xPointByVisitEqual]
+    const totalByGame=pointByScore +pointByAnalogScore+pointByLocalEqual+pointByVisitEqual
+    data.push({name, localTeam, localFlag, localScore, analogScore, visitScore, visitTeam, visitFlag, pointByScore, pointByAnalogScore, pointByLocalEqual,pointByVisitEqual, totalByGame})
+  }
+
+  // console.log(data)
+  return data
+  }
+
+const getClassification = async(group)=>{
+  const classification = await Classification.find({group}).lean()
+  const team= await Team.find().lean()
+  const msgDefault="Sin clasificado"
+  const idFirstTeam=classification[0].firstTeam
+  const idSecondTeam=classification[0].secondTeam
+  const idThirdTeam=classification[0].thirdTeam
+  const idFourthTeam=classification[0].fourthTeam
+  let firstTeam=null, secondTeam=null, thirdTeam=null, fourthTeam=null, firstFlag=null, secondFlag=null, thirdFlag=null, fourthFlag=null
+  if (idFirstTeam!='NO-CLASSIFICATION' ){
+    firstTeam=team.find(t=>t._id==idFirstTeam).name
+    firstFlag=team.find(t=>t._id==idFirstTeam).flag
+  }else{
+    firstTeam=msgDefault
+    firstFlag='no-flag.png'
+  }
+  if (idSecondTeam!='NO-CLASSIFICATION' ){
+    secondTeam=team.find(t=>t._id==idSecondTeam).name
+    secondFlag=team.find(t=>t._id==idSecondTeam).flag
+  }else{
+    secondTeam=msgDefault
+    secondFlag='no-flag.png'
+  }
+  if (idThirdTeam!='NO-CLASSIFICATION'){
+    thirdTeam=team.find(t=>t._id==idThirdTeam).name
+    thirdFlag=team.find(t=>t._id==idThirdTeam).flag
+  }else{
+    thirdTeam=msgDefault
+    thirdFlag='no-flag.png'
+  }
+  if (idFourthTeam!='NO-CLASSIFICATION'){
+    fourthTeam=team.find(t=>t._id==idForthTeam).name
+    fourthFlag=team.find(t=>t._id==idFourthTeam).flag
+  }else{
+    fourthTeam=msgDefault
+    fourthFlag='no-flag.png'
+  }
+  const data= [{group, firstTeam, firstFlag, secondTeam , secondFlag, thirdTeam, thirdFlag, fourthTeam, fourthFlag}]
+  console.log(data)
+  return data
+    
+}
+
+const getBetClassificationAllUsers= async(group)=>{ 
+const data=[]
+const betClassification= await BetClassification.find({group}).lean()
+const users= await User.find().lean()
+const teams= await Team.find().lean()
+
+for (bet of betClassification){
+  let= firstTeam=null, firstFlag=null, secondTeam=null, secondFlag=null, thirdTeam=null, thirdFlag=null, fourthTeam=null, fourthFlag=null, renderFinal=false
+  const msgDefault='-'
+  const flagDefault='no-flag.png'
+  const name=users.find(u=>u._id==bet.idUser).name
+  const idFirstTeam=bet.firstTeam
+  const idSecondTeam=bet.secondTeam
+  const idThirdTeam=bet.thirdTeam
+  const idFourthTeam=bet.fourthTeam
+  const pointByFirst=bet.earnedScore[config.xPointByFirst]
+  const pointBySecond= bet.earnedScore[config.xPointBySecond]
+  const pointByThird=bet.earnedScore[config.xPointByThirdh]
+  const pointByFourth=bet.earnedScore[config.xPointByFourth]
+  const total=pointByFirst+pointBySecond+pointByThird+pointByFourth
+  if (idFirstTeam!='NO-BET'){
+    firstTeam=teams.find(t=>t._id==idFirstTeam).name
+    firstFlag=teams.find(t=>t._id==idFirstTeam).flag
+  } else {
+    firstTeam=msgDefault
+    firstFlag=flagDefault
+  }
+  if (idSecondTeam!='NO-BET'){
+    secondTeam=teams.find(t=>t._id==idSecondTeam).name
+    secondFlag=teams.find(t=>t._id==idSecondTeam).flag
+  } else {
+    secondTeam=msgDefault
+    secondFlag=flagDefault
+  }
+  if (idThirdTeam!='NO-BET'){
+    thirdTeam=teams.find(t=>t._id==idThirdTeam).name
+    thirdFlag=teams.find(t=>t._id==idThirdTeam).flag
+  } else {
+    thirdTeam=msgDefault
+    thirdFlag=flagDefault
+  }
+  if (idFourthTeam!='NO-BET'){
+    fourthTeam=teams.find(t=>t._id==idFourthTeam).name
+    fourthFlag=teams.find(t=>t._id==idFourthTeam).flag
+  } else {
+    fourthTeam=msgDefault
+    fourthFlag=flagDefault
+  }
+  if (group=='FINAL') {renderFinal=true} 
+data.push({group, renderFinal, name, firstTeam, firstFlag, secondTeam, secondFlag, thirdTeam, thirdFlag, fourthTeam, fourthFlag, pointByFirst, pointBySecond, pointByThird,pointByFourth,total})
+}
+return data
+}
 // Controlador encargado de sumar todos los puntos del los partidos de un grupo, entrega {group, idUser, totalScore, totalAnalog, totalLocal, totalVisit, totalByGroup}
 const getPointGameGroup = async (group, idUser) => {
   const betGames = await BetGame.find({ idUser }).lean()
@@ -681,7 +891,6 @@ const totalPointByGamePhases = async (idUser) => {
   return total
 }
 
-
 const totalPointByClassification = async (idUser) => {
   const iterator = ["A", "B", "C", "D", "E", "F", "G", "H"]
   let total = 0
@@ -713,10 +922,6 @@ const greatTotal = async (idUser) => {
   const total = phaseOne + phaseTwo
   return total
 }
-
-
-
-
 
 // Funciones que devuelven data para las diferentes vistas de los puntajes
 
@@ -797,8 +1002,6 @@ const dataForTableClass = async idUser => {
   return data
 }
 
-
-
 //COntrolador encargado de verificar si una phase esta complemtamemte diligenciada par dar paso a la sigueiknte fase y activar el menu correspondiente (esta funcion se usa comio un midleware en el contexto proinscipal)
 
 const verifyPhaseCompleted = async idUser => {
@@ -837,5 +1040,61 @@ const verifyPhaseCompleted = async idUser => {
   return { octavosCompleted, cuartosCompleted, semiCompleted }
 }
 
+// Controladores encargados de verificar si las apuestas estan hechas
 
-module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted }
+// Verificacion de los juegos en ronda grupos 
+const verifyGamesGroups =async idUser=>{
+  const data =[]
+  const games= await Game.find({phase:config.phaseInitial}).lean()
+  const betGames = await BetGame.find({idUser}).lean()
+  for (game of games){
+   const betGame = betGames.find(b=>b.idGame==game._id)
+   if (betGame.localScore==-1||betGame.analogScore=='-1'||betGame.visitScore==-1){
+    data.push(betGame)
+   }
+  }
+  console.log("Cantidad de juegos sin diligenciar ",data.length )
+  return data
+}
+
+// Verificacion de las clasificaciones en ronda grupos
+const verifyClassGroups =async idUser=>{
+  const data =[]
+  const betClassification= await BetClassification.find({idUser}).lean()
+  for (betClass of betClassification){
+    if (betClass.group!='FINAL'){
+      if(betClass.firstTeam=='NO-BET'|| betClass.secondTeam=='NO-BET'||betClass.thirdTeamTeam=='NO-BET'||betClass.fouthTeam=='NO-BET'){
+        data.push(betClass)
+      }
+    }
+  }
+  console.log("Cantidad de clasificaciones sin diligenciar ",data.length )
+ return data
+  
+}
+
+// Verificacion de los jugos en ronda de fases
+const verifyGamesPhases =async idUser=>{
+  const data =[]
+  const games= await Game.find().lean()
+  const betGames = await BetGame.find({idUser}).lean()
+  for (game of games){
+    if(game.phase!=config.phaseInitial){
+       const betGame = betGames.find(b=>b.idGame==game._id)
+       if (betGame.localScore==-1||betGame.analogScore=='-1'||betGame.visitScore==-1){
+         data.push(betGame)
+       }
+     }
+  }
+  console.log("Cantidad de juegos sin diligenciar ",data.length )
+  return data
+}
+
+// Verificacion de la clasificacion final (ronda fase)
+const verifyClassPhases =async idUser=>{
+
+  res.status(200).json(GameById) 
+}
+
+
+module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassPhases }

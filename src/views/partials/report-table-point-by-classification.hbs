@@ -1,0 +1,90 @@
+<table class="table">
+  {{#each dataFlag}}
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center">Pos</th>
+      <th scope="col" style="text-align: center">Jugador</th>
+      {{#if renderFinal}}
+      <th scope="col" style="text-align: center">Campeón</th>
+      <th scope="col" style="text-align: center">Sub Campeón</th>
+      <th scope="col" style="text-align: center">Tercero</th>
+      <th scope="col" style="text-align: center">Cuarto</th>
+      <th scope="col" style="text-align: center">Pts campeón</th>
+      <th scope="col" style="text-align: center">Pts sub campeó</th>
+      <th scope="col" style="text-align: center">Pts tercero</th>
+      <th scope="col" style="text-align: center">Pts cuarto</th>
+      {{else }}
+      <th scope="col" style="text-align: center">Primero</th>
+      <th scope="col" style="text-align: center">Segundo</th>
+      <th scope="col" style="text-align: center">Puntos primero</th>
+      <th scope="col" style="text-align: center">Puntos segundo</th>
+      {{/if}}
+      <th scope="col" style="text-align: center">TOTAL </th>
+    </tr>
+  </thead>
+  {{/each}}
+
+  {{#each dataBetClassification}}
+  <tbody>
+    <tr>
+      <td></td>
+      <td scope="col" style="text-align: center">{{name}}</td>
+      <td scope="col" style="text-align: center">
+        <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{firstFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{firstTeam}}
+          </div>
+        </div>
+
+      </td>
+      <td scope="col" style="text-align: center">
+        <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{secondFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{secondTeam}}
+          </div>
+        </div>
+      </td>
+
+      {{#if renderFinal}}
+      <td scope="col" style="text-align: center">
+        <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{thirdFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{thirdTeam}}
+          </div>
+        </div>
+      </td>
+
+      <td scope="col" style="text-align: center">
+        <div class="row">
+          <div class="col">
+            <img src="/img/flags/{{fourthFlag}}" alt="flag" width="30%">
+          </div>
+          <div class="col">
+            {{fourthTeam}}
+          </div>
+        </div>
+      </td>
+      {{/if}}
+
+      <td scope="col" style="text-align: center">{{pointByFirst}}</td>
+      <td scope="col" style="text-align: center">{{pointBySecond}}</td>
+      {{#if renderFinal}}
+      <td scope="col" style="text-align: center">{{pointByThird}}</td>
+      <td scope="col" style="text-align: center">{{pointByFourth}}</td>
+      {{/if}}
+      <td scope="col" style="text-align: center">{{total}}</td>
+
+    </tr>
+  </tbody>
+  {{/each}}
+
+</table>

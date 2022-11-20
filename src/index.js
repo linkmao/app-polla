@@ -16,6 +16,7 @@ const flash = require('connect-flash') // Para el envio de mensajes del backend 
 const passport = require('passport') // Passport y sus dependencias auxiliares
 const session = require('express-session') // Passport y sus dependencias auxiliares
 const path = require('path') // para la obtencion de rutas del proyecto
+const config=require('./config/config')
 // const cors = require('cors');
 const {verifyPhaseCompleted}= require('./controllers/index')
 
@@ -75,6 +76,7 @@ app.use((req, res, next) => {
   res.locals.mensajeError = req.flash('mensajeError')
   res.locals.mensajeOk = req.flash('mensajeOk')
   res.locals.localUsuario = req.user || null // Se guarda el user que envia passport, y se guarda en una variable local
+  res.locals.enableMenuPhases= config.enableMenuRoundPhases // Habilita o no el menú phases
   res.locals.localBody=req.body || null
   // const temporal=res.locals.localBody
   // console.log("BODY GUARDADO: ", temporal)

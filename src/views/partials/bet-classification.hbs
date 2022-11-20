@@ -65,7 +65,14 @@
           </div>
         </div>
 
+{{#if renderButtonViewOtherBetGroup}}
+        <div class="row">
+      <a class="btn btn-primary" href="/detailpointbyclassification/{{group}}" role="button">Apuestas de la clasificación</a>
+      </div>
+ {{/if}}     
 
+
+{{#if renderBetRoundGroup}}
         <p class="card-text">Realiza la apuesta por clasificacion del grupo {{group}}.</p>
 
         <div class="row">
@@ -133,6 +140,11 @@
           </div>
         </div>
 
+<div class="row mt-3">
+            <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
+          </div>
+  {{/if}}
+
         <div class="row">
           <p>Puntos ganados: </p>
           <h4>Puntaje por primero: {{pointByFirst}}</h4>
@@ -141,9 +153,7 @@
           <h4>Puntaje por tercero: {{pointByThirdh}}</h4>
           <h4>Puntaje por cuarto: {{pointByFourth}}</h4>
           {{/if}}
-          <div class="row">
-            <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
-          </div>
+          
 
         </div>
   </form>
