@@ -43,7 +43,7 @@ versiones posteriores hacer esta implementación ya sea via base de datos o por 
 renderButtonRegister:false, // renderiza el boton de registro
 
 renderBetRoundGroup: false, // permite que el usuario pueda usar la zona de apuestas para la ronda de grupos
-renderViewOtherBetGroup:true, // Activa el boton que permita ver las apuestas de los otros jugadores
+renderViewOtherBetGroup:false, // Activa el boton que permita ver las apuestas de los otros jugadores
 
 enableMenuRoundPhases:false, // Activa el Menu para acceder a los juegos de las fases
 renderBetRoundPhases:false, // Permite que el usuario puda usar la zonas de apuesas de la ronda por fases
