@@ -141,7 +141,8 @@ y listo
 En caso que se requiera hacer copia de seguridad de la base de datos de atlas, entonces se exporta así
 
 ### Cuando se quiere exportar toda la base de datos
-mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> 
+mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>
+mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/db-app-polla
 
 ### Cuando se quiere exportar una colección en particular 
 mongoexport --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
@@ -273,12 +274,13 @@ Se hace lanzamiento de la app-polla el domiingo 13 de noviembre de 2022!!!
 - (OK SIN NOVEDAD) VAriable de entorno para deshabilitar octavos (o data en BD o nuevo despliegue)
 - SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
 - YA ESTÁ PARA LA FASE INICIAL, DEBO LUEGO HACER LA FASE FINAL
+- Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
 
 - INSTRUCCIONES DE JUEGO EN LA APP
 - COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
 
 PRIORIDAD POSTERIOR
-- Correción de errores EN LA PRUEBA REALIZADA EL VIERNES
+- Correción de errores EN LA PRUEBA REALIZADA EL VIERNES (ver hojas usadas)
 - Foto o avatar
 - coleres en las tarjetas dependiendo si se ha jugado el juego  (aplica tambien a juego tercer y cuarto y final)
 - en los juegos de la fase final, cambiar la palabra clasifica por ganador en la eleccion del equipo que gana
@@ -288,39 +290,35 @@ PRIORIDAD POSTERIOR
 - Poner cronometro de cierre de apuestas
 - Cronometro de inicio de torneo
 - Fecha y hora de los juegos
-pass
+- Notificacion de los partidos del dia
+- Pensar en un sistema mas directo de ver los partidos del dia
+- Sistema de notificacion de cuando se haya cargado resultados
+- implementar fecha y hora correctamente en el modelo game y no como texto (lo hice dada la premura)
+- Cronometro de cuenta regresiva para (ciere apuesta, inicio mundial, cierre apuesta grupo, fin mundial)
+
+password
 $2a$10$Bvc/AVRGNXgJBaBj8AL/8u4YMVFGqq.kXcnJkHzf2ohaMyOLqwzXa
 
 
-Seguimiento a diligeciamiento de la polla
+# Historia de versiones
+## Version 1.0.0 (13.11.22)
+- Sistema de logueo, apuesta, y puntaje funcional
+- API funcional
+
+# Version 1.1.0 (20.11.22)
+- Menú superior con íconos
+- Permite la configuración de la visibilidad de botones (ver apuesta de otros jugadores, boton registro), ademas de permitir o no de realizar mas apuestas (config.js)
+- Implementación de verificador via postman de cuales apuestas no estan completamente diligenciada para la ronda de grupos
+
+
+# Version 1.1.1 (21.11.22)
+- Pequeñas mdificaciones de estilo y colores en los reportes de resultados total
+- Se muestra la fecha y hora de cada juego
 
 
 
 
 
-
-Juan Guillero...ok
-Olga... ok
-Luz Densi ...ok
-Edilma...ok
-Gladys... ok
-Juan CArlos ok
-Elmer Ok
-Lucho OK
-Cesar OK
-Pablo Emilio  OK
-Jackelinne OK
-camilo Buritica OK
-Jorge Ok
-Juan Daniel Ok
-Yohana ... Ok
-Diego Collazos OK
-Vilma ... OK
-Sara .... OK
-Luza ...ok
-Juan Jose..ok
-testing...ok
-Ana Maria ...ok
 
 
 

@@ -1,18 +1,18 @@
 {{#each dataPoint}}
-<div class="card" style="width: 23rem;">
-  <img src="..." class="card-img-top" alt="...">
+<div class="card" style="width: 25rem;">
+  <img src="/img/iconos/point-total.png"   width="100%" alt="...">
   <div class="card-body">
-    <h2 class="card-title">Puntajes generales</h2>
+    <h2 class="card-title text-center">Ronda grupos</h2>
+    <p class="card-text">Puntaje total por juegos ronda grupos: {{totalByGameGroups}}</p>
+    <p class="card-text">Puntaje total por clasificaciones ronda grupos: {{totalByClassification}}</p>
+    <h5 class="card-title">Total de puntaje ronda de grupos: {{totalPointGroups}}</h5>
     <br>
-    <p class="card-text">Puntaje total por juegos fase grupos: {{totalByGameGroups}}</p>
-    <p class="card-text">Puntaje total por clasificaciones fase grupos: {{totalByClassification}}</p>
-    <h5 class="card-title">Total de puntaje fase de grupos: {{totalPointGroups}}</h5>
-    <br>
-    <p class="card-text">Puntaje total por juegos fases eliminatorias: {{totalByGamePhases}}</p>
+    <h2 class="card-title text-center">Ronda fases</h2>
+    <p class="card-text">Puntaje total por juegos ronda fases: {{totalByGamePhases}}</p>
     <p class="card-text">Puntaje total por clasificacion final: {{totalByClassificationFinal}}</p>
-    <h5 class="card-title">Total de puntaje fase eliminatorias: {{totalPointPhases}}</h5>
+    <h5 class="card-title">Total de puntaje ronda fases: {{totalPointPhases}}</h5>
     <br>
-    <h2 class="card-title">Gran total: {{greatTotalPoint}}</h2>
+    <h1 class="card-title text-primary text-center" >Gran total: {{greatTotalPoint}}</h1>
   </div>
 </div>
 {{/each}}

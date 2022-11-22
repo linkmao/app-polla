@@ -10,6 +10,7 @@ const GameSchema= new Schema({
     visitScore:{type:Number, default:-1},
     analogScore:{type:String, default:"-1"}, // Despues que un juego se actualiza, esta propiedad será L, E, V 
     played:{type:Boolean, default:false},
+    description:{type:String, default:"GENERIC-DESCRIPTION"},
     created_at:{type:Date, default:Date.now}
 }, 
 {versionKey:false})  // elimina __v el cual es un versionado por defecto de mongoose (por el momento no funciona)
