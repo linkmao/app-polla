@@ -42,7 +42,7 @@ xPointByFourth:3,
 versiones posteriores hacer esta implementación ya sea via base de datos o por medio de variables de entorno, lo que permitiria en esos dos casos no desplegar con cdda cambio sino hacer el cambio correspondiente (base de datos o variable de entorno)*/ 
 renderButtonRegister:false, // renderiza el boton de registro
 
-renderBetRoundGroup: true, // permite que el usuario pueda usar la zona de apuestas para la ronda de grupos
+renderBetRoundGroup: false, // permite que el usuario pueda usar la zona de apuestas para la ronda de grupos
 renderViewOtherBetGroup:true, // Activa el boton que permita ver las apuestas de los otros jugadores
 
 enableMenuRoundPhases:false, // Activa el Menu para acceder a los juegos de las fases
