@@ -322,8 +322,8 @@ $2a$10$Bvc/AVRGNXgJBaBj8AL/8u4YMVFGqq.kXcnJkHzf2ohaMyOLqwzXa
 
 
                       Railway     Heroku     Caprover (*)       Caprover (**)
-Mi puntaje              11            2         14 
-Puntaje otros jug       52            8         59
+Mi puntaje              11            2         14                   12
+Puntaje otros jug       52            8         59                   60
 
 (*) 1GB/1CPU -  25GB SSD disk - 1000GB transfer
 (**) 8GB/1CPU -  160GB SSD disk - 5TB transfer
