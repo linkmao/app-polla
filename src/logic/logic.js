@@ -1,9 +1,11 @@
 // Codigo con la lógica del juego
 const config = require('../config/config')
 const game= require('../models/Game')
+const user= require('../models/User')
 const classification= require('../models/Classification')
 const betGame = require('../models/Bet-game')
 const betClassification = require('../models/Bet-classification')
+const {totalPointByGameGroups,totalPointByClassification,totalPointByGamePhases,totalPointByClassificationFinal }= require('../controllers/index')
 
 
 // Funcion que permite calcular en cada apuesta que tenga el idGame enviado, el puntaje ganado, ademas guarda el puntaje en earnedScore 
@@ -91,10 +93,29 @@ if (e.secondTeam==classifications[0].secondTeam){
 })
 }
 
+// Funcion encargada de actualizar totalPoint del modelo User
+// totalPoint es un array de 5 entradas donde está el total de las rondas (grupos y fases), se hace esta implementación ya que se busca que la consulta a la BD sea mas optimizada
+//Estructura de totalPoint [ptsByGameGroup, ptsByClassGroup, ptsByScorePhase, ptsByClassPhase, greatTotal]
+const updateTotalPoint = async ()=>{
+const users= await user.find()
+console.log(users)
+console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
+for (u of users){
+   if (u.role!="admin"){
+    const totalGameGroup= await totalPointByGameGroups(u._id)
+    const totalClassGroup=await totalPointByClassification(u._id)
+    const totalGamePhase=await totalPointByGamePhases(u._id)
+    const totalClassPhase=await totalPointByClassificationFinal(u._id)
+    const greatTotal=totalGameGroup+totalClassGroup+totalGamePhase+totalClassPhase
+    const totalPoint=[totalGameGroup,totalClassGroup,totalGamePhase,totalClassPhase,greatTotal]
+    const userUpdate = await user.findByIdAndUpdate(u._id, {totalPoint},{new:true})
+    console.log("Jugador con id: ", u._id, " actualizado ", totalPoint) 
+   }
+}
+console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
+}
 
 
 
 
-
-
-module.exports = {calculatePointByGame, calculatePointByClassification}
+module.exports = {calculatePointByGame, calculatePointByClassification, updateTotalPoint}

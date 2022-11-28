@@ -767,10 +767,16 @@ const getPointGameGroup = async (group, idUser) => {
   const betGames = await BetGame.find({ idUser }).lean()
   const games = await Game.find({ group }).lean()
   const sumPuntajes = [0, 0, 0, 0]
-  games.forEach(g => {
+
+  // games.forEach(g => {
+  //   const puntajes = betGames.find(b => b.idGame == g._id).earnedScore
+  //   puntajes.forEach((p, i) => { sumPuntajes[i] += p })
+  // })
+  for (g of games){
     const puntajes = betGames.find(b => b.idGame == g._id).earnedScore
     puntajes.forEach((p, i) => { sumPuntajes[i] += p })
-  })
+  }
+
   let total = 0
   sumPuntajes.forEach(s => { total += s })
 

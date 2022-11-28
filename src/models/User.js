@@ -9,6 +9,7 @@ const UserSchema= new Schema({
     phone: {type:String, required:true},
     role:{type:String,default:'user'},
     active:{type:Boolean, default:true},
+    totalPoint:{type:Array, default:[0,0,0,0,0]},  // GUardara el consolidado de puntajes para mejorar rendimiento en consulta de los resultados [ptsByScoreGroup, ptsByClassGroup, ptsByScorePhase, ptsByClassPhase, greatTotal]
     created_at:{type:Date, default:Date.now}
 }, 
 {versionKey:false})  // elimina __v el cual es un versionado por defecto de mongoose (por el momento no funciona)

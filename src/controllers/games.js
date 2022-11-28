@@ -1,6 +1,6 @@
 const Game = require('../models/Game')
 const config= require('../config/config')
-const {calculatePointByGame} = require('../logic/logic')
+const {calculatePointByGame, updateTotalPoint} = require('../logic/logic')
 
 const  getGames = async (req, res)=>{
   const Games = await Game.find()
@@ -52,7 +52,9 @@ const updateGame  = async (req, res)=>{
       break
       default: // Se actualiza el juego con id ingresado
       const gameUpdate = await Game.findByIdAndUpdate(req.params.id, req.body,{new:true})
-      if (req.body.forCalculate) await calculatePointByGame(req.params.id) 
+      if (req.body.forCalculate) {
+         await calculatePointByGame(req.params.id)} 
+         await updateTotalPoint()
       res.status(200).json(gameUpdate)
     }
   }
