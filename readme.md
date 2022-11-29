@@ -205,6 +205,7 @@ Otra opcion es usar heroku cli, luego de haber hecho heroku login y usar la sigu
 heroku config:set MONGODB_URI=mongodb+srv://maolink:<password>@mongo-cluster.h360t.mongodb.net/<bdname>?retryWrites=true&w=majority
 
 
+
 Con esto hecho.. es de esperarse que todo corra ok
 
 
