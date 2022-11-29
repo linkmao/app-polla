@@ -697,7 +697,7 @@ const getClassification = async(group)=>{
     thirdFlag='no-flag.png'
   }
   if (idFourthTeam!='NO-CLASSIFICATION'){
-    fourthTeam=team.find(t=>t._id==idForthTeam).name
+    fourthTeam=team.find(t=>t._id==idFourthTeam).name
     fourthFlag=team.find(t=>t._id==idFourthTeam).flag
   }else{
     fourthTeam=msgDefault
