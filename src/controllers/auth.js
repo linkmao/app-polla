@@ -12,9 +12,9 @@ const signUp = async (req,res)=>{
 
   // Se verifica la llave para validar la creación del usuario
  const keys= await Key.find({keyCode:key, isUsed:false})
- if (keys[0]!=null){
+ if (true){   //keys[0]!=null
   // Actualizo la key con el id del usuario registrado
-  await Key.findByIdAndUpdate(keys[0]._id,{idUser:newUser._id,isUsed:true},{new:true})
+  // await Key.findByIdAndUpdate(keys[0]._id,{idUser:newUser._id,isUsed:true},{new:true})
 // La siguiente seccion de codigo lo que hace es generar la estructura de la apuesta inicial para el jugador recien logueado, se espera el futuras versiones hacer esta implementacion en un midleware independinete
   
   // CREACION DE LOS DATOS PARA Bet-game
