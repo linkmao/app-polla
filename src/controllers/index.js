@@ -39,7 +39,7 @@ const getGameAndBet = async (group, idUser) => {//phase,
   return data
 }
 
-// Controlador para obtener la data de los game por grupo
+// Controlador para obtener la data de SOLO los game por grupo
 const getGameByGroup = async (group) => {
   const teams = await Team.find({ group }).lean()
   const games = await Game.find({ group }).lean()
@@ -336,13 +336,15 @@ const getBetClassificationByGroup = async (group, idUser) => {
     { group == "FINAL" ? renderFinal = true : renderFinal = false }
     const renderBetRoundGroup= config.renderBetRoundGroup // Renderiza o no la zona de apuestas por clasificacion para la ronda de grupos
     let renderButtonViewOtherBetGroup=null
+    let renderBetRoundPhases=null
     if (group!='FINAL'){
     renderButtonViewOtherBetGroup= config.renderViewOtherBetGroup
     }else{
     renderButtonViewOtherBetGroup= config.renderViewOtherBetClassFinal  
+    renderBetRoundPhases=config.renderBetRoundPhases
     }
   
-    data.push({ group, idUser, betFirstTeam, flagFirstTeam, betSecondTeam, flagSecondTeam, betThirdTeam, flagThirdTeam, betFourthTeam, flagFourthTeam, teamOne, teamOneId, teamTwo, teamTwoId, teamThree, teamThreeId, teamFour, teamFourId, pointByFirst, pointBySecond, pointByThirdh, pointByFourth, totalScore, renderFinal, renderBetRoundGroup, renderButtonViewOtherBetGroup })
+    data.push({ group, idUser, betFirstTeam, flagFirstTeam, betSecondTeam, flagSecondTeam, betThirdTeam, flagThirdTeam, betFourthTeam, flagFourthTeam, teamOne, teamOneId, teamTwo, teamTwoId, teamThree, teamThreeId, teamFour, teamFourId, pointByFirst, pointBySecond, pointByThirdh, pointByFourth, totalScore, renderFinal, renderBetRoundGroup, renderBetRoundPhases, renderButtonViewOtherBetGroup })
   }) // fin del método
 
   return data

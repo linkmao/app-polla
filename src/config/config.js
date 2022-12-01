@@ -41,16 +41,12 @@ xPointByFourth:3,
 /* Esta es una implementación que implica desplegar a producción cada que se necesite un cambio. Se buscará en 
 versiones posteriores hacer esta implementación ya sea via base de datos o por medio de variables de entorno, lo que permitiria en esos dos casos no desplegar con cdda cambio sino hacer el cambio correspondiente (base de datos o variable de entorno)*/ 
 renderButtonRegister:true, // renderiza el boton de registro
-
 renderBetRoundGroup: false, // permite que el usuario pueda usar la zona de apuestas para la ronda de grupos
 renderViewOtherBetGroup:true, // Activa el boton que permita ver las apuestas de los otros jugadores
 
-enableMenuRoundPhases:false, // Activa el Menu para acceder a los juegos de las fases
+enableMenuRoundPhases:true, // Activa el Menu para acceder a los juegos de las fases
 renderBetRoundPhases:false, // Permite que el usuario puda usar la zonas de apuesas de la ronda por fases
 renderViewOtherBetPhases:false, // Activa el boton que permita ver las apuestas de los otros jugadores
 renderViewOtherBetClassFinal:false,// Muestra o no el boton para ver las clasificaciones FINAL
-
-
-
 }
 

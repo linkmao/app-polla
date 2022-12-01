@@ -9,11 +9,11 @@
     <p class="card-text">Puntaje por marcador: {{dataPointGames.totalScore}} </p>
     <p class="card-text">Puntaje por L-E.V: {{dataPointGames.totalAnalog}} </p>
     {{#if dataFlags.renderEqualTeam}} 
-     <p class="card-text">Puntaje por local coincidente: {{t.d}} </p>
-     <p class="card-text">Puntaje por local coincidente: {{dataPointGames.totalVisitEqual}} </p>
+     <p class="card-text">Puntaje por local coincidente: {{dataPointGames.totalLocalEqual}} </p>
+     <p class="card-text">Puntaje por visitante coincidente: {{dataPointGames.totalVisitEqual}} </p>
     {{/if}}
     {{#if dataFlags.renderClassification}}
-    <p class="card-text">Puntaje por clasificación: {{dataPointClass.total  }} </p>
+    <p class="card-text">Puntaje por clasificación: {{dataPointClass.total}} </p>
     {{/if}}
     {{#if dataFlags.renderGamePhantom}}
      <p class="card-text">Puntaje por ganador en 3 y 4: {{dataPointGamePhantom.totalLocalEqual}} </p>

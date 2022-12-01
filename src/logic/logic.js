@@ -98,7 +98,7 @@ if (e.secondTeam==classifications[0].secondTeam){
 //Estructura de totalPoint [ptsByGameGroup, ptsByClassGroup, ptsByScorePhase, ptsByClassPhase, greatTotal]
 const updateTotalPoint = async ()=>{
 const users= await user.find()
-console.log(users)
+// console.log(users)
 console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
 for (u of users){
    if (u.role!="admin"){

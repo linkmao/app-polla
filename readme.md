@@ -122,30 +122,43 @@ Para que estos dos ultimos juegos tengan la misma estructura de ganar 3 puntos s
 # Fase de despliegue
 
 # Apuntes técnicos para este y otros proyectos
-## Exportacion de la base de datos local
+## EXPORTACION DE BD
 Cuando se desarrolla en local la base de datos tambien es en local, llevar esa base de datos a la nube, en este caso a mongo atlas se siguien los siguientes pasos
 
-1. Exportar la base de datos de local
+1. EXPORTAR la base de datos LOCAL 
 $ mongodump --db [name database]
 (esto me genera una carpeta dump y por dentro la carpeta con la base de datos exportada)
 (Se debe tener descargado mongodump.exe y prendido el servicio de la base de datos con mongod)
 
-2. Importar la base de datos en atlas
-Se ingresa a Mongo atlas y de la seccion Cmd Line Tools se toma la linea de comando necesaria para restaurar la bd, la cual tiene esta estructura
-$ mongorestore --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net 
-(En <Paswword> se copia el password del cluster)
+2. EXPORTAR base de datos de CLOUD
+(Toda la BD)
+$ mongodump --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>
 
-y listo
 
-## Exportación de la base de datos de mongo atlas
-En caso que se requiera hacer copia de seguridad de la base de datos de atlas, entonces se exporta así
+(Una colección)
+$ mongoexport --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
+(Filetype normalmente json)
 
-### Cuando se quiere exportar toda la base de datos
-mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>
-mongodump --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/db-app-polla
 
-### Cuando se quiere exportar una colección en particular 
-mongoexport --uri mongodb+srv://maolink:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
+## IMPORTACION DE BD
+
+3. IMPORTAR base de datos en LOCAL
+(todas la BD que estan dump o en el nombre que tenga el directorio)
+$ mongorestore [ruta a dump]
+
+(Una coleccion en particular)
+$ mongorestore --db [como la quiero llamar] --collection [como la quiero llamar] dump/collection.bson
+
+
+4. IMPORTAR base de datos en CLOUD
+$ mongorestore --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net 
+
+
+
+
+
+
+
 
 
 
@@ -275,12 +288,14 @@ Se hace lanzamiento de la app-polla el domiingo 13 de noviembre de 2022!!!
 - (OK SIN NOVEDAD) VAriable de entorno para deshabilitar octavos (o data en BD o nuevo despliegue)
 - SISTEMATIZAR VALIDACION DE JUEGOS NO DILIGENCIADOS Y OBTENER INFORME (PILAS CON EL JUEGO FANTASMA SI EL CREITERIO ES "-1" PUES LO TENDRÁ)
 - YA ESTÁ PARA LA FASE INICIAL, DEBO LUEGO HACER LA FASE FINAL
+- Revisar lo de la prueba con camila
 - Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
 
-- INSTRUCCIONES DE JUEGO EN LA APP
-- COMPRAR DYNO Y CONFIGURAR CERTIFICADO SSL
+
+
 
 PRIORIDAD POSTERIOR
+- INSTRUCCIONES DE JUEGO EN LA APP
 - Correción de errores EN LA PRUEBA REALIZADA EL VIERNES (ver hojas usadas)
 - Foto o avatar
 - coleres en las tarjetas dependiendo si se ha jugado el juego  (aplica tambien a juego tercer y cuarto y final)
@@ -299,6 +314,9 @@ PRIORIDAD POSTERIOR
 
 password
 $2a$10$Bvc/AVRGNXgJBaBj8AL/8u4YMVFGqq.kXcnJkHzf2ohaMyOLqwzXa
+
+
+
 
 
 # Historia de versiones
@@ -331,3 +349,4 @@ Puntaje otros jug       52            8         59                   60
 
 
 
+MongoDB is deployed and available as srv-captain--db-app:27017 to other apps. For example with NodeJS: mongoose.connect('mongodb://srv-captain--db-app/mydatabase?authSource=admin', {userMongoClient: true})

@@ -51,7 +51,7 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   const dataPointGames = await getPointGameGroup(req.params.g, req.user.id)
   const dataPointClass = await getPointClassification(req.params.g, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass])
-  const dataPoint = [{ dataPointGames, dataFlags: { renderGroup: true, renderClassification: true, total } }]
+  const dataPoint = [{ dataPointGames, dataPointClass,  dataFlags: { renderGroup: true, renderClassification: true, total } }]
   res.render('games', { dataGameAndBet, dataBetClassification, dataPoint })
 })
 
@@ -67,7 +67,7 @@ router.get('/eighth', validar.isAuth, async (req, res) => {
   })
   const dataPointGames = await getPointGamePhase(config.phaseEighth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
-  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Octavos", total } }]
+  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: false, renderPhase: true, phase: "Octavos", total } }]
   res.render('games-by-phase', { dataGameAndBet, dataPoint })
   
 })

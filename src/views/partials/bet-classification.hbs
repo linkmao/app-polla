@@ -71,9 +71,11 @@
  {{/if}}     
 
 
+{{!-- Para tener independencia en la visibiidad de la posibilidad de apostar las clasificaciones de la fase de grupo y de la ronda de fases, se usan dos variables bolleanas difernetes al igual que se duplica el código del form para cada caso --}}
+
+{{!-- RENDERIZADO DEL FOMULARIO PARA LA RONDA DE GRUPOS --}}
 {{#if renderBetRoundGroup}}
         <p class="card-text">Realiza la apuesta por clasificacion del grupo {{group}}.</p>
-
         <div class="row">
           <div class="col">
             <p>Orden</p>
@@ -143,6 +145,82 @@
             <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
           </div>
   {{/if}}
+
+{{!-- RENDERIZADO PARA LA RONDA DE FASES --}}
+{{#if renderBetRoundPhases}}
+        <p class="card-text">Realiza la apuesta por clasificacion del grupo {{group}}.</p>
+        <div class="row">
+          <div class="col">
+            <p>Orden</p>
+          </div>
+          <div class="col">
+            <p>Equipo</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>1°</p>
+          </div>
+          <div class="col">
+            <select class="form-select" aria-label="Default select example" id="select" name="firstTeam" required>
+              <option value="{{teamOneId}}">{{teamOne}}</option>
+              <option value="{{teamTwoId}}">{{teamTwo}}</option>
+              <option value="{{teamThreeId}}">{{teamThree}}</option>
+              <option value="{{teamFourId}}">{{teamFour}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>2°</p>
+          </div>
+          <div class="col">
+            <select class="form-select" aria-label="Default select example" id="select" name="secondTeam" required>
+              <option value="{{teamOneId}}">{{teamOne}}</option>
+              <option value="{{teamTwoId}}">{{teamTwo}}</option>
+              <option value="{{teamThreeId}}">{{teamThree}}</option>
+              <option value="{{teamFourId}}">{{teamFour}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>3°</p>
+          </div>
+          <div class="col">
+            <select class="form-select" aria-label="Default select example" id="select" name="thirdTeam" required>
+              <option value="{{teamOneId}}">{{teamOne}}</option>
+              <option value="{{teamTwoId}}">{{teamTwo}}</option>
+              <option value="{{teamThreeId}}">{{teamThree}}</option>
+              <option value="{{teamFourId}}">{{teamFour}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>4°</p>
+          </div>
+          <div class="col">
+            <select class="form-select" aria-label="Default select example" id="select" name="fourthTeam" required>
+              <option value="{{teamOneId}}">{{teamOne}}</option>
+              <option value="{{teamTwoId}}">{{teamTwo}}</option>
+              <option value="{{teamThreeId}}">{{teamThree}}</option>
+              <option value="{{teamFourId}}">{{teamFour}}</option>
+            </select>
+          </div>
+        </div>
+
+<div class="row mt-3">
+            <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
+          </div>
+  {{/if}}
+
+
+
 
         <div class="row">
           <p>Puntos ganados: </p>
