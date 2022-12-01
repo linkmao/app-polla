@@ -135,6 +135,7 @@ $ mongodump --db [name database]
 $ mongodump --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>
 
 
+
 (Una colección)
 $ mongoexport --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --out <FILENAME>
 (Filetype normalmente json)
@@ -151,7 +152,9 @@ $ mongorestore --db [como la quiero llamar] --collection [como la quiero llamar]
 
 
 4. IMPORTAR base de datos en CLOUD
+(Lee la BD de la carpeta dump, por eso la bd quedará con el nombre de la carpeta dentro de dump)
 $ mongorestore --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net 
+ 
 
 
 

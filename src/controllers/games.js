@@ -53,8 +53,10 @@ const updateGame  = async (req, res)=>{
       default: // Se actualiza el juego con id ingresado
       const gameUpdate = await Game.findByIdAndUpdate(req.params.id, req.body,{new:true})
       if (req.body.forCalculate) {
-         await calculatePointByGame(req.params.id)} 
-         await updateTotalPoint()  
+         await calculatePointByGame(req.params.id)
+        //  await updateTotalPoint()
+        } 
+           
       res.status(200).json(gameUpdate)
     }
   }
