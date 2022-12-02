@@ -15,7 +15,7 @@ const validar = require('../midleware/validaciones')
 // router.delete('/:id',validar.verifyToken, validar.isAdminToken, controllers.deleteUser)//borra usuario por id accede admin
 // router.delete('/me/delete',validar.verifyToken, validar.isAdminToken,  controllers.deleteMe)//borra el usuario logueado
 
-// // Version con logueo desde frontend
+// Version con logueo desde frontend
 router.get('/', validar.isAuth, controllers.getUsers) // obtener todos los usuarios accede cualquiera
 router.get('/:id', validar.isAuth, controllers.getUsersById) //obtener usuario por id, accede cualquiera
 router.get('/me/profile', validar.isAuth, controllers.getMe) //obtener usuario logueado, accede propio usuario
