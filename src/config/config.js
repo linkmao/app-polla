@@ -46,7 +46,7 @@ renderViewOtherBetGroup:true, // Activa el boton que permita ver las apuestas de
 
 enableMenuRoundPhases: true, // Activa el Menu para acceder a los juegos de las fases
 renderBetRoundPhases:true, // Permite que el usuario puda usar la zonas de apuesas de la ronda por fases
-renderViewOtherBetPhases:false, // Activa el boton que permita ver las apuestas de los otros jugadores
-renderViewOtherBetClassFinal:false,// Muestra o no el boton para ver las clasificaciones FINAL
+renderViewOtherBetPhases:true, // Activa el boton que permita ver las apuestas de los otros jugadores
+renderViewOtherBetClassFinal:true,// Muestra o no el boton para ver las clasificaciones FINAL
 }
 

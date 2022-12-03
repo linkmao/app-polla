@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassPhases } = require('../controllers/index')
+const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal } = require('../controllers/index')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
 
@@ -27,6 +27,11 @@ router.get('/verifygamesphases/:id', async (req, res)=>{
 
 router.get('/verifyclassgroups/:id', async (req, res)=>{
   const data= await verifyClassGroups(req.params.id)
+  res.status(200).json({message: data}) 
+})
+
+router.get('/verifyclassfinal/:id', async (req, res)=>{
+  const data= await verifyClassFinal(req.params.id)
   res.status(200).json({message: data}) 
 })
 

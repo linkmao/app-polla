@@ -1091,22 +1091,31 @@ const verifyGamesPhases =async idUser=>{
   const games= await Game.find().lean()
   const betGames = await BetGame.find({idUser}).lean()
   for (game of games){
-    if(game.phase!=config.phaseInitial){
+    if(game.phase!=config.phaseInitial&&game.gameNumber!=65){
        const betGame = betGames.find(b=>b.idGame==game._id)
        if (betGame.localScore==-1||betGame.analogScore=='-1'||betGame.visitScore==-1){
          data.push(betGame)
        }
      }
   }
-  console.log("Cantidad de juegos sin diligenciar ",data.length )
+  console.log("Cantidad de juegos RONDA FASE sin diligenciar ",data.length )
   return data
 }
 
 // Verificacion de la clasificacion final (ronda fase)
-const verifyClassPhases =async idUser=>{
-
-  res.status(200).json(GameById) 
+// Verificacion de las clasificaciones en ronda grupos
+const verifyClassFinal =async idUser=>{
+  const data =[]
+  const betClassification= await BetClassification.find({idUser,group:"FINAL"}).lean()
+  for (betClass of betClassification){
+    if(betClass.firstTeam=='NO-BET'|| betClass.secondTeam=='NO-BET'||betClass.thirdTeamTeam=='NO-BET'||betClass.fouthTeam=='NO-BET'){
+    data.push(betClass)
+    }
+    
+  }
+  console.log("Cantidad de clasificaciones sin diligenciar ",data.length )
+ return data
+  
 }
 
-
-module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassPhases }
+module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal }
