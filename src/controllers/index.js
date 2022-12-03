@@ -575,15 +575,27 @@ const getOneGame = async (idGame) => {
   const teams= await Team.find().lean()
   const idLocalTeam = game[0].localTeam
   const idVisitTeam= game[0].visitTeam
-  let localScore=null, analogScore=null, visitScore=null
+  let localScore=null, analogScore=null, visitScore=null, localTeam=null, localFlag=null, visitTeam=null, visitFlag=null
   const gameNumber=game[0].gameNumber
-  const localTeam = teams.find(t => t._id == idLocalTeam).name
-  const localFlag = teams.find(t => t._id == idLocalTeam).flag
+  
+  if (idLocalTeam!="GENERIC LOCAL TEAM"){
+  localTeam = teams.find(t => t._id == idLocalTeam).name
+  localFlag = teams.find(t => t._id == idLocalTeam).flag
+  } else {
+  localTeam = "Sin asignar"
+  localFlag = "no-flag.png"
+  }
   localScore =  game[0].localScore
   analogScore = game[0].analogScore
   visitScore = game[0].visitScore
-  const visitFlag = teams.find(t => t._id == idVisitTeam).flag
-  const visitTeam = teams.find(t => t._id == idVisitTeam).name
+  console.log("Id Visitante ", idVisitTeam)
+  if (idVisitTeam!="GENERIC LOCAL TEAM"){ //extrañamente el modelo habla de GENRIC VISIT TEAM, PERO LOS GAME QUEDARON CON GENRIC LOCAL TEAM, A CORREGIR
+  visitTeam = teams.find(t => t._id == idVisitTeam).name
+  visitFlag = teams.find(t => t._id == idVisitTeam).flag
+  } else{
+  visitTeam = "Sin asignar"
+  visitFlag = "no-flag.png"
+  }
   {localScore==-1?localScore="-":localScore}
   {analogScore=='-1'?analogScore="-":analogScore}
   {visitScore==-1?visitScore="-":visitScore}
