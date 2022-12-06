@@ -983,6 +983,23 @@ const getAllGamersPoint = async () => {
   return data
 }
 
+const getAllGamersPointOptimizated = async () => {
+  const users = await User.find({ role: 'user' }).lean()
+  console.log(users)
+  const data = []
+  for (const user of users) {
+    const name = user.name
+    const puntajePorJuegosGrupos= user.totalPoint[0]
+    const puntajePorClasificacionGrupos=user.totalPoint[1]
+    const puntajePorJuegosFases=user.totalPoint[2]
+    const puntajePorClasificacionFinal= user.totalPoint[3]
+    const totalJugador=user.totalPoint[4]
+    data.push({ name, puntajePorJuegosGrupos, puntajePorClasificacionGrupos,puntajePorJuegosFases,  puntajePorClasificacionFinal, totalJugador })
+  }
+  return data
+}
+
+
 const dataForTableGame = async idUser => {
   const data = []
   const iteratorGroup = ["A", "B", "C", "D", "E", "F", "G", "H"]
@@ -1132,4 +1149,23 @@ const verifyClassFinal =async idUser=>{
   
 }
 
-module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal }
+
+const updateTotalPoint = async ()=>{
+  const users= await User.find()
+  console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
+  for (u of users){
+     if (u.role!="admin"){
+      const totalGameGroup= await totalPointByGameGroups(u._id)
+      const totalClassGroup=await totalPointByClassification(u._id)
+      const totalGamePhase=await totalPointByGamePhases(u._id)
+      const totalClassPhase=await totalPointByClassificationFinal(u._id)
+      const greatTotal=totalGameGroup+totalClassGroup+totalGamePhase+totalClassPhase
+      const totalPoint=[totalGameGroup,totalClassGroup,totalGamePhase,totalClassPhase,greatTotal]
+      await User.findByIdAndUpdate(u._id, {totalPoint},{new:true})
+      console.log("Jugador con id: ", u._id, " actualizado ", totalPoint) 
+     }
+  }
+  console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
+  }
+
+module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint,getAllGamersPointOptimizated, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, updateTotalPoint }

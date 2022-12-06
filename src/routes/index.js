@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal } = require('../controllers/index')
+const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers,  getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, getAllGamersPointOptimizated, updateTotalPoint } = require('../controllers/index')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
 
@@ -14,6 +14,12 @@ res.render('index',{dataFlags})}
 router.get('/about', (req, res) => res.render('about'))
 
 router.get('/passrestore', (req, res) => res.render('user/pass-forget'))
+
+// LLamado de utilidada que permite la actualización de todos los puntajes y guardado en la BD para optimiar consulta
+router.get('/updatepoint', async (req, res)=>{
+  const data= await updateTotalPoint()
+  res.status(200).json({message: data}) 
+})
 
 router.get('/verifygamesgroups/:id', async (req, res)=>{
   const data= await verifyGamesGroups(req.params.id)
@@ -147,6 +153,11 @@ router.get('/detailpoints', validar.isAuth, async (req, res) => {
 
 router.get('/detailpointsgamers', validar.isAuth, async (req, res) => {
   data = await getAllGamersPoint()
+  res.render('detail-points-gamers', { data })
+})
+
+router.get('/detailpointsgamersoptimizated', async (req, res) => {
+  data = await getAllGamersPointOptimizated()
   res.render('detail-points-gamers', { data })
 })
 
