@@ -132,7 +132,7 @@ $ mongodump --db [name database]
 
 2. EXPORTAR base de datos de CLOUD
 (Toda la BD)
-$ mongodump --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>
+$ mongodump --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DATABASE>cd dump
 
 
 

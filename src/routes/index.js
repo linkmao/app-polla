@@ -68,7 +68,7 @@ router.get('/eighth', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],  renderTableByLocalAndVisit:false, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],  renderTableByLocalAndVisit:false, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases})
   })
   const dataPointGames = await getPointGamePhase(config.phaseEighth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
@@ -88,7 +88,7 @@ router.get('/fourth', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i],renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases, renderPointCoincidente:true })
   })
   const dataPointGames = await getPointGamePhase(config.phaseFourth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
@@ -107,7 +107,7 @@ router.get('/semi', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases,renderPointCoincidente:true })
   })
   const dataPointGames = await getPointGamePhase(config.phaseSemiFinals, req.user.id)
   const total = sumTotalPoint([dataPointGames])
@@ -127,7 +127,7 @@ router.get('/finals', validar.isAuth, async (req, res) => {
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit:true, renderBetRoundPhase:config.renderBetRoundPhases, renderButtonViewOtherBetPhases:config.renderViewOtherBetPhases,renderPointCoincidente:true,rederPointVirtualGame:true })
   })
   const dataBetClassification = await getBetClassificationByGroup("FINAL", req.user.id)
   const dataPointGames = await getPointGamePhase(config.phaseFinal, req.user.id)

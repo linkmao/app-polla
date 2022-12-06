@@ -128,19 +128,21 @@ const getGameByPhase = async (phase, gameStruct) => {
     {visitScore2==-1?visitScore2='-':visitScore2}
     {analogScore2=="-1"?analogScore2='-':analogScore2}
     
-    if (idTeamLocal2 == 'GENERIC LOCAL TEAM' || idTeamVisit2 == 'GENERIC LOCAL TEAM') {
+    if (idTeamLocal2 == 'GENERIC LOCAL TEAM') {
       localTeam2 = "Sin asignar"
       localFlag2 = 'no-flag.png'
+    }else {
+        localTeam2 = teams.find(t => t._id == idTeamLocal2).name
+        localFlag2 = teams.find(t => t._id == idTeamLocal2).flag
+     }
+
+     if(idTeamVisit2 == 'GENERIC LOCAL TEAM'){
       visitTeam2 = "Sin asignar"
-      visitFlag2 = 'no-flag.png'
-    }
-    else {
-      localTeam2 = teams.find(t => t._id == idTeamLocal2).name
-      localFlag2 = teams.find(t => t._id == idTeamLocal2).flag
+    visitFlag2 = 'no-flag.png'
+     }else{
       visitTeam2 = teams.find(t => t._id == idTeamVisit2).name
       visitFlag2 = teams.find(t => t._id == idTeamVisit2).flag
-    }
-
+     }
     data.push({ idGame1, gameNumber1, gameDescription1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1,idGame2,  gameNumber2,gameDescription2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
   })
   return data
