@@ -44,6 +44,28 @@ const signUp = async (req,res)=>{
   
 }
 
+// controlador que permite la creación de un usuario tipo admin desde la api con la ruta auth/signup/admin
+const signUpAdmin = async (req,res)=>{
+  // Para garantizar que solamente pueda crear cuentas tipo admin solo quien corra esta app (que se supone es el admin) se hace uso de una variable de entorno, eso garantiza que nadie diefente a quien tenga este código en local o producción pueda crear cuentas tipo admin
+  const {email, pass, name, lastName, phone, key}= req.body
+  if (key==process.env.CODE_FOR_CREATE_ADMIN) 
+{
+  const newUser=new User({email, pass:await User.encryptPass(pass) , name, lastName, phone, role:'admin'})
+  await newUser.save()
+  res.status(200).json({message:"User admin create"})
+}
+else
+{
+  res.status(200).json({message:"user admin is not create, wrong key"})
+}
+
+
+  
+
+
+
+}
+
 // VERSION DE CODIGO CON JWEBTOKEN
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
@@ -85,4 +107,4 @@ const signInAdmin = async (req, res)=>{
 }
 
 
-module.exports =  {signUp, signInAdmin}
+module.exports =  {signUp, signInAdmin, signUpAdmin}

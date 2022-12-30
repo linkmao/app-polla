@@ -4,9 +4,11 @@ const router = Router()
 const validar= require('../midleware/validaciones')
 const passport= require('passport')
 
+// Ruta para el registro de nuevos usuarios, (via frontend)
 router.post('/signup',  validar.validyPass, validar.validityEmail,auth.signUp)
-// router.post('/signin', auth.signIn)
 
+//Ruta para el registro de un usuario tipo admin (solo desde postman)
+router.post('/signup/admin', auth.signUpAdmin)
 
 // No se como poner a funcionar los mensajes flash con el uso de passport
 router.post('/signin',passport.authenticate('local',{
