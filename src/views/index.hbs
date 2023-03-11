@@ -3,19 +3,22 @@
 
   <div class="col-md-5 m-0 p-0">
     <form action="/auth/signin" method="POST">
-      <div class="mb">
-        <p class="text-warning m-0">For user guest use:</p>
+      <div class="px-2">
+        
+        <div >
+          <p class="text-warning m-0">For user guest use:</p>
         <p class="text-warning m-0">user: <b>guest@guest.com</b></p>
         <p class="text-warning m-0">password: <b>guest</b></p>
+        </div>
         
         <label for="email" class="form-label">Correo</label>
         <input type="email" class="form-control" name="email" placeholder="Tu correo">
       </div>
-      <div class="mb-1">
+      <div class="mb-1 px-2">
         <label for="pass" class="form-label">Contraseña</label>
         <input type="password" class="form-control" name="password" placeholder="Contraseña">
       </div>
-      <div class="row justify-content-center mt-3">
+      <div class="row justify-content-center mt-3 px-2">
         <div class="col text-center"><button type="submit" class="btn btn-primary mb-1 container">Ingresa</button></div>
         {{#if enableRegisterButton}}
         <div class="col text-center"><a class="btn btn-primary mb-1 container" href="signup">Registro</a></div>
