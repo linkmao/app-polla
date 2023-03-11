@@ -27,10 +27,12 @@
       <td class="table-success"> {{dataTablePoint.total}}</td>
     </tr>
     {{#if dataFlags.renderFinal}}
-      <tr>
+    <tr>
       <th scope="row" colspan="5">TOTAL</th>
-      <td><h4>{{dataFlags.totalizerClass}}</h4></td>
-      </tr>
+      <td>
+        <h4>{{dataFlags.totalizerClass}}</h4>
+      </td>
+    </tr>
     {{/if}}
 
     {{/each}}

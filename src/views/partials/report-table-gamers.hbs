@@ -3,31 +3,33 @@
     <tr>
       <th scope="col" style="text-align: center">Pos</th>
       <th scope="col" style="text-align: center">Jugador</th>
-      <th scope="col" colspan="2"  style="text-align: center">Grupos</th>
-      <th scope="col" colspan="2"  style="text-align: center">Fases</th>
+      <th scope="col" colspan="2" style="text-align: center">Grupos</th>
+      <th scope="col" colspan="2" style="text-align: center">Fases</th>
       <th scope="col" style="text-align: center">TOTAL </th>
     </tr>
-      <tr>
-      <th scope="col" ></th>
-      <th scope="col" ></th>
-      <th scope="col"style="text-align: center" class="text-success">Juegos</th>
-      <th scope="col"style="text-align: center" class="text-success">Clasificación</th>
-      <th scope="col"style="text-align: center" class="text-success">Juegos</th>
-      <th scope="col"style="text-align: center" class="text-success">Clasificación final</th>
-      
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col" style="text-align: center" class="text-success">Juegos</th>
+      <th scope="col" style="text-align: center" class="text-success">Clasificación</th>
+      <th scope="col" style="text-align: center" class="text-success">Juegos</th>
+      <th scope="col" style="text-align: center" class="text-success">Clasificación final</th>
+
     </tr>
   </thead>
   {{#each data}}
   <tbody>
     <tr>
       <td></td>
-      <td scope="col"style="text-align: center" class="text-primary">{{name}}</td>
-      <td scope="col"style="text-align: center" class="text-black-50" >{{puntajePorJuegosGrupos}}</td>
-      <td scope="col"style="text-align: center" class="text-black-50">{{puntajePorClasificacionGrupos}}</td>
-      <td scope="col"style="text-align: center">{{puntajePorJuegosFases}}</td>
-      <td scope="col"style="text-align: center">{{puntajePorClasificacionFinal}}</td>
-      <td scope="col"style="text-align: center"><h3 style="color:rgb(20, 100, 191)">{{totalJugador}}</h3></td>
-    </tr>  
+      <td scope="col" style="text-align: center" class="text-primary">{{name}}</td>
+      <td scope="col" style="text-align: center" class="text-black-50">{{puntajePorJuegosGrupos}}</td>
+      <td scope="col" style="text-align: center" class="text-black-50">{{puntajePorClasificacionGrupos}}</td>
+      <td scope="col" style="text-align: center">{{puntajePorJuegosFases}}</td>
+      <td scope="col" style="text-align: center">{{puntajePorClasificacionFinal}}</td>
+      <td scope="col" style="text-align: center">
+        <h3 style="color:rgb(20, 100, 191)">{{totalJugador}}</h3>
+      </td>
+    </tr>
   </tbody>
   {{/each}}
 

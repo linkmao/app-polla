@@ -1,12 +1,28 @@
 # APP POLLA
 
 ## GENERALIDADES
-Diseño e implementación de un sistema de apuesta para juegos de futbol, paarticularmente para torneos tipo Mundial de Futbol, Copa América o similares. El sistema de apuesta está basado en lo que normalmente he denomindao polla mundialista, la cual tradicionalmente la venia desarrolandohaciendo uso de una hoja de calculo de excel.
+Diseño e implementación de un sistema de apuesta para juegos de futbol, particularmente para torneos tipo Mundial de Futbol, Copa América o similares. El sistema de apuesta está basado en lo que normalmente he denomindao polla mundialista, la cual tradicionalmente la venia desarrolandohaciendo uso de una hoja de calculo de excel.
+
+## TECNOLOGÍAS USADAS
+-   nodejs
+-   express
+-   handlebars
+-   mongodb
+-   boostrap
 
 ## DESCRIPCIÓN DEL SISTEMA DE JUEGO
 El juego consiste en apostar el posible marcador numérico de cada resultado, y el resultado análogo de cada pardido (Local, Empate, Visitante), dependiendo de si se acierta o no dichos resultados se fa puntaje.
-Adicionalmente en la ronda de grupos se da puntaje si se acierta a la clasificación de los equipos a la ronda de fases, y finalmente tambien se gana punto por acertar los 4 finalistas del torneno.
+Adicionalmente en la ronda de grupos se da puntaje si se acierta a la clasificación de los equipos a la ronda de fases, y finalmente tambien se gana punto por acertar los 4 finalistas del torneo.
 Para los detalles del sistema del juego [consulte este documento](./supplies/Reglas%20e%20imagenes/Reglas%20Polla%20Copa%20mundial%20de%20futbol%20%202022%20-%20Ronda%20grupos.pdf)
+
+## REFERENCIAS
+**Ref:** Sin video base
+
+**Repo:** [Repositorio](https://github.com/linkmao/app-polla)
+
+**Deploy:** [Despliegue](https://polla.maolink.co) 
+
+***
 
 ## CORRER LA APP
 
@@ -211,7 +227,7 @@ Petición PUT `/api/games/id-game-phantom`
 
 Es importante colocar los resultados y el analogScore tal cual se muestra en esta plantilla
 
-**NOTA IMPORTANTE**: Esta funcionalidad está por verificar pues presentó problemas al momento de su implementación.
+**NOTA IMPORTANTE**: Esta funcionalidad está por verificar pues presentó problemas al momento de su implementación, entre las cosas que hay que mirar con precuación es el id del equipo que se lleva a localTeam y vositTeam respectivamente pues en un apunte en el cuaderno dice lo contrario a lo anotado anterriormente (en el cuaderno dice que localTeam:"Id Campeón", visitTeam:"Id ganador 3 y 4").
 
 **Restablecer contraseña de algún usuario**
 
@@ -264,6 +280,7 @@ Fueron munchos los retos que se presentaron durante el desarrollo e implementaci
 ## To do
 - Desarrollo de un frontend completo para el admin
 - Hacer manual de usuario apostadores dentro de la app
+- En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)
 - Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
 - Posibilidad de foto o avatar para cada usuario.
 - Sismta de colores en la tarjeta del juego de tal manera que adquiera un color, por ejemplo rojo, cuando este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado
@@ -279,6 +296,7 @@ Fueron munchos los retos que se presentaron durante el desarrollo e implementaci
 - Sistema de envio automatico por correo electrónico o whatsappp la key que permite el registro de un usuario nuevo
 - Automatización del registro de los resultados conectando la app con una api que entregue los resultados en tiempo real
 -   En el consolidado de puntajes en total tener el puntaje alcanzado/total posible (incluso esto puede luego traducirse en un % de rendimiento)
+-   En el detalle de las apuestas de un juego de ocatavo a finales (apuestas del juego), debe mostrarse, cual fue el equipo que se eligió como ganador y que pasa a la siguiente ronda
 - Visualización del puntaje de CADA UNO de los juego syclasificaciones por usuariom y que los demás usuarios puedan ver el de cualquier usuario.
 
 ## To do refactoring and optimizated
@@ -445,5 +463,6 @@ Reinciar la app en heroku
 
 
 ***
-# Maolink Software
+## Maolink Software
 Diciembre 30 2022
+

@@ -53,14 +53,11 @@ const updateMeBetClassificationGroup = async (req, res) => {
   }
 }
 
-
 // const updateMeBetGameGroup  = async (req, res)=>{
 //   const gameMeBetUpdate = await BetGame.findOneAndUpdate( {idUser:req.user.id, _id:req.params.id }, req.body,{new:true}) 
 //   const group = req.params.g
 //   res.redirect(`/groups/${group}`)
-//   }
-
-
+//}
 
 const updateClassification = async (req, res) => {
   const classificationUpdated = await BetClassification.findOneAndUpdate({ _id: req.params.id, }, req.body, { new: true })

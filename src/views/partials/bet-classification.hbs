@@ -1,8 +1,8 @@
 {{#each dataBetClassification}}
-<a name ="class"></a>
+<a name="class"></a>
 <section class="bet-classification">
 
-   <form action="../api/bet-classifications/me/bet/group/{{group}}/?_method=PUT" method="POST">
+  <form action="../api/bet-classifications/me/bet/group/{{group}}/?_method=PUT" method="POST">
     <input type="hidden" name="_method" value="PUT">
     <div class="card" style="width: 20rem;">
       <img src="/img/iconos/classification.png" class="card-img-top" alt="...">
@@ -64,17 +64,20 @@
           </div>
         </div>
 
-{{#if renderButtonViewOtherBetGroup}}
+        {{#if renderButtonViewOtherBetGroup}}
         <div class="row">
-      <a class="btn btn-primary" href="/detailpointbyclassification/{{group}}" role="button">Apuestas de la clasificación</a>
-      </div>
- {{/if}}     
+          <a class="btn btn-primary" href="/detailpointbyclassification/{{group}}" role="button">Apuestas de la
+            clasificación</a>
+        </div>
+        {{/if}}
 
 
-{{!-- Para tener independencia en la visibiidad de la posibilidad de apostar las clasificaciones de la fase de grupo y de la ronda de fases, se usan dos variables bolleanas difernetes al igual que se duplica el código del form para cada caso --}}
+        {{!-- Para tener independencia en la visibiidad de la posibilidad de apostar las clasificaciones de la fase de
+        grupo y de la ronda de fases, se usan dos variables bolleanas difernetes al igual que se duplica el código del
+        form para cada caso --}}
 
-{{!-- RENDERIZADO DEL FOMULARIO PARA LA RONDA DE GRUPOS --}}
-{{#if renderBetRoundGroup}}
+        {{!-- RENDERIZADO DEL FOMULARIO PARA LA RONDA DE GRUPOS --}}
+        {{#if renderBetRoundGroup}}
         <p class="card-text">Realiza la apuesta por clasificacion del grupo {{group}}.</p>
         <div class="row">
           <div class="col">
@@ -141,13 +144,13 @@
           </div>
         </div>
 
-<div class="row mt-3">
-            <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
-          </div>
-  {{/if}}
+        <div class="row mt-3">
+          <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
+        </div>
+        {{/if}}
 
-{{!-- RENDERIZADO PARA LA RONDA DE FASES --}}
-{{#if renderBetRoundPhases}}
+        {{!-- RENDERIZADO PARA LA RONDA DE FASES --}}
+        {{#if renderBetRoundPhases}}
         <p class="card-text">Realiza la apuesta por clasificacion del grupo {{group}}.</p>
         <div class="row">
           <div class="col">
@@ -214,10 +217,10 @@
           </div>
         </div>
 
-<div class="row mt-3">
-            <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
-          </div>
-  {{/if}}
+        <div class="row mt-3">
+          <button type="submit" class="btn btn-primary mb-3">Clasificacion</button>
+        </div>
+        {{/if}}
 
 
 
@@ -230,7 +233,7 @@
           <h4>Puntaje por tercero: {{pointByThirdh}}</h4>
           <h4>Puntaje por cuarto: {{pointByFourth}}</h4>
           {{/if}}
-          
+
 
         </div>
   </form>

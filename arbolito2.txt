@@ -1,0 +1,110 @@
+
+|   .env
+|   .gitignore
+|   captain-definition
+|   package-lock.json
+|   package.json
+|   readme.md
+|   
++---src
+|   |   index.js
+|   |   styles.scss
+|   |   
+|   +---config
+|   |       config.js
+|   |       database.js
+|   |       passport.js
+|   |       
+|   +---controllers
+|   |       auth.js
+|   |       bet-classifications.js
+|   |       bet-games.js
+|   |       classifications.js
+|   |       games.js
+|   |       index.js
+|   |       keys.js
+|   |       teams.js
+|   |       users.js
+|   |       
+|   +---logic
+|   |       logic.js
+|   |       
+|   +---midleware
+|   |       validaciones.js
+|   |       
+|   +---models
+|   |       Bet-classification.js
+|   |       Bet-game.js
+|   |       Classification.js
+|   |       Game.js
+|   |       Key.js
+|   |       Team.js
+|   |       User.js
+|   |       
+|   +---public
+|   |   +---css
+|   |   |       styles.css
+|   |   +---img
+|   |   |   +---flags
+|   |   |   |       
+|   |   |   +---front
+|   |   |   |       
+|   |   |   +---groups
+|   |   |   |       
+|   |   |   \---iconos
+|   |   |           
+|   |   \---js
+|   |           bootstrap.min.js
+|   +---routes
+|   |       auth.js
+|   |       bet-classifications.js
+|   |       bet-games.js
+|   |       classifications.js
+|   |       games.js
+|   |       index.js
+|   |       keys.js
+|   |       teams.js
+|   |       users.js
+|   |       
+|   \---views
+|       |   about.hbs
+|       |   detail-point-by-classification.hbs
+|       |   detail-point-by-game-phases.hbs
+|       |   detail-point-by-game.hbs
+|       |   detail-points-gamers.hbs
+|       |   detail-points.hbs
+|       |   games-by-phase.hbs
+|       |   games.hbs
+|       |   index.hbs
+|       |   
+|       +---admin
+|       |       pass-restore.hbs
+|       |       users.hbs
+|       |       
+|       +---layouts
+|       |       main.hbs
+|       |       
+|       +---partials
+|       |       bet-by-phase.hbs
+|       |       bet-classification.hbs
+|       |       bet-games.hbs
+|       |       links-bet.hbs
+|       |       mensajes.hbs
+|       |       navigation.hbs
+|       |       report-great-total.hbs
+|       |       report-table-class.hbs
+|       |       report-table-gamers.hbs
+|       |       report-table-games.hbs
+|       |       report-table-point-by-classification.hbs
+|       |       report-table-point-by-game-phases.hbs
+|       |       report-table-point-by-game.hbs
+|       |       report-teams-classification.hbs
+|       |       report-total-point.hbs
+|       |       
+|       \---user
+|               pass-forget.hbs
+|               password.hbs
+|               profile.hbs
+|               signup.hbs
+
+

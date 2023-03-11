@@ -1,15 +1,15 @@
-const {Router}=require('express')
+const { Router } = require('express')
 const router = Router()
 const controller = require('../controllers/classifications.js')
 const validar = require('../midleware/validaciones')
 
 // Version con autenticacion con token via POSTMAN
-router.get('/', validar.verifyToken,validar.isAdminToken,  controller.getClassification )
-router.get('/:id', validar.verifyToken,validar.isAdminToken, controller.getClassificationById)
-router.post('/',  validar.verifyToken,validar.isAdminToken,controller.addClassification )
-router.put('/:id',  validar.verifyToken,validar.isAdminToken,controller.updateClassification)
-router.delete('/:id',  validar.verifyToken,validar.isAdminToken,controller.deleteClassification )
-router.delete('/',  validar.verifyToken,validar.isAdminToken,controller.deleteAllClassifications )
+router.get('/', validar.verifyToken, validar.isAdminToken, controller.getClassification)
+router.get('/:id', validar.verifyToken, validar.isAdminToken, controller.getClassificationById)
+router.post('/', validar.verifyToken, validar.isAdminToken, controller.addClassification)
+router.put('/:id', validar.verifyToken, validar.isAdminToken, controller.updateClassification)
+router.delete('/:id', validar.verifyToken, validar.isAdminToken, controller.deleteClassification)
+router.delete('/', validar.verifyToken, validar.isAdminToken, controller.deleteAllClassifications)
 
 // Version con autenticacion por frontend
 // router.get('/', validar.isAuth, controller.getClassification )
@@ -27,4 +27,4 @@ router.delete('/',  validar.verifyToken,validar.isAdminToken,controller.deleteAl
 // router.delete('/:id', controller.deleteClassification )
 // router.delete('/', controller.deleteAllClassifications )
 
-module.exports= router
+module.exports = router

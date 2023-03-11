@@ -1,8 +1,7 @@
-
 {{#each dataGame}}
 <div class="card">
   {{!-- <img src="..." class="card-img-top" alt="..."> --}}
-    <div class="card-body">
+  <div class="card-body">
     <h6 class="card-title">Juego número: {{gameNumber}}</h6>
     <div class="row">
       <div class="col">
@@ -20,19 +19,19 @@
       <div class="col">
         <h2 class="card-text">{{visitScore}}</h2>
       </div>
-       <div class="col">
+      <div class="col">
         <p class="card-text">{{visitTeam}}</p>
       </div>
-        <div class="col">
+      <div class="col">
         <img src="/img/flags/{{visitFlag}}" alt="flag" width="100%">
       </div>
-      
+
     </div>
   </div>
 </div>
 {{/each}}
 
-<br><br>  
+<br><br>
 
 <table class="table">
   <thead>
@@ -52,16 +51,15 @@
   <tbody>
     <tr>
       <td></td>
-      <td scope="col"style="text-align: center">{{name}}</td>
-      <td scope="col"style="text-align: center">{{localScore}}</td>
-      <td scope="col"style="text-align: center">{{analogScore}}</td>
-      <td scope="col"style="text-align: center">{{visitScore}}</td>
-      <td scope="col"style="text-align: center">{{pointByScore}}</td>
-      <td scope="col"style="text-align: center">{{pointByAnalogScore}}</td>
-      <td scope="col"style="text-align: center">{{totalByGame}}</td>
-    </tr>  
+      <td scope="col" style="text-align: center">{{name}}</td>
+      <td scope="col" style="text-align: center">{{localScore}}</td>
+      <td scope="col" style="text-align: center">{{analogScore}}</td>
+      <td scope="col" style="text-align: center">{{visitScore}}</td>
+      <td scope="col" style="text-align: center">{{pointByScore}}</td>
+      <td scope="col" style="text-align: center">{{pointByAnalogScore}}</td>
+      <td scope="col" style="text-align: center">{{totalByGame}}</td>
+    </tr>
   </tbody>
   {{/each}}
 
 </table>
-

@@ -1,28 +1,27 @@
-
 {{#each dataPoint}}
-  <br>
-  <br>
+<br>
+<br>
 <div class="card" style="width: 18rem;">
   <img src="/img/iconos/point-group.png" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title text-center">{{#if dataFlags.renderGroup}} Grupo {{dataPointGames.group}} {{/if}} {{#if dataFlags.renderPhase}} Fase {{dataFlags.phase}}{{/if}} </h5>
+    <h5 class="card-title text-center">{{#if dataFlags.renderGroup}} Grupo {{dataPointGames.group}} {{/if}} {{#if
+      dataFlags.renderPhase}} Fase {{dataFlags.phase}}{{/if}} </h5>
     <p class="card-text">Puntaje por marcador: {{dataPointGames.totalScore}} </p>
     <p class="card-text">Puntaje por L-E.V: {{dataPointGames.totalAnalog}} </p>
-    {{#if dataFlags.renderEqualTeam}} 
-     <p class="card-text">Puntaje por local coincidente: {{dataPointGames.totalLocalEqual}} </p>
-     <p class="card-text">Puntaje por visitante coincidente: {{dataPointGames.totalVisitEqual}} </p>
+    {{#if dataFlags.renderEqualTeam}}
+    <p class="card-text">Puntaje por local coincidente: {{dataPointGames.totalLocalEqual}} </p>
+    <p class="card-text">Puntaje por visitante coincidente: {{dataPointGames.totalVisitEqual}} </p>
     {{/if}}
     {{#if dataFlags.renderClassification}}
     <p class="card-text">Puntaje por clasificación: {{dataPointClass.total}} </p>
     {{/if}}
     {{#if dataFlags.renderGamePhantom}}
-     <p class="card-text">Puntaje por ganador en 3 y 4: {{dataPointGamePhantom.totalLocalEqual}} </p>
-     <p class="card-text">Puntaje por ganador en final: {{dataPointGamePhantom.totalVisitEqual}} </p>
+    <p class="card-text">Puntaje por ganador en 3 y 4: {{dataPointGamePhantom.totalLocalEqual}} </p>
+    <p class="card-text">Puntaje por ganador en final: {{dataPointGamePhantom.totalVisitEqual}} </p>
     {{/if}}
     <br>
-    <h6 class="card-title">Total puntaje {{#if dataFlags.renderGroup}} del grupo {{dataPointGames.group}}: {{/if}} {{#if dataFlags.renderPhase}}de la fase {{dataFlags.phase}}:{{/if}} {{dataFlags.total}}    </h6>
-
-
+    <h6 class="card-title">Total puntaje {{#if dataFlags.renderGroup}} del grupo {{dataPointGames.group}}: {{/if}} {{#if
+      dataFlags.renderPhase}}de la fase {{dataFlags.phase}}:{{/if}} {{dataFlags.total}} </h6>
   </div>
 </div>
 {{/each}}

@@ -1,16 +1,15 @@
-const {Router}=require('express')
+const { Router } = require('express')
 const router = Router()
 const controller = require('../controllers/keys.js')
-const validar= require('../midleware/validaciones')
-
+const validar = require('../midleware/validaciones')
 
 // VERSION API CON AUTENTICACION DESDE POSTMAN  
-router.get('/', validar.verifyToken, validar.isAdminToken  ,controller.getKey)
-router.get('/:id', validar.verifyToken,validar.isAdminToken, controller.getKeyById)
-router.post('/',validar.verifyToken, validar.isAdminToken, controller.addKey )
+router.get('/', validar.verifyToken, validar.isAdminToken, controller.getKey)
+router.get('/:id', validar.verifyToken, validar.isAdminToken, controller.getKeyById)
+router.post('/', validar.verifyToken, validar.isAdminToken, controller.addKey)
 router.put('/:id', validar.verifyToken, validar.isAdminToken, controller.updateKey)
-router.delete('/:id', validar.verifyToken, validar.isAdminToken, controller.deleteKey )
-router.delete('/', validar.verifyToken, validar.isAdminToken, controller.deleteAllKey )
+router.delete('/:id', validar.verifyToken, validar.isAdminToken, controller.deleteKey)
+router.delete('/', validar.verifyToken, validar.isAdminToken, controller.deleteAllKey)
 
 // VERSION API CON AUTENTICACION DESDE LA WEB
 // router.get('/', validar.isAuth, validar.isAdmin  ,controller.getKey)
@@ -28,4 +27,4 @@ router.delete('/', validar.verifyToken, validar.isAdminToken, controller.deleteA
 // router.delete('/:id',  controller.deleteKey )
 // router.delete('/',  controller.deleteAllKey )
 
-module.exports= router
+module.exports = router

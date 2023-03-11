@@ -1,16 +1,15 @@
-const {Router}=require('express')
+const { Router } = require('express')
 const router = Router()
 const controller = require('../controllers/teams.js')
-const validar= require('../midleware/validaciones')
+const validar = require('../midleware/validaciones')
 
 // VERSION API CON AUTENTICACION VIA TOKEN
-router.get('/', validar.verifyToken,validar.isAdminToken  ,controller.getTeam  )
-router.get('/:id', validar.verifyToken,validar.isAdminToken, controller.getTeamById)
-router.post('/',validar.verifyToken,validar.isAdminToken, controller.addTeam )
-router.put('/:id', validar.verifyToken,validar.isAdminToken, controller.updateTeam)
-router.delete('/:id', validar.verifyToken,validar.isAdminToken, controller.deleteTeam )
-router.delete('/', validar.verifyToken,validar.isAdminToken, controller.deleteAllTeam )
-
+router.get('/', validar.verifyToken, validar.isAdminToken, controller.getTeam)
+router.get('/:id', validar.verifyToken, validar.isAdminToken, controller.getTeamById)
+router.post('/', validar.verifyToken, validar.isAdminToken, controller.addTeam)
+router.put('/:id', validar.verifyToken, validar.isAdminToken, controller.updateTeam)
+router.delete('/:id', validar.verifyToken, validar.isAdminToken, controller.deleteTeam)
+router.delete('/', validar.verifyToken, validar.isAdminToken, controller.deleteAllTeam)
 
 // VERSION API CON AUTENTICACION
 // router.get('/', validar.isAuth  ,controller.getTeam  )
@@ -28,4 +27,4 @@ router.delete('/', validar.verifyToken,validar.isAdminToken, controller.deleteAl
 // router.delete('/:id', controller.deleteTeam )
 // router.delete('/',  controller.deleteAllTeam )
 
-module.exports= router
+module.exports = router
