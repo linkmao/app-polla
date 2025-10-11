@@ -51,9 +51,12 @@ router.get('/routegames', validar.isAuth, async (req, res) => {
 router.get('/groups/:g', validar.isAuth, async (req, res) => {
   // Datos para pintar apuestas y clasificaciones  
   const dataBet = await getGameAndBet(req.params.g, req.user.id) //config.phaseInitial,
+ 
   const dataBetClassification = await getBetClassificationByGroup(req.params.g, req.user.id)
+  
   // datos para pintar el game y los resultados reales
   const dataGame = await getGameByGroup(req.params.g)
+  
   // Pequelo código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
@@ -64,6 +67,7 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   const dataPointClass = await getPointClassification(req.params.g, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass])
   const dataPoint = [{ dataPointGames, dataPointClass, dataFlags: { renderGroup: true, renderClassification: true, total } }]
+  console.log(dataPoint)
   res.render('games', { dataGameAndBet, dataBetClassification, dataPoint })
 })
 
