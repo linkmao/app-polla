@@ -43,7 +43,7 @@ module.exports = {
   // Valores y configuraciones para el renderizado o no de algunos elementos segun la etapa del juego.
   /* Esta es una implementación que implica desplegar a producción cada que se necesite un cambio. Se buscará en 
   versiones posteriores hacer esta implementación ya sea via base de datos o por medio de variables de entorno, lo que permitiria en esos dos casos no desplegar con cdda cambio sino hacer el cambio correspondiente (base de datos o variable de entorno)*/
-  renderButtonRegister: false, // renderiza el boton de registro
+  renderButtonRegister: true, // renderiza el boton de registro
   renderBetRoundGroup: true, // permite que el usuario pueda usar la zona de apuestas para la ronda de grupos
   renderViewOtherBetGroup: true, // Activa el boton que permita ver las apuestas de los otros jugadores
   enableMenuRoundPhases: true, // Activa el Menu para acceder a los juegos de las fases

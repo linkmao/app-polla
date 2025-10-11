@@ -8,9 +8,12 @@ const User = require('../models/User')  // se trae la clase user para su consult
 
 passport.use(new LocalStrategy({usernameField:'email'}, 
 async (email, password, done) =>{
+  console.log("PROBANDO")
+  console.log(email)
   const user= await User.findOne({email:email})  // Se hace la consulta para buscar si por lo menos el email existe
   if (!user) {
     console.log("correo no encontrado")
+    
     return done(null, false,{message:"Correo no encontrado"})}
   else {
       const match = await user.comparePass(password) // Uso del metodo comparePass de la instancia user
@@ -25,7 +28,5 @@ async (email, password, done) =>{
 
 passport.serializeUser((user,done)=>{done(null,user.id)})  // Se almacena el id del usuario
 passport.deserializeUser((id,done)=>{// Toma el id del usuario logueado y guardado en serializeUser para tomar sus datos
- User.findById(id, (err,user)=>{
-    done(err,user)
-  })
+ User.findById(id, (err,user)=>{done(err,user)})
 })
