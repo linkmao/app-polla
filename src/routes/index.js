@@ -45,18 +45,26 @@ router.get('/verifyclassfinal/:id', async (req, res) => {
 router.get('/signup', (req, res) => res.render('user/signup'))
 
 router.get('/routegames', validar.isAuth, async (req, res) => {
-  res.render('games')
+  console.log("estoy en routesgame")
+  if (req.user.role == 'admin') {
+    console.log("Estoy en el si")
+    res.render('admin/panel')
+  } else {
+    console.log("Estoy en el no")
+    res.render('games')
+  }
+
 })
 
 router.get('/groups/:g', validar.isAuth, async (req, res) => {
   // Datos para pintar apuestas y clasificaciones  
   const dataBet = await getGameAndBet(req.params.g, req.user.id) //config.phaseInitial,
- 
+
   const dataBetClassification = await getBetClassificationByGroup(req.params.g, req.user.id)
-  
+
   // datos para pintar el game y los resultados reales
   const dataGame = await getGameByGroup(req.params.g)
-  
+
   // Pequelo código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
