@@ -21,10 +21,14 @@
 
 <body>
   <div class="container-fluid">
-    {{!-- {{>mensajes}} --}}
-    {{!-- {{>navigation}} --}}
-    {{!-- Este body es constantemente actualizado por el llamado de cada view --}}
+    {{#if localAdmin}}
     {{{body}}}
+    {{else}}
+    {{>mensajes}}
+    {{>navigation}}
+    {{{body}}}
+    {{!-- Este body es constantemente actualizado por el llamado de cada view --}}
+    {{/if}}
   </div>
 
 </body>
