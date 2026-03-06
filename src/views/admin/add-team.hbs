@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white shadow-lg">
+                <div class="card-header border-bottom border-secondary">
+                    <h3 class="text-center mb-0">Agregar Nuevo Equipo</h3>
+                </div>
+                <div class="card-body p-4">
+                    {{>mensajes}}
+                    <form action="/api/teams" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre del Equipo</label>
+                            <input type="text" name="name" id="name" class="form-control bg-light text-dark"
+                                placeholder="Ej: Argentina" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="group" class="form-label">Grupo</label>
+                            <input type="text" name="group" id="group" class="form-control bg-light text-dark"
+                                placeholder="Ej: A, B, C..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tag" class="form-label">Etiqueta (Tag)</label>
+                            <input type="text" name="tag" id="tag" class="form-control bg-light text-dark"
+                                placeholder="Ej: A1, B2 (opcional)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="flag" class="form-label">URL Bandera (PNG)</label>
+                            <input type="text" name="flag" id="flag" class="form-control bg-light text-dark"
+                                placeholder="nombre-archivo.png">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Guardar Equipo</button>
+                            <a href="/routegames" class="btn btn-outline-light">Volver al Panel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

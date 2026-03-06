@@ -11,10 +11,25 @@ const getKeyById = async (req, res) => {
 }
 
 const addKey = async (req, res) => {
-  const { keyNumber, keyCode } = req.body
-  const newKey = new Key({ keyNumber, keyCode })
-  await newKey.save()
-  res.status(201).json({ "message": "Key creada" })
+  try {
+    const { keyNumber, keyCode } = req.body
+    const newKey = new Key({ keyNumber, keyCode })
+    await newKey.save()
+
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(201).json({ "message": "Key creada" })
+    } else {
+      req.flash('mensajeOk', 'Llave creada correctamente')
+      res.redirect('/admin/keys')
+    }
+  } catch (error) {
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(500).json({ "message": error.message })
+    } else {
+      req.flash('mensajeError', 'Error al crear la llave: ' + error.message)
+      res.redirect('/admin/keys')
+    }
+  }
 }
 
 const updateKey = async (req, res) => {
@@ -23,8 +38,22 @@ const updateKey = async (req, res) => {
 }
 
 const deleteKey = async (req, res) => {
-  await Key.findByIdAndDelete(req.params.id)
-  res.status(200).send("Key con id " + req.params.id + "ha sido borrado")
+  try {
+    await Key.findByIdAndDelete(req.params.id)
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(200).send("Key con id " + req.params.id + "ha sido borrado")
+    } else {
+      req.flash('mensajeOk', 'Llave eliminada correctamente')
+      res.redirect('/admin/keys')
+    }
+  } catch (error) {
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(500).json({ "message": error.message })
+    } else {
+      req.flash('mensajeError', 'Error al eliminar la llave: ' + error.message)
+      res.redirect('/admin/keys')
+    }
+  }
 }
 
 const deleteAllKey = async (req, res) => {

@@ -40,7 +40,12 @@ app.engine('.hbs', exphbs.engine({
   defaultLayout: 'main.hbs',
   layoutsDir: path.join(app.get('views'), 'layouts'),
   partialDir: path.join(app.get('views'), 'partials'),
-  extname: '.hbs'
+  extname: '.hbs',
+  helpers: {
+    eq: function (v1, v2) {
+      return v1 == v2
+    }
+  }
 }))
 app.set('view engine', '.hbs') // con esta linea queda lista la configuracion del motor de plantilla
 

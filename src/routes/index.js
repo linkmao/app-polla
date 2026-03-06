@@ -219,4 +219,56 @@ router.get('/admin/pass-restore', validar.isAuth, validar.isAdmin, async (req, r
   res.render('admin/pass-restore')
 })
 
+const Team = require('../models/Team')
+const Game = require('../models/Game') // Added this line for the new routes
+
+router.get('/admin/teams', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const teams = await Team.find().lean().sort({ name: 1 })
+  res.render('admin/manage-teams', { teams })
+})
+
+router.get('/admin/teams/edit/:id', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const team = await Team.findById(req.params.id).lean()
+  res.render('admin/edit-team', { team })
+})
+
+router.get('/admin/games', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const gamesRaw = await Game.find().lean().sort({ gameNumber: 1 })
+  const teams = await Team.find().lean()
+  const games = gamesRaw.map(g => {
+    const localTeam = teams.find(t => t._id == g.localTeam)
+    const visitTeam = teams.find(t => t._id == g.visitTeam)
+    return {
+      ...g,
+      localTeamName: localTeam ? localTeam.name : 'Sin asignar',
+      visitTeamName: visitTeam ? visitTeam.name : 'Sin asignar',
+      localFlag: localTeam ? localTeam.flag : 'no-flag.png',
+      visitFlag: visitTeam ? visitTeam.flag : 'no-flag.png'
+    }
+  })
+  res.render('admin/manage-games', { games })
+})
+
+router.get('/admin/games/edit/:id', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const game = await Game.findById(req.params.id).lean()
+  const teams = await Team.find().lean().sort({ name: 1 })
+  res.render('admin/edit-game', { game, teams })
+})
+
+router.get('/admin/teams/add', validar.isAuth, validar.isAdmin, (req, res) => {
+  res.render('admin/add-team')
+})
+
+router.get('/admin/games/add', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const teams = await Team.find().lean().sort({ name: 1 })
+  res.render('admin/add-game', { teams })
+})
+
+const Key = require('../models/Key') // Ensure Key model is imported
+
+router.get('/admin/keys', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const keys = await Key.find().lean().sort({ keyNumber: 1 })
+  res.render('admin/manage-keys', { keys })
+})
+
 module.exports = router

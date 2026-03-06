@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-dark text-white shadow-lg">
+                <div class="card-header border-bottom border-secondary">
+                    <h3 class="text-center mb-0">Agregar Nuevo Juego (Partido)</h3>
+                </div>
+                <div class="card-body p-4">
+                    {{>mensajes}}
+                    <form action="/api/games" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="gameNumber" class="form-label">Número de Juego</label>
+                                <input type="number" name="gameNumber" id="gameNumber"
+                                    class="form-control bg-light text-dark" placeholder="Ej: 1" required autofocus>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="phase" class="form-label">Fase (Número)</label>
+                                <select name="phase" id="phase" class="form-select bg-light text-dark" required>
+                                    <option value="1">1 - Ronda de Grupos</option>
+                                    <option value="2">2 - Octavos de Final</option>
+                                    <option value="3">3 - Cuartos de Final</option>
+                                    <option value="4">4 - Semifinal</option>
+                                    <option value="5">5 - Final / 3er Puesto</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="localTeam" class="form-label">Equipo Local</label>
+                                <select name="localTeam" id="localTeam" class="form-select bg-light text-dark" required>
+                                    <option value="GENERIC LOCAL TEAM">Genérico (Para Fases)</option>
+                                    {{#each teams}}
+                                    <option value="{{_id}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="visitTeam" class="form-label">Equipo Visitante</label>
+                                <select name="visitTeam" id="visitTeam" class="form-select bg-light text-dark" required>
+                                    <option value="GENERIC VISIT TEAM">Genérico (Para Fases)</option>
+                                    {{#each teams}}
+                                    <option value="{{_id}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="group" class="form-label">Grupo del Partido</label>
+                            <input type="text" name="group" id="group" class="form-control bg-light text-dark"
+                                placeholder="Ej: A, B... (GENERIC-GROUP para fases)" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <input type="text" name="description" id="description"
+                                class="form-control bg-light text-dark" placeholder="Fecha, Hora, Estadio..." required>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Guardar Juego</button>
+                            <a href="/routegames" class="btn btn-outline-light">Volver al Panel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold mb-0">Gestionar Equipos</h2>
+        <a href="/admin/teams/add" class="btn btn-success">
+            <i class="fas fa-plus me-2"></i>Agregar Equipo
+        </a>
+    </div>
+
+    {{>mensajes}}
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Bandera</th>
+                            <th>Nombre</th>
+                            <th>Grupo</th>
+                            <th>Tag</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each teams}}
+                        <tr>
+                            <td class="ps-4">
+                                <img src="/img/banderas/{{flag}}" alt="{{name}}" class="img-thumbnail"
+                                    style="width: 40px; height: 30px; object-fit: cover;">
+                            </td>
+                            <td class="fw-bold">{{name}}</td>
+                            <td><span class="badge bg-secondary">{{group}}</span></td>
+                            <td class="text-muted">{{tag}}</td>
+                            <td class="text-center">
+                                <a href="/admin/teams/edit/{{_id}}" class="btn btn-sm btn-outline-primary me-2">
+                                    <i class="fas fa-edit me-1"></i>Editar
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/routegames" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Panel Principal
+        </a>
+    </div>
+</div>

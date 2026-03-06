@@ -7,41 +7,53 @@ const Key = require('../models/Key')
 
 const signUp = async (req, res) => {
   const { email, pass, name, lastName, phone, key } = req.body
-  const newUser = new User({ email, pass: await User.encryptPass(pass), name, lastName, phone })
-  await newUser.save()
 
-  // Se verifica la llave para validar la creación del usuario
-  const keys = await Key.find({ keyCode: key, isUsed: false })
-  if (keys[0] != null) {
-    // Actualizo la key con el id del usuario registrado
-    await Key.findByIdAndUpdate(keys[0]._id, { idUser: newUser._id, isUsed: true }, { new: true })
-    // La siguiente seccion de codigo lo que hace es generar la estructura de la apuesta inicial para el jugador recien logueado, se espera el futuras versiones hacer esta implementacion en un midleware independinete
+  // Verificamos si la llave proporcionada es la llave maestra de administrador en el .env
+  let role = 'user'
+  let isValidKey = false
+  let dbKey = null
 
-    // CREACION DE LOS DATOS PARA Bet-game
-    //Nota del 29 de agsoto de 2022. Inicialmente la estructura de apuesta que se le cargaba al jugador era solo el correspondiente a  la fase inicial, para ello se usaba en la consulta del modelo Game la siguiente sintaxis Game.find({phase:config.phaseInitial}), sin embargo analizando postetiormente y para no tener que crear otra estructura cuando las apuestas sean de las demás fases, se opta por que se cargue al jugador previamente registrado. TODA LA ESTRUCTURA DE LOS JUEGos, es decir todos los 64 partidos, la forma de diferenciar cada etapa está en la propiedad phase del modelo Game
+  if (key === process.env.KEY_ADMIN) {
+    role = 'admin'
+    isValidKey = true
+  } else {
+    // Si no es la llave admin, verificamos en la base de datos
+    dbKey = await Key.findOne({ keyCode: key, isUsed: false })
+    if (dbKey) {
+      isValidKey = true
+    }
+  }
+
+  if (isValidKey) {
+    const newUser = new User({ email, pass: await User.encryptPass(pass), name, lastName, phone, role })
+    await newUser.save()
+
+    if (dbKey) {
+      // Si se usó una llave de la BD, la actualizamos
+      await Key.findByIdAndUpdate(dbKey._id, { idUser: newUser._id, isUsed: true }, { new: true })
+    }
+
+    // CREACION DE LOS DATOS PARA Bet-game y Bet-classification
     const games = await Game.find()
-    games.forEach(async (e, i) => {
+    const betGamesPromises = games.map(e => {
       const newBetGame = new BetGame({ idGame: e._id, idUser: newUser._id, localScore: -1, visitScore: -1, analogScore: "-1" })
-      await newBetGame.save()
+      return newBetGame.save()
     })
 
-    // CREACION DE LOS DATOS PARA Bet-classification
-    const classification = await Classification.find()
-    classification.forEach(async e => {
+    const classifications = await Classification.find()
+    const betClassificationsPromises = classifications.map(e => {
       const newBetClassification = new BetClassification({ idUser: newUser._id, group: e.group, idClassification: e._id })
-      await newBetClassification.save()
+      return newBetClassification.save()
     })
+
+    await Promise.all([...betGamesPromises, ...betClassificationsPromises])
 
     req.flash('mensajeOk', 'Registro exitoso. Inicia sesión')
-    res.status(200).redirect('/')    // Luego de registrado se redirige a la pnatalla principal para que haga loguin, sin empbargoo luego lo haré oara que inmediatamente ingrese a su app
-
+    res.status(200).redirect('/')
   } else {
-    // Borro el usuario creado, pues no tiene la llave
-    await User.findByIdAndDelete(newUser._id)
     req.flash('mensajeError', 'Llave no valida para registrarse')
     res.status(200).redirect('/')
   }
-
 }
 
 // controlador que permite la creación de un usuario tipo admin desde la api con la ruta auth/signup/admin

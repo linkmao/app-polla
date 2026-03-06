@@ -1,20 +1,42 @@
-<div class="container">
-  <form action="/api/users/pass/restore/?_method=PUT" method="POST">
-    <input type="hidden" name="_method" value="PUT">
-    <div class="row">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">ID del jugador</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Id de usuario" name="id">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nueva contraseña</label>
-        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Nueva contraseña"
-          name="pass">
-      </div>
-    </div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card bg-dark text-white border-warning shadow-lg">
+        <div class="card-header border-warning text-center py-4">
+          <div
+            class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+            style="width: 60px; height: 60px;">
+            <i class="fas fa-key text-warning fa-2x"></i>
+          </div>
+          <h3 class="fw-bold mb-0 text-warning">Restablecer Contraseña</h3>
+        </div>
+        <div class="card-body p-4">
+          {{>mensajes}}
+          <form action="/api/users/pass/restore/?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
 
-    <div class="row">
-      <button type="submit" class="btn btn-primary mb-3">Restablecer</button>
+            <div class="mb-3">
+              <label for="idUser" class="form-label text-muted small uppercase fw-bold">ID del Jugador</label>
+              <input type="text" class="form-control bg-light text-dark shadow-sm" id="idUser"
+                placeholder="Pega el ID del usuario aquí" name="id" required>
+              <div class="form-text text-white-50 small">Este ID lo encuentras en el listado de usuarios.</div>
+            </div>
+
+            <div class="mb-4">
+              <label for="newPass" class="form-label text-muted small uppercase fw-bold">Nueva Contraseña</label>
+              <input type="password" class="form-control bg-light text-dark shadow-sm" id="newPass"
+                placeholder="Mínimo 6 caracteres" name="pass" required>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-warning btn-lg fw-bold shadow-sm mb-2">Restablecer Ahora</button>
+              <a href="/routegames" class="btn btn-outline-light">
+                <i class="fas fa-arrow-left me-2"></i>Volver al Panel Principal
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
 </div>

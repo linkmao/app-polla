@@ -1,1 +1,99 @@
-<h1>PANEL DE ADMINISTRACION</h1>
+<div class="container mt-5">
+    <div
+        class="d-flex justify-content-between align-items-center mb-5 bg-dark p-4 rounded-3 shadow-sm border-bottom border-primary">
+        <div>
+            <h1 class="text-white fw-bold mb-0">Panel de Administración</h1>
+            <p class="text-primary mb-0 small uppercase tracking-wider">Control Maestro del Torneo</p>
+        </div>
+        <a href="/auth/logout" class="btn btn-outline-danger px-4">
+            <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+        </a>
+    </div>
+
+    {{>mensajes}}
+    <div class="row g-4 justify-content-center">
+        <!-- Gestión de Equipos -->
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all">
+                <div class="card-body text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <img src="/img/iconos/game-by-group.png" alt="Equipos" style="width: 45px;">
+                    </div>
+                    <h3 class="card-title h4 mb-3">Equipos</h3>
+                    <p class="card-text text-muted mb-4">Registra nuevos equipos y gestiona los participantes del
+                        torneo.</p>
+                    <div class="d-grid">
+                        <a href="/admin/teams" class="btn btn-primary btn-lg">Gestionar Equipos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de Juegos -->
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all">
+                <div class="card-body text-center p-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <img src="/img/iconos/game-by-phase.png" alt="Juegos" style="width: 45px;">
+                    </div>
+                    <h3 class="card-title h4 mb-3">Juegos y Partidos</h3>
+                    <p class="card-text text-muted mb-4">Define el fixture, asigna estadios y configura las fechas de
+                        juego.</p>
+                    <div class="d-grid">
+                        <a href="/admin/games" class="btn btn-success btn-lg">Gestionar Juegos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de Usuarios (Existente) -->
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <img src="/img/iconos/profile.png" alt="Usuarios" style="width: 45px;">
+                    </div>
+                    <h3 class="card-title h4 mb-3">Usuarios</h3>
+                    <p class="card-text text-muted mb-4">Administra los permisos de usuario, gestiona llaves de registro
+                        y restablece contraseñas.</p>
+                    <div class="d-grid gap-2">
+                        <a href="/admin/keys" class="btn btn-warning btn-lg">Gestionar Llaves</a>
+                        <a href="/resetpass" class="btn btn-outline-warning">Restablecer Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seguridad -->
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <img src="/img/iconos/point.png" alt="Puntajes" style="width: 45px;">
+                    </div>
+                    <h3 class="card-title h4 mb-3">Seguridad</h3>
+                    <p class="card-text text-muted mb-4">Restablecer contraseñas y gestionar accesos administrativos.
+                    </p>
+                    <div class="d-grid">
+                        <a href="/admin/pass-restore" class="btn btn-warning text-white">Restablecer Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+    }
+
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+</style>

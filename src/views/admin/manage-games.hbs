@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-success fw-bold mb-0">Gestionar Juegos</h2>
+        <a href="/admin/games/add" class="btn btn-success">
+            <i class="fas fa-plus me-2"></i>Agregar Juego
+        </a>
+    </div>
+
+    {{>mensajes}}
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">No.</th>
+                            <th>Local</th>
+                            <th>Visitante</th>
+                            <th>Fase</th>
+                            <th>Grupo</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each games}}
+                        <tr>
+                            <td class="ps-4 fw-bold">{{gameNumber}}</td>
+                            <td>
+                                <img src="/img/banderas/{{localFlag}}" alt="" class="me-2" style="width: 25px;">
+                                {{localTeamName}}
+                            </td>
+                            <td>
+                                <img src="/img/banderas/{{visitFlag}}" alt="" class="me-2" style="width: 25px;">
+                                {{visitTeamName}}
+                            </td>
+                            <td><span class="badge bg-info text-dark">Fase {{phase}}</span></td>
+                            <td><span class="badge bg-secondary">{{group}}</span></td>
+                            <td class="text-center">
+                                <a href="/admin/games/edit/{{_id}}" class="btn btn-sm btn-outline-success">
+                                    <i class="fas fa-edit me-1"></i>Editar
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/routegames" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Panel Principal
+        </a>
+    </div>
+</div>

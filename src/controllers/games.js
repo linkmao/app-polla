@@ -24,11 +24,24 @@ const getGameByGroup = async (req, res) => {
 }
 
 const addGame = async (req, res) => {
-  console.log(req.body)
-  const { gameNumber, localTeam, visitTeam, phase } = req.body
-  const newGame = new Game({ gameNumber, localTeam, visitTeam, phase })
-  await newGame.save()
-  res.status(201).json({ "message": "Juego guardado" })
+  try {
+    const { gameNumber, localTeam, visitTeam, phase, group, description } = req.body
+    const newGame = new Game({ gameNumber, localTeam, visitTeam, phase, group, description })
+    await newGame.save()
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(201).json({ "message": "Juego guardado" })
+    } else {
+      req.flash('mensajeOk', 'Juego guardado correctamente')
+      res.redirect('/admin/games/add')
+    }
+  } catch (error) {
+    if (req.headers['content-type'] === 'application/json') {
+      res.status(500).json({ "message": error.message })
+    } else {
+      req.flash('mensajeError', 'Error al guardar el juego: ' + error.message)
+      res.redirect('/admin/games/add')
+    }
+  }
 }
 
 // Solo si forCalculate es true, el sistema hace el calculo del los puntajes, y coloca el estado del partide played en true
@@ -50,9 +63,24 @@ const updateGame = async (req, res) => {
       res.status(200).json({ message: "Todos los equipos de fases, reseteados" })
       break
     default: // Se actualiza el juego con id ingresado
-      const gameUpdate = await Game.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      if (req.body.forCalculate) await calculatePointByGame(req.params.id)
-      res.status(200).json(gameUpdate)
+      try {
+        const gameUpdate = await Game.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        if (req.body.forCalculate) await calculatePointByGame(req.params.id)
+
+        if (req.headers['content-type'] === 'application/json') {
+          res.status(200).json(gameUpdate)
+        } else {
+          req.flash('mensajeOk', 'Juego actualizado correctamente')
+          res.redirect('/admin/games')
+        }
+      } catch (error) {
+        if (req.headers['content-type'] === 'application/json') {
+          res.status(500).json({ "message": error.message })
+        } else {
+          req.flash('mensajeError', 'Error al actualizar el juego: ' + error.message)
+          res.redirect('/admin/games')
+        }
+      }
   }
 }
 
