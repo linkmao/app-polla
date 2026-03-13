@@ -1,0 +1,125 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card bg-dark text-white rounded-4 border-0 shadow-lg overflow-hidden">
+                <div class="card-header bg-primary bg-opacity-10 border-bottom border-primary border-opacity-25 text-center py-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                        style="width: 60px; height: 60px;">
+                        <i class="fas fa-trophy text-primary fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0 text-primary">Agregar Clasificación</h3>
+                    <p class="text-muted small mb-0 uppercase tracking-wider">Define el ranking oficial por grupo</p>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    {{>mensajes}}
+                    <form action="/api/classifications" method="POST">
+                        <div class="mb-4">
+                            <label for="group" class="form-label fw-bold text-primary small uppercase tracking-wider">Grupo de Competencia</label>
+                            <select name="group" id="group" class="form-select bg-light text-dark border-0 py-2 fw-bold" required autofocus>
+                                <option value="" disabled selected>Selecciona un grupo...</option>
+                                {{#each groups}}
+                                <option value="{{this}}">Grupo {{this}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="form-text text-muted smaller mt-1">Selecciona un grupo para filtrar los equipos disponibles.</div>
+                        </div>
+
+                        <hr class="border-secondary opacity-25 my-4">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="firstTeam" class="form-label fw-bold text-success small uppercase">1° Puesto (Ganador)</label>
+                                <select name="firstTeam" id="firstTeam" class="form-select team-select bg-light text-dark border-0 py-2" required disabled>
+                                    <option value="" disabled selected>Selecciona equipo...</option>
+                                    <option value="Generic Team" data-group="all">Generic Team</option>
+                                    {{#each teams}}
+                                    <option value="{{_id}}" data-group="{{group}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="secondTeam" class="form-label fw-bold text-info small uppercase">2° Puesto</label>
+                                <select name="secondTeam" id="secondTeam" class="form-select team-select bg-light text-dark border-0 py-2" required disabled>
+                                    <option value="" disabled selected>Selecciona equipo...</option>
+                                    <option value="Generic Team" data-group="all">Generic Team</option>
+                                    {{#each teams}}
+                                    <option value="{{_id}}" data-group="{{group}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <label for="thirdTeam" class="form-label fw-bold text-warning small uppercase">3° Puesto</label>
+                                <select name="thirdTeam" id="thirdTeam" class="form-select team-select bg-light text-dark border-0 py-2" required disabled>
+                                    <option value="" disabled selected>Selecciona equipo...</option>
+                                    <option value="Generic Team" data-group="all">Generic Team</option>
+                                    {{#each teams}}
+                                    <option value="{{_id}}" data-group="{{group}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <label for="fourthTeam" class="form-label fw-bold text-secondary small uppercase">4° Puesto</label>
+                                <select name="fourthTeam" id="fourthTeam" class="form-select team-select bg-light text-dark border-0 py-2" required disabled>
+                                    <option value="" disabled selected>Selecciona equipo...</option>
+                                    <option value="Generic Team" data-group="all">Generic Team</option>
+                                    {{#each teams}}
+                                    <option value="{{name}}" data-group="{{group}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary bg-opacity-10 rounded-3 p-3 border border-primary border-opacity-10 mb-5">
+                            <div class="d-flex text-muted small">
+                                <i class="fas fa-info-circle me-2 mt-1"></i>
+                                <p class="mb-0">Al guardar, el sistema recalculará los puntos de todos los usuarios registrados que hayan apostado en este grupo.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm py-3">
+                                <i class="fas fa-save me-2"></i>Guardar Clasificación
+                            </button>
+                            <a href="/admin/classifications" class="btn btn-outline-light border-0 py-2">
+                                <i class="fas fa-arrow-left me-2"></i>Cancelar y Volver
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const groupSelect = document.getElementById('group');
+        const teamSelects = document.querySelectorAll('.team-select');
+
+        groupSelect.addEventListener('change', function() {
+            const selectedGroup = this.value;
+
+            teamSelects.forEach(select => {
+                select.disabled = false;
+                select.value = ""; // Reset selection
+
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    const optionGroup = option.getAttribute('data-group');
+                    
+                    if (!optionGroup || optionGroup === 'all' || optionGroup === selectedGroup) {
+                        option.style.display = '';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    .smaller { font-size: 0.75rem; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.1em; }
+</style>

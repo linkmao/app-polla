@@ -265,10 +265,48 @@ router.get('/admin/games/add', validar.isAuth, validar.isAdmin, async (req, res)
 })
 
 const Key = require('../models/Key') // Ensure Key model is imported
+const Classification = require('../models/Classification')
 
 router.get('/admin/keys', validar.isAuth, validar.isAdmin, async (req, res) => {
   const keys = await Key.find().lean().sort({ keyNumber: 1 })
   res.render('admin/manage-keys', { keys })
+})
+
+router.get('/admin/classifications', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const classifications = await Classification.find().lean().sort({ group: 1 })
+  const teams = await Team.find().lean()
+  
+  // Create a map for quick lookup: { id: name }
+  const teamMap = {}
+  teams.forEach(t => {
+    teamMap[t._id.toString()] = t.name
+  })
+
+  // Manually attach readable names
+  const enhancedClassifications = classifications.map(c => ({
+    ...c,
+    firstTeamName: teamMap[c.firstTeam] || c.firstTeam,
+    secondTeamName: teamMap[c.secondTeam] || c.secondTeam,
+    thirdTeamName: teamMap[c.thirdTeam] || c.thirdTeam,
+    fourthTeamName: teamMap[c.fourthTeam] || c.fourthTeam
+  }))
+
+  res.render('admin/manage-classifications', { classifications: enhancedClassifications })
+})
+
+router.get('/admin/classifications/add', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const teams = await Team.find().lean().sort({ name: 1 })
+  let groups = await Team.distinct('group')
+  if (!groups.includes('FINAL')) groups.push('FINAL')
+  res.render('admin/add-classification', { teams, groups })
+})
+
+router.get('/admin/classifications/edit/:id', validar.isAuth, validar.isAdmin, async (req, res) => {
+  const classification = await Classification.findById(req.params.id).lean()
+  const teams = await Team.find().lean().sort({ name: 1 })
+  let groups = await Team.distinct('group')
+  if (!groups.includes('FINAL')) groups.push('FINAL')
+  res.render('admin/edit-classification', { classification, teams, groups })
 })
 
 module.exports = router

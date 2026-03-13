@@ -462,6 +462,27 @@ Reinciar la app en heroku
     heroku restart --app [nombre-app]
 
 
+
+### Notas borrador
+Estas son notas de borrador, no son notas oficiales
+paridos
+Grupo A (Camerun, Colombia, Irlanda, Japo)
+A1: Camerun vs Colombia
+A2: Irlanda vs Japo
+A3: Camerun vs Irlanda
+A4: Colombia vs Japo
+A5: Camerun vs Japo
+A6: Colombia vs Irlanda
+
+Grupo B (Mexico, Paraguay, Portugal, Somalia)
+B1: Mexico vs Paraguay
+B2: Portugal vs Somalia
+B3: Mexico vs Portugal
+B4: Paraguay vs Somalia
+B5: Mexico vs Somalia
+B6: Paraguay vs Portugal
+
+
 ***
 ## Maolink Software
 Diciembre 30 2022

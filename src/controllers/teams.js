@@ -12,7 +12,14 @@ const getTeamById = async (req, res) => {
 
 const addTeam = async (req, res) => {
   try {
-    const { name, group, tag, flag } = req.body
+    const { name, group, tag } = req.body
+    let flag = req.body.flag
+
+    // Si hay un archivo subido, usamos su nombre generado por multer
+    if (req.file) {
+      flag = req.file.filename
+    }
+
     const newTeam = new Team({ name, group, tag, flag })
     await newTeam.save()
     if (req.headers['content-type'] === 'application/json') {
@@ -33,7 +40,15 @@ const addTeam = async (req, res) => {
 
 const updateTeam = async (req, res) => {
   try {
-    const teamUpdate = await Team.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const updateData = { ...req.body }
+
+    // Si se subió una nueva imagen, actualizamos el campo flag
+    if (req.file) {
+      updateData.flag = req.file.filename
+    }
+
+    const teamUpdate = await Team.findByIdAndUpdate(req.params.id, updateData, { new: true })
+
     if (req.headers['content-type'] === 'application/json') {
       res.status(200).json(teamUpdate)
     } else {

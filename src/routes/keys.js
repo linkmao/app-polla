@@ -19,12 +19,12 @@ router.put('/:id', validar.isAuth, validar.isAdmin, controller.updateKey)
 router.delete('/:id', validar.isAuth, validar.isAdmin, controller.deleteKey)
 router.delete('/', validar.isAuth, validar.isAdmin, controller.deleteAllKey)
 
-// Version api de prueba sin necesidad d autentcacón
-// router.get('/', controller.getKey  )
-// router.get('/:id',  controller.getKeyById)
-// router.post('/', controller.addKey )
-// router.put('/:id',  controller.updateKey)
-// router.delete('/:id',  controller.deleteKey )
-// router.delete('/',  controller.deleteAllKey )
+// Version api de prueba sin necesidad d autentcacón USANDO POSTMAN
+router.get('/dev/postman', controller.getKey)
+router.get('/dev/postman/:id', controller.getKeyById)
+router.post('/dev/postman', controller.addKey)
+router.put('/dev/postman/:id', controller.updateKey)
+router.delete('/dev/postman/:id', controller.deleteKey)
+router.delete('/dev/postman', controller.deleteAllKey)
 
 module.exports = router

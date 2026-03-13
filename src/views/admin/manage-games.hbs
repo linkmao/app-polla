@@ -15,29 +15,51 @@
                     <thead class="bg-light">
                         <tr>
                             <th class="ps-4">No.</th>
-                            <th>Local</th>
-                            <th>Visitante</th>
-                            <th>Fase</th>
-                            <th>Grupo</th>
+                            <th>Local vs Visitante</th>
+                            <th>Fase / Grupo</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Resultado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each games}}
                         <tr>
-                            <td class="ps-4 fw-bold">{{gameNumber}}</td>
+                            <td class="ps-4 fw-bold text-muted">{{gameNumber}}</td>
                             <td>
-                                <img src="/img/banderas/{{localFlag}}" alt="" class="me-2" style="width: 25px;">
-                                {{localTeamName}}
+                                <div class="d-flex align-items-center">
+                                    <div class="text-end" style="width: 120px;">
+                                        <span class="small me-2">{{localTeamName}}</span>
+                                        <img src="/img/flags/{{localFlag}}" alt="" style="width: 25px;">
+                                    </div>
+                                    <span class="mx-2 text-muted small">vs</span>
+                                    <div class="text-start" style="width: 120px;">
+                                        <img src="/img/flags/{{visitFlag}}" alt="" style="width: 25px;">
+                                        <span class="small ms-2">{{visitTeamName}}</span>
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                <img src="/img/banderas/{{visitFlag}}" alt="" class="me-2" style="width: 25px;">
-                                {{visitTeamName}}
+                                <span class="badge bg-info text-dark opacity-75">F{{phase}}</span>
+                                <span class="badge bg-secondary opacity-75">{{group}}</span>
                             </td>
-                            <td><span class="badge bg-info text-dark">Fase {{phase}}</span></td>
-                            <td><span class="badge bg-secondary">{{group}}</span></td>
                             <td class="text-center">
-                                <a href="/admin/games/edit/{{_id}}" class="btn btn-sm btn-outline-success">
+                                {{#if played}}
+                                <span class="badge rounded-pill bg-success px-3">Jugado</span>
+                                {{else}}
+                                <span class="badge rounded-pill bg-warning text-dark px-3">Pendiente</span>
+                                {{/if}}
+                            </td>
+                            <td class="text-center fw-bold">
+                                {{#if played}}
+                                <span class="text-primary">{{localScore}} - {{visitScore}}</span>
+                                <span class="badge bg-light text-dark border ms-1">{{analogScore}}</span>
+                                {{else}}
+                                <span class="text-muted small italic">-</span>
+                                {{/if}}
+                            </td>
+                            <td class="text-center">
+                                <a href="/admin/games/edit/{{_id}}" class="btn btn-sm btn-outline-success border-0">
                                     <i class="fas fa-edit me-1"></i>Editar
                                 </a>
                             </td>

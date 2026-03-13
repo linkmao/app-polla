@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body p-4">
                     {{>mensajes}}
-                    <form action="/api/teams" method="POST">
+                    <form action="/api/teams" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre del Equipo</label>
                             <input type="text" name="name" id="name" class="form-control bg-light text-dark"
@@ -24,9 +24,11 @@
                                 placeholder="Ej: A1, B2 (opcional)">
                         </div>
                         <div class="mb-3">
-                            <label for="flag" class="form-label">URL Bandera (PNG)</label>
-                            <input type="text" name="flag" id="flag" class="form-control bg-light text-dark"
-                                placeholder="nombre-archivo.png">
+                            <label for="flag" class="form-label">Bandera del Equipo (Imagen)</label>
+                            <input type="file" name="flag" id="flag" class="form-control bg-light text-dark"
+                                accept="image/*" required>
+                            <div class="form-text text-white-50">Selecciona una imagen (PNG, JPG) desde tu ordenador.
+                            </div>
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg">Guardar Equipo</button>

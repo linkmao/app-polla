@@ -28,16 +28,16 @@ router.delete('/:id', validar.isAuth, validar.isAdmin, controllers.deleteUser)//
 router.delete('/me/delete', validar.isAuth, controllers.deleteMe)//borra el usuario logueado
 
 
-// Version sin logueo
-// router.get('/', controllers.getUsers) // obtener todos los usuarios accede cualquiera
-// router.get('/:id', controllers.getUsersById) //obtener usuario por id, accede cualquiera
-// router.get('/me/profile', controllers.getMe) //obtener usuario logueado, accede propio usuario
-// router.put('/:id', controllers.updateUser) // actualiza usuario por id, accede admin
-// router.put('/me/profile', controllers.updateMe) //actuializa usuario accede propio usuario
-// router.put('/me/password', controllers.updatePassword) // Usuario cambia contraseña
-// router.put('/pass/restore', controllers.restorePass) // Restaurar pass a usuario
-// router.delete('/', controllers.deleteAllUser) //borra todos los usuarios, solo admin
-// router.delete('/:id', controllers.deleteUser)//borra usuario por id accede admin
-// router.delete('/me/delete', controllers.deleteMe)//borra el usuario logueado
+// Version sin logueo USANDO POSTMAN
+router.get('/dev/postman', controllers.getUsers) // obtener todos los usuarios accede cualquiera
+router.get('/dev/postman/:id', controllers.getUsersById) //obtener usuario por id, accede cualquiera
+router.get('/dev/postman/me/profile', controllers.getMe) //obtener usuario logueado, accede propio usuario
+router.put('/dev/postman/:id', controllers.updateUser) // actualiza usuario por id, accede admin
+router.put('/dev/postman/me/profile', controllers.updateMe) //actuializa usuario accede propio usuario
+router.put('/dev/postman/me/password', controllers.updatePassword) // Usuario cambia contraseña
+router.put('/dev/postman/pass/restore', controllers.restorePass) // Restaurar pass a usuario
+router.delete('/dev/postman', controllers.deleteAllUser) //borra todos los usuarios, solo admin
+router.delete('/dev/postman/:id', controllers.deleteUser)//borra usuario por id accede admin
+router.delete('/dev/postman/me/delete', controllers.deleteMe)//borra el usuario logueado
 
 module.exports = router
