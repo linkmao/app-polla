@@ -4,8 +4,8 @@ module.exports = {
   tokenDuration: 60 * 24 * 60 * 60,  // Duracion en segundos (2 meses hora)
   pointByScore: 3,
   pointByAnalogScore: 2,
-  pointByClassificationOrder: 3,
-  pointByClassificatioNoOrder: 1,
+  pointByGroupClassification: 5,
+  //pointByClassificatioNoOrder: 1,
   pointByTeamClassificated: 3,
   pointByFinalistFirstTeam: 10,
   pointByFinalistSecondTeam: 7,

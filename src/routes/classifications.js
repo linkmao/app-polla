@@ -20,11 +20,11 @@ router.delete('/:id', validar.isAuth, validar.isAdmin, controller.deleteClassifi
 router.delete('/', validar.isAuth, validar.isAdmin, controller.deleteAllClassifications)
 
 //Version sin autenticacaion
-// router.get('/', controller.getClassification )
-// router.get('/:id', controller.getClassificationById)
-// router.post('/', controller.addClassification )
-// router.put('/:id', controller.updateClassification)
-// router.delete('/:id', controller.deleteClassification )
-// router.delete('/', controller.deleteAllClassifications )
+router.get('/dev/postman', controller.getClassification)
+router.get('/dev/postman/:id', controller.getClassificationById)
+router.post('/dev/postman', controller.addClassification)
+router.put('/dev/postman/:id', controller.updateClassification)
+router.delete('/dev/postman/:id', controller.deleteClassification)
+router.delete('/dev/postman', controller.deleteAllClassifications)
 
 module.exports = router

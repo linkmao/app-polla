@@ -37,21 +37,21 @@ router.delete('/:id', validar.isAuth, validar.isAdmin, controller.deleteBetGame)
 router.delete('/admin/:iduser', validar.isAuth, validar.isAdmin, controller.deleteAllBetGameByIdUser) // Borrar todos los juegos de un usuario dado por id, accede admin
 router.delete('/', validar.isAuth, validar.isAdmin, controller.deleteAllBetGames) //Borra las apuestas de todos los usuarios
 
-// Version sin autenticacion
-// router.get('/', controller.getAllBets) //obtiene todas los apuestas, accede cualquier usuario
-// router.get('/me/bet', controller.getMeBets) //obtiene todas las apuestas, usuario logueado
-// router.get('/:id', controller.getBetGameById)  //obtiene cualquier apuesta por id, cualquier user
-// router.get('/user/:iduser', controller.getBetGameByIdUser)  //obtiene todas las apuestas de un usuario (Solo admin)
-// router.post('/me/bet', controller.addMeBetGame ) //crea apuesta usuario logueado
-// router.post('/:iduser', controller.addBetGame) //crea apuesta a usuario con id ingresado por url, solo accede admmin
-// router.put('/me/bet/:id',controller.updateMeBetGame)//Actualiza apuesta usuario logueado
-// router.put('/me/bet/group/:id/:g',controller.updateMeBetGameGroup)//Actualiza apuesta usuario logueado y grupo del juego (ruta optimizada para el frontend)
-// router.put('/me/bet/:id/:game',controller.updateMeBetGameAndNextGame)//Actualiza apuesta usuario logueado pero tambien permite asignar el equipo que clasifica para el siguiente partido, esto solo tiene utilidad para su uso desde el frontend
-// router.put('/:id', controller.updateBetGame)
-// router.delete('/me/bet/:id', controller.deleteMeBetGame ) // Borra juego id accede usuario logueado
-// router.delete('/me/bet',  controller.deleteAllMeBetGames ) //borra todos las apuestas de usuario logueado
-// router.delete('/:id',  controller.deleteBetGame)//borra apuesta con id, accede admin
-// router.delete('/admin/:iduser', controller.deleteAllBetGameByIdUser) // Borrar todos los juegos de un usuario dado por id, accede admin
-// router.delete('/',  controller.deleteAllBetGames) //Borra las apuestas de todos los usuarios
+// Version sin autenticacion USANDO POSTMAN
+router.get('/dev/postman', controller.getAllBets) //obtiene todas los apuestas, accede cualquier usuario
+router.get('/dev/postman/me/bet', controller.getMeBets) //obtiene todas las apuestas, usuario logueado
+router.get('/dev/postman/:id', controller.getBetGameById)  //obtiene cualquier apuesta por id, cualquier user
+router.get('/dev/postman/user/:iduser', controller.getBetGameByIdUser)  //obtiene todas las apuestas de un usuario (Solo admin)
+router.post('/dev/postman/me/bet', controller.addMeBetGame) //crea apuesta usuario logueado
+router.post('/dev/postman/:iduser', controller.addBetGame) //crea apuesta a usuario con id ingresado por url, solo accede admmin
+router.put('/dev/postman/me/bet/:id', controller.updateMeBetGame)//Actualiza apuesta usuario logueado
+router.put('/dev/postman/me/bet/group/:id/:g', controller.updateMeBetGameGroup)//Actualiza apuesta usuario logueado y grupo del juego (ruta optimizada para el frontend)
+router.put('/dev/postman/me/bet/:id/:game', controller.updateMeBetGameAndNextGame)//Actualiza apuesta usuario logueado pero tambien permite asignar el equipo que clasifica para el siguiente partido, esto solo tiene utilidad para su uso desde el frontend
+router.put('/dev/postman/:id', controller.updateBetGame)
+router.delete('/dev/postman/me/bet/:id', controller.deleteMeBetGame) // Borra juego id accede usuario logueado
+router.delete('/dev/postman/me/bet', controller.deleteAllMeBetGames) //borra todos las apuestas de usuario logueado
+router.delete('/dev/postman/:id', controller.deleteBetGame)//borra apuesta con id, accede admin
+router.delete('/dev/postman/admin/:iduser', controller.deleteAllBetGameByIdUser) // Borrar todos los juegos de un usuario dado por id, accede admin
+router.delete('/dev/postman', controller.deleteAllBetGames) //Borra las apuestas de todos los usuarios
 
 module.exports = router

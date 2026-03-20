@@ -36,19 +36,19 @@ router.delete('/:id', validar.isAuth, validar.isAdmin, controller.deleteClassifi
 router.delete('/user/:iduser', validar.isAuth, validar.isAdmin, controller.deleteAllClassifitationsByIdUser) // Borrar todos las clasificaciones de un usuario dado por id, accede admin
 router.delete('/', validar.isAuth, validar.isAdmin, controller.deleteAllClassifications) //Borra las apuestas de todos los usuarios
 
-//VERSION SIN AUTENTICACION
-// router.get('/', controller.getAllClassifications) //obtiene todas los apuestas, accede cualquier usuario
-// router.get('/me/bet',  controller.getMeClassification) //obtiene todas las apuestas, usuario logueado
-// router.get('/:id', controller.getClassificationById)  //obtiene cualquier apuesta por id, cualquier user
-// router.get('/user/:id', controller.getClassificationByUserId)  //obtiene las apuestas de un usuario id (admin)
-// router.post('/me/bet', controller.addMeClassification ) //crea apuesta usuario logueado
-// router.post('/:iduser',  controller.addClassification) //crea apuesta a usuario con id ingresado por url, solo accede admmin
-// router.put('/me/bet/:id',controller.updateMeClassification)//Actualiza apuesta usuario logueado
-// router.put('/:id',  controller.updateClassification)
-// router.delete('/me/bet/:id', controller.deleteMeClassification ) // Borra juego id accede usuario logueado
-// router.delete('/me/bet', controller.deleteAllMeClassifications ) //borra todos las apuestas de usuario logueado
-// router.delete('/:id',  controller.deleteClassification)//borra apuesta con id, accede admin
-// router.delete('/user/:iduser',  controller.deleteAllClassifitationsByIdUser) // Borrar todos las clasificaciones de un usuario dado por id, accede admin
-// router.delete('/',  controller.deleteAllClassifications) //Borra las apuestas de todos los usuarios
+//VERSION SIN AUTENTICACION USANDO POSTMAN
+router.get('/dev/postman', controller.getAllClassifications) //obtiene todas los apuestas, accede cualquier usuario
+router.get('/dev/postman/me/bet', controller.getMeClassification) //obtiene todas las apuestas, usuario logueado
+router.get('/dev/postman/:id', controller.getClassificationById)  //obtiene cualquier apuesta por id, cualquier user
+router.get('/dev/postman/user/:id', controller.getClassificationByUserId)  //obtiene las apuestas de un usuario id (admin)
+router.post('/dev/postman/me/bet', controller.addMeClassification) //crea apuesta usuario logueado
+router.post('/dev/postman/:iduser', controller.addClassification) //crea apuesta a usuario con id ingresado por url, solo accede admmin
+router.put('/dev/postman/me/bet/:id', controller.updateMeClassification)//Actualiza apuesta usuario logueado
+router.put('/dev/postman/:id', controller.updateClassification)
+router.delete('/dev/postman/me/bet/:id', controller.deleteMeClassification) // Borra juego id accede usuario logueado
+router.delete('/dev/postman/me/bet', controller.deleteAllMeClassifications) //borra todos las apuestas de usuario logueado
+router.delete('/dev/postman/:id', controller.deleteClassification)//borra apuesta con id, accede admin
+router.delete('/dev/postman/user/:iduser', controller.deleteAllClassifitationsByIdUser) // Borrar todos las clasificaciones de un usuario dado por id, accede admin
+router.delete('/dev/postman', controller.deleteAllClassifications) //Borra las apuestas de todos los usuarios
 
 module.exports = router

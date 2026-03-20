@@ -481,9 +481,13 @@ B3: Mexico vs Portugal
 B4: Paraguay vs Somalia
 B5: Mexico vs Somalia
 B6: Paraguay vs Portugal
-
-
 ***
+
+Cambio en esta version
+Se implementa el puntaje por clasificacion de grupo donde esta vez en vez de ganar 3 puntos por acertar el equipo en el orden correcto, se ganan 5 puntos, esto es para los 4 equipos por grupo.
+
+
+
 ## Maolink Software
 Diciembre 30 2022
 

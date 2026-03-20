@@ -39,7 +39,7 @@
                                 <select name="secondTeam" id="secondTeam" class="form-select team-select bg-light text-dark border-0 py-2" required>
                                     <option value="Generic Team" data-group="all" {{#if (eq classification.secondTeam "Generic Team")}}selected{{/if}}>Generic Team</option>
                                     {{#each teams}}
-                                    <option value="{{name}}" data-group="{{group}}" {{#if (eq name ../classification.secondTeam)}}selected{{/if}}>{{name}}</option>
+                                    <option value="{{_id}}" data-group="{{group}}" {{#if (eq _id ../classification.secondTeam)}}selected{{/if}}>{{name}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -48,7 +48,7 @@
                                 <select name="thirdTeam" id="thirdTeam" class="form-select team-select bg-light text-dark border-0 py-2" required>
                                     <option value="Generic Team" data-group="all" {{#if (eq classification.thirdTeam "Generic Team")}}selected{{/if}}>Generic Team</option>
                                     {{#each teams}}
-                                    <option value="{{name}}" data-group="{{group}}" {{#if (eq name ../classification.thirdTeam)}}selected{{/if}}>{{name}}</option>
+                                    <option value="{{_id}}" data-group="{{group}}" {{#if (eq _id ../classification.thirdTeam)}}selected{{/if}}>{{name}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -57,7 +57,7 @@
                                 <select name="fourthTeam" id="fourthTeam" class="form-select team-select bg-light text-dark border-0 py-2" required>
                                     <option value="Generic Team" data-group="all" {{#if (eq classification.fourthTeam "Generic Team")}}selected{{/if}}>Generic Team</option>
                                     {{#each teams}}
-                                    <option value="{{name}}" data-group="{{group}}" {{#if (eq name ../classification.fourthTeam)}}selected{{/if}}>{{name}}</option>
+                                    <option value="{{_id}}" data-group="{{group}}" {{#if (eq _id ../classification.fourthTeam)}}selected{{/if}}>{{name}}</option>
                                     {{/each}}
                                 </select>
                             </div>

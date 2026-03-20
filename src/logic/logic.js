@@ -57,20 +57,16 @@ const calculatePointByClassification = async (group) => {
     if (group != "FINAL") {
       // Compara el primer equpo apostado del jugador con los de la clasificacion verdadera y se hace el analisis del orden
       if (e.firstTeam == classifications[0].firstTeam) {  // Se usa [0] ya que se tiene un array y este debe acceder a su 
-        earnedScore[config.xPointByFirst] = config.pointByClassificationOrder
-        console.log("Puntos por primer equipo: ", earnedScore[config.xPointByFirst])
+        earnedScore[config.xPointByFirst] = config.pointByGroupClassification
       }
       if (e.secondTeam == classifications[0].secondTeam) {
-        earnedScore[config.xPointBySecond] = config.pointByClassificationOrder
-        console.log("Puntos por segundo equipo: ", earnedScore[config.xPointBySecond])
+        earnedScore[config.xPointBySecond] = config.pointByGroupClassification
       }
       if (e.thirdTeam == classifications[0].thirdTeam) {
-        earnedScore[config.xPointByThirdh] = config.pointByClassificationOrder
-        console.log("Puntos por tercer equipo: ", earnedScore[config.xPointByThirdh])
+        earnedScore[config.xPointByThirdh] = config.pointByGroupClassification
       }
       if (e.fourthTeam == classifications[0].fourthTeam) {
-        earnedScore[config.xPointByFourth] = config.pointByClassificationOrder
-        console.log("Puntos por cuarto equipo: ", earnedScore[config.xPointByFourth])
+        earnedScore[config.xPointByFourth] = config.pointByGroupClassification
       }
 
     } else // Aplica para el calculo de puntaje para la clasificación FINAL

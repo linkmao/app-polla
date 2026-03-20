@@ -21,13 +21,13 @@ router.put('/:id', validar.isAuth, validar.isAdmin, controller.updateGame)
 router.delete('/:id', validar.isAuth, validar.isAdmin, controller.deleteGame)
 router.delete('/', validar.isAuth, validar.isAdmin, controller.deleteAllGames)
 
-// Version sin autenticacion
-// router.get('/', controller.getGames )
-// router.get('/:id', controller.getGameById)
-// router.get('/group/:g',  controller.getGameByGroup)
-// router.post('/', controller.addGame )
-// router.put('/:id',controller.updateGame)
-// router.delete('/:id', controller.deleteGame )
-// router.delete('/', controller.deleteAllGames )
+// Version sin autenticacion USANDO POSTMAN
+router.get('/dev/postman', controller.getGames)
+router.get('/dev/postman/:id', controller.getGameById)
+router.get('/dev/postman/group/:g', controller.getGameByGroup)
+router.post('/dev/postman', controller.addGame)
+router.put('/dev/postman/:id', controller.updateGame)
+router.delete('/dev/postman/:id', controller.deleteGame)
+router.delete('/dev/postman', controller.deleteAllGames)
 
 module.exports = router
