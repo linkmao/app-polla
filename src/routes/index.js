@@ -79,6 +79,24 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   res.render('games', { dataGameAndBet, dataBetClassification, dataPoint })
 })
 
+router.get('/sixteenth', validar.isAuth, async (req, res) => {
+  // Data para apuestas de dieciseisavos
+  const dataBet = await getGameAndBetByPhase(config.phaseSixteenth, config.gamesSixteenth, req.user.id)
+  // data para juegos de dieciseisavos
+  const dataGame = await getGameByPhase(config.phaseSixteenth, config.gamesSixteenth)
+  // Pequeño código para juntar la data de los game y apusta 
+  const dataGameAndBet = []
+  dataGame.forEach((g, i) => {
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit: false, renderBetRoundPhase: config.renderBetRoundPhases, renderButtonViewOtherBetPhases: config.renderViewOtherBetPhases })
+  })
+  const dataPointGames = await getPointGamePhase(config.phaseSixteenth, req.user.id)
+  const total = sumTotalPoint([dataPointGames])
+  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: false, renderPhase: true, phase: "Dieciseisavos", total } }]
+  res.render('games-by-phase', { dataGameAndBet, dataPoint })
+})
+
+
+
 router.get('/eighth', validar.isAuth, async (req, res) => {
   // Data para apuestas de octavos
   const dataBet = await getGameAndBetByPhase(config.phaseEighth, config.gamesEighth, req.user.id)
@@ -275,7 +293,7 @@ router.get('/admin/keys', validar.isAuth, validar.isAdmin, async (req, res) => {
 router.get('/admin/classifications', validar.isAuth, validar.isAdmin, async (req, res) => {
   const classifications = await Classification.find().lean().sort({ group: 1 })
   const teams = await Team.find().lean()
-  
+
   // Create a map for quick lookup: { id: name }
   const teamMap = {}
   teams.forEach(t => {

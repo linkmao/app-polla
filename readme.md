@@ -487,6 +487,13 @@ Cambio en esta version
 Se implementa el puntaje por clasificacion de grupo donde esta vez en vez de ganar 3 puntos por acertar el equipo en el orden correcto, se ganan 5 puntos, esto es para los 4 equipos por grupo.
 
 
+Pendiente
+En la pantalla de agregar juego, que se haya un boton para eliminar un juego
+En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description
+Al momento de crear las clasificaciones esta bien el hecho de que aparezcan lso equipos del respectivo grupo, sin embargo en el grupo FINAL no aparece ningun equipo, mejorarpara que aparezcan TODOS los equipos en ese grupo final
+
+Solucionar luego lo de las bandera spara los equipos genericos
+
 
 ## Maolink Software
 Diciembre 30 2022
