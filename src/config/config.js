@@ -21,10 +21,10 @@ module.exports = {
   // La siguinte configuracion está asociado a la información necesaria para crear las apuestas de las etapas de cuartos de final, semifinal , y finales
   // La estructura para la conformación de los partidos de ocatavo de final en adelante se realiza con eesta configuración, cada array se compone de [juego1, juego2, juego3] donde juego3 se conforma con los ganadores de juego1 y juego2 respectivamente
 
-  gamesEighth: [[74, 77, 89], [73, 75, 90], [76, 78, 91], [79, 80, 92], [83, 84, 93], [81, 82, 94], [86, 88, 95], [85, 87, 96]],
-  gamesFourth: [[89, 90, 97], [93, 94, 98], [91, 92, 99], [95, 96, 100]],
-  gamesSemi: [[97, 98, 101], [99, 100, 102]],
-  gameFinal: [[101, 102, 104]],
+  gamesSixteenth: [[74, 77, 89], [73, 75, 90], [76, 78, 91], [79, 80, 92], [83, 84, 93], [81, 82, 94], [86, 88, 95], [85, 87, 96]],
+  gamesEighth: [[89, 90, 97], [93, 94, 98], [91, 92, 99], [95, 96, 100]],
+  gamesFourth: [[97, 98, 101], [99, 100, 102]],
+  gamesSemi: [[101, 102, 104]],
   // finalStruct contiene los juegos para armar la estructura de los dos juegos finales (tercero y cuarto y finales), si bien gamesSemi tiene la estructura para armar el juego final, debido a que se requiere otra logica para el juego de tercero y cuarto se implementa de estamanera, el orden de los datos correspondiente al numero de juego de los partidos necesrios es el siguiente
   // virtualNextGame es un juego que no se da (el siguiente a la final) y solo es para que sirva como almacenamiento para el equipo ganador de la final y de terceros y cuartos y así poder dar puntaje por ellos como en el resto esquema de clasificaciones
   //[Juego-semifinal-1, juego-semifinal-2, juego-tercero-y-cuarto, juego-final, virtualNexGame]
