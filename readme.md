@@ -494,7 +494,9 @@ Al momento de crear las clasificaciones esta bien el hecho de que aparezcan lso 
 
 Solucionar luego lo de las bandera spara los equipos genericos
 
+Importante: Los apostadores no pueden ingresar a la apuesta de los 16 avos, hasta que el administrador no haya ingresado los juegos reales que se van a dar en esa fase
 
+Importante: Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
 ## Maolink Software
 Diciembre 30 2022
 

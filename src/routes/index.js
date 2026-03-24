@@ -95,24 +95,26 @@ router.get('/sixteenth', validar.isAuth, async (req, res) => {
   res.render('games-by-phase', { dataGameAndBet, dataPoint })
 })
 
-
-
 router.get('/eighth', validar.isAuth, async (req, res) => {
-  // Data para apuestas de octavos
+  // Data para apuestas de cuartos
   const dataBet = await getGameAndBetByPhase(config.phaseEighth, config.gamesEighth, req.user.id)
-  // data para juegos de octavos
+  if (dataBet == null) {
+    req.flash('mensajeError', 'Para realizar las apuestas de la fase de OCTAVOS DE FINAL, debes realizar primero todas las apuestas de la fase DIECISEISAVOS DE FINAL')
+    res.redirect('/sixteenth')
+  }
+  // data para juegos de cuartos
   const dataGame = await getGameByPhase(config.phaseEighth, config.gamesEighth)
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []
   dataGame.forEach((g, i) => {
-    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit: false, renderBetRoundPhase: config.renderBetRoundPhases, renderButtonViewOtherBetPhases: config.renderViewOtherBetPhases })
+    dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], renderTableByLocalAndVisit: true, renderBetRoundPhase: config.renderBetRoundPhases, renderButtonViewOtherBetPhases: config.renderViewOtherBetPhases, renderPointCoincidente: true })
   })
   const dataPointGames = await getPointGamePhase(config.phaseEighth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
-  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: false, renderPhase: true, phase: "Octavos", total } }]
+  const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Octavos", total } }]
   res.render('games-by-phase', { dataGameAndBet, dataPoint })
-
 })
+
 
 router.get('/fourth', validar.isAuth, async (req, res) => {
   // Data para apuestas de cuartos
@@ -156,13 +158,16 @@ router.get('/semi', validar.isAuth, async (req, res) => {
 
 router.get('/finals', validar.isAuth, async (req, res) => {
   // Data para apuestas de final
+  console.log("ESPERANDO INFO")
   const dataBet = await getGameAndBetFinal(config.phaseFinal, config.finalStruct, req.user.id)
+  console.log("informacion obtenida", dataBet)
   if (dataBet == null) {
     req.flash('mensajeError', 'Para realizar las apuestas de la fase FINAL, debes realizar primero todas las apuestas de la fase SEMI FINAL')
     res.redirect('/semi')
   }
   // data para juegos de final
-  const dataGame = await getGameByPhaseFinal(config.phaseFinal, [63, 64])
+  const juegosFinal = [config.finalStruct[2], config.finalStruct[3]]
+  const dataGame = await getGameByPhaseFinal(config.phaseFinal, juegosFinal)
 
   // Pequeño código para juntar la data de los game y apusta 
   const dataGameAndBet = []

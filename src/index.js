@@ -67,6 +67,7 @@ app.use(passport.session())  // para usar passport con session
 app.use(async (req, res, next) => {
   const data = req.user || null
   if (data && data.role !== 'admin') {
+    res.locals.dieciseisAvosCompleted = (await verifyPhaseCompleted(data._id)).dieciseisAvosCompleted
     res.locals.octavosCompleted = (await verifyPhaseCompleted(data._id)).octavosCompleted
     res.locals.cuartosCompleted = (await verifyPhaseCompleted(data._id)).cuartosCompleted
     res.locals.semiCompleted = (await verifyPhaseCompleted(data._id)).semiCompleted

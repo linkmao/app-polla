@@ -136,7 +136,7 @@ const getGameByPhase = async (phase, gameStruct) => {
       localFlag2 = teams.find(t => t._id == idTeamLocal2).flag
     }
 
-    if (idTeamVisit2 == 'GENERIC LOCAL TEAM') {
+    if (idTeamVisit2 == 'GENERIC VISIT TEAM') {
       visitTeam2 = "Sin asignar"
       visitFlag2 = 'no-flag.png'
     } else {
@@ -178,7 +178,7 @@ const getGameByPhaseFinal = async (phase, gameStruct) => {
   { analogScore1 == "-1" ? analogScore1 = '-' : analogScore1 }
 
   // Si el id de los equipos es GENERIC LOCAL TEAM, entonces el juego no se ha realizado
-  if (idTeamLocal1 == 'GENERIC LOCAL TEAM' || idTeamVisit1 == 'GENERIC LOCAL TEAM') {
+  if (idTeamLocal1 == 'GENERIC LOCAL TEAM' || idTeamVisit1 == 'GENERIC VISIT TEAM') {
     localTeam1 = "Sin asignar"
     localFlag1 = 'no-flag.png'
     visitTeam1 = "Sin asignar"
@@ -311,8 +311,8 @@ const getBetClassificationByGroup = async (group, idUser) => {
     }
     else { // Si grupo es "FINAL" entonces los teams lo debo sacar de las apuestas de los partidos 63 y 64
       // Obtengo los id de los game 63 y 63
-      const idSemiGame = games.find(g => g.gameNumber == 63)._id
-      const idFinalGame = games.find(g => g.gameNumber == 64)._id
+      const idSemiGame = games.find(g => g.gameNumber == config.finalStruct[2])._id
+      const idFinalGame = games.find(g => g.gameNumber == config.finalStruct[3])._id
       // Obtengo los id de los equipos apostados en los partidos 63 y 64
       teamOneId = betGames.find(b => b.idGame == idSemiGame).betLocalTeam
       teamTwoId = betGames.find(b => b.idGame == idSemiGame).betVisitTeam
@@ -367,7 +367,7 @@ const getGameAndBetByPhase = async (phase, gamesPhase, idUser) => {
       const idNextGame = games.find(t => t.gameNumber == g[2])._id
       let localTeamId1 = null, visitTeamId1 = null, localTeamId2 = null, visitTeamId2 = null
 
-      if (phase == config.phaseEighth) {
+      if (phase == config.phaseSixteenth) {
         localTeamId1 = games.find(t => t.gameNumber == g[0]).localTeam
         visitTeamId1 = games.find(t => t.gameNumber == g[0]).visitTeam
         localTeamId2 = games.find(t => t.gameNumber == g[1]).localTeam
@@ -467,10 +467,6 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
     const idGame2 = games.find(g => g.gameNumber == gameStruct[3])._id // Id juego final
     const gameNumber2 = gameStruct[3]
 
-    console.log("ID GAME 1", idGame1)
-    console.log("ID GAME 2", idGame2)
-
-
     let localTeamId1 = null, visitTeamId1 = null, localTeamId2 = null, visitTeamId2 = null
 
 
@@ -509,10 +505,15 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
     const pointByAnalogScore2 = earnedScore2[config.xPointByAnalogScore]
     const pointByLocalEqual2 = earnedScore2[config.xPointByLocalEqual]
     const pointByVisitEqual2 = earnedScore2[config.xPointByVisitEqual]
+
     // Datos de virtualGame donde estan guadados los puntos por la apuesta del equipo ganador en el partido de 3y4 y de final, el puntaje de 3y4 está guardado en earnedScore[xPointByLocalEqual] y partido de final está guardado en earnedSecore[xPointByVisitEqual]
     const idVirtualGame = games.find(g => g.gameNumber == gameStruct[4])._id
     const pointByWin1 = betGames.find(b => b.idGame == idVirtualGame).earnedScore[config.xPointByLocalEqual]
     const pointByWin2 = betGames.find(b => b.idGame == idVirtualGame).earnedScore[config.xPointByVisitEqual]
+
+
+    // console.log("pointByWin1", pointByWin1)
+    // console.log("pointByWin2", pointByWin2)
 
     let totalScore1 = 0, totalScore2 = 0
     earnedScore1.forEach(e => { totalScore1 += e })
@@ -557,11 +558,10 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
 
     data.push({ phase, idNextGame, idGame1, gameNumber1, localTeamId1, localTeam1, localFlag1, visitTeamId1, visitTeam1, visitFlag1, idGame2, gameNumber2, localTeamId2, localTeam2, localFlag2, visitTeamId2, visitTeam2, visitFlag2, idBet1, localScore1, visitScore1, analogScore1, earnedScore1, idBet2, localScore2, visitScore2, analogScore2, earnedScore2, betLocalTeam, betLocalFlag, betVisitTeam, betVisitFlag, pointByScore1, pointByAnalogScore1, pointByLocalEqual1, pointByVisitEqual1, totalScore1, pointByScore2, pointByAnalogScore2, pointByLocalEqual2, pointByVisitEqual2, totalScore2, pointByWin1, pointByWin2, renderPoint, rederPointVirtualGame })
 
-    console.log(data)
     return data
   }
   catch (err) {
-    console.log('apuesta de fase actual no está completa')
+    console.log('apuesta de fase actual no está completa, ESTO ES DE PRUEBA')
     return null
   }
 }
@@ -1045,14 +1045,20 @@ const dataForTableClass = async idUser => {
 //COntrolador encargado de verificar si una phase esta complemtamemte diligenciada par dar paso a la sigueiknte fase y activar el menu correspondiente (esta funcion se usa comio un midleware en el contexto proinscipal)
 
 const verifyPhaseCompleted = async idUser => {
-  let octavosCompleted = true, cuartosCompleted = true, semiCompleted = true
+  let dieciseisAvosCompleted = true, octavosCompleted = true, cuartosCompleted = true, semiCompleted = true
   // Verificacion de la phase octavos
+  const games16Avos = await Game.find({ phase: config.phaseInitial })
   const gamesOctavos = await Game.find({ phase: config.phaseEighth })
   const gamesCuartos = await Game.find({ phase: config.phaseFourth })
   const gamesSemi = await Game.find({ phase: config.phaseSemiFinals })
+  const id16Avos = []
   const idOctavos = []
   const idCuartos = []
   const idSemi = []
+
+  for (game of games16Avos) {
+    id16Avos.push(game._id)
+  }
   for (game of gamesOctavos) {
     idOctavos.push(game._id)
   }
@@ -1064,6 +1070,10 @@ const verifyPhaseCompleted = async idUser => {
   }
 
   const betGames = await BetGame.find({ idUser })
+
+  for (idBet of id16Avos) {
+    if ((betGames.find(b => b.idGame == idBet).localScore) == '-1' || (betGames.find(b => b.idGame == idBet).visitScore) == '-1') dieciseisAvosCompleted = false
+  }
 
   for (idBet of idOctavos) {
     if ((betGames.find(b => b.idGame == idBet).localScore) == '-1' || (betGames.find(b => b.idGame == idBet).visitScore) == '-1') octavosCompleted = false
@@ -1077,7 +1087,7 @@ const verifyPhaseCompleted = async idUser => {
     if ((betGames.find(b => b.idGame == idBet).localScore) == '-1' || (betGames.find(b => b.idGame == idBet).visitScore) == '-1') semiCompleted = false
   }
 
-  return { octavosCompleted, cuartosCompleted, semiCompleted }
+  return { dieciseisAvosCompleted, octavosCompleted, cuartosCompleted, semiCompleted }
 }
 
 // Controladores encargados de verificar si las apuestas estan hechas
