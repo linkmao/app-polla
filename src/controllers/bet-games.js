@@ -70,7 +70,7 @@ const updateMeBetGameAndNextGame = async (req, res) => {
   // Guarda el equipo apostato para la siguinete ronda (juego de ganadors)
   await BetGame.findOneAndUpdate({ idUser: req.user.id, idGame: req.params.game }, { betLocalTeam: req.body.betLocalTeam, betVisitTeam: req.body.betVisitTeam })
   // Ademas del juego de ganadores creado (los elegidos por el usuario), si la pase es de semifinal se debe crear tambien el juego de perderores, para confromar así el juego de terceros y cuartos
-
+  if (req.params.phase == config.phaseSixteenth) res.redirect(`/sixteenth#${req.params.id}`)
   if (req.params.phase == config.phaseEighth) res.redirect(`/eighth#${req.params.id}`)
   if (req.params.phase == config.phaseFourth) res.redirect(`/fourth#${req.params.id}`)
   if (req.params.phase == config.phaseSemiFinals) {
