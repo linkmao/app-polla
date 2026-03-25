@@ -26,7 +26,11 @@
             </a>
             <ul class="dropdown-menu ">
               <li><a class="dropdown-item" href="/sixteenth">Mis apuestas 16vos</a></li>
+              {{#if dieciseisAvosCompleted}}
               <li><a class="dropdown-item" href="/eighth">Mis apuestas octavos</a></li>
+              {{else}}
+              <li><a class="dropdown-item disabled" href="/eighth">Mis apuestas octavos</a></li>
+              {{/if}}
               {{#if octavosCompleted}}
               <li><a class="dropdown-item" href="/fourth">Mis apuestas cuartos</a></li>
               {{else}}

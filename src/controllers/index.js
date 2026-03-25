@@ -1047,7 +1047,7 @@ const dataForTableClass = async idUser => {
 const verifyPhaseCompleted = async idUser => {
   let dieciseisAvosCompleted = true, octavosCompleted = true, cuartosCompleted = true, semiCompleted = true
   // Verificacion de la phase octavos
-  const games16Avos = await Game.find({ phase: config.phaseInitial })
+  const games16Avos = await Game.find({ phase: config.phaseSixteenth })
   const gamesOctavos = await Game.find({ phase: config.phaseEighth })
   const gamesCuartos = await Game.find({ phase: config.phaseFourth })
   const gamesSemi = await Game.find({ phase: config.phaseSemiFinals })
@@ -1087,6 +1087,10 @@ const verifyPhaseCompleted = async idUser => {
     if ((betGames.find(b => b.idGame == idBet).localScore) == '-1' || (betGames.find(b => b.idGame == idBet).visitScore) == '-1') semiCompleted = false
   }
 
+  console.log("Fase 16 avos", dieciseisAvosCompleted)
+  console.log("Fase octavos", octavosCompleted)
+  console.log("Fase cuartos", cuartosCompleted)
+  console.log("Fase semi", semiCompleted)
   return { dieciseisAvosCompleted, octavosCompleted, cuartosCompleted, semiCompleted }
 }
 
