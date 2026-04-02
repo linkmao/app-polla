@@ -1,9 +1,0 @@
-[
-  "betclassifications",
-  "teams",
-  "keys",
-  "users",
-  "classifications",
-  "games",
-  "betgames"
-]
