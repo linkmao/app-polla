@@ -486,6 +486,7 @@ B6: Paraguay vs Portugal
 Cambio en esta version
 Se implementa el puntaje por clasificacion de grupo donde esta vez en vez de ganar 3 puntos por acertar el equipo en el orden correcto, se ganan 5 puntos, esto es para los 4 equipos por grupo.
 
+Se implementa el puntaje  por clasificacion final de 10 puntos por cada uno de los 4 equipos finalistas acertados, en el orden correcto. En el caso de que no se acierte el orden correcto se dan 0 puntos.
 
 Pendiente
 En la pantalla de agregar juego, que se haya un boton para eliminar un juego
@@ -497,6 +498,15 @@ Solucionar luego lo de las bandera spara los equipos genericos
 Importante: Los apostadores no pueden ingresar a la apuesta de los 16 avos, hasta que el administrador no haya ingresado los juegos reales que se van a dar en esa fase
 
 Importante: Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
+
+
+Pasos para el montaje de la polla
+1. Crear el usuario admin
+2. Ingresar todos los equipos del torneo
+3. Ingresar TODOS LOS JUEGOS DEL TORNEO, incluyendo el juego fantasma. Desde los juegos por fases, colocar equipos genericos.
+4. Ingresar TODAS LAS CLASIFICACIONES de manera generica, incluyendo la de la final
+5. Generar llaves para creacion de usuarios
+
 ## Maolink Software
 Diciembre 30 2022
 

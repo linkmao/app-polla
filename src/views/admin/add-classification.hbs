@@ -107,7 +107,7 @@
                 options.forEach(option => {
                     const optionGroup = option.getAttribute('data-group');
                     
-                    if (!optionGroup || optionGroup === 'all' || optionGroup === selectedGroup) {
+                    if (!optionGroup || optionGroup === 'all' || optionGroup === selectedGroup || selectedGroup === 'FINAL') {
                         option.style.display = '';
                     } else {
                         option.style.display = 'none';

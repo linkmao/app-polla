@@ -1,39 +1,50 @@
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary fw-bold mb-0">Gestionar Equipos</h2>
-        <a href="/admin/teams/add" class="btn btn-success">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-primary border-opacity-25">
+        <div>
+            <h2 class="text-primary fw-bold mb-0">Gestionar Equipos</h2>
+            <p class="text-muted small mb-0 uppercase tracking-wider">Lista total de participantes</p>
+        </div>
+        <a href="/admin/teams/add" class="btn btn-success shadow-sm px-4">
             <i class="fas fa-plus me-2"></i>Agregar Equipo
         </a>
     </div>
 
     {{>mensajes}}
 
-    <div class="card border-0 shadow-sm">
+    <div class="card border-0 shadow-lg Modern-Card overflow-hidden rounded-4">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
+                <table class="table table-hover align-middle mb-0" id="teamsTable">
+                    <thead class="bg-primary bg-opacity-10 text-primary border-bottom border-primary border-opacity-25">
                         <tr>
-                            <th class="ps-4">Bandera</th>
-                            <th>Nombre</th>
-                            <th>Grupo</th>
-                            <th>Tag</th>
-                            <th class="text-center">Acciones</th>
+                            <th class="ps-4 py-3">Bandera</th>
+                            <th class="py-3 cursor-pointer sortable" data-column="1">
+                                <div class="d-flex align-items-center">
+                                    Nombre <i class="fas fa-sort ms-2 small opacity-50"></i>
+                                </div>
+                            </th>
+                            <th class="py-3 cursor-pointer sortable" data-column="2">
+                                <div class="d-flex align-items-center">
+                                    Grupo <i class="fas fa-sort ms-2 small opacity-50"></i>
+                                </div>
+                            </th>
+                            <th class="py-3">Tag</th>
+                            <th class="text-center py-3">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each teams}}
-                        <tr>
+                        <tr class="border-bottom border-secondary border-opacity-10">
                             <td class="ps-4">
-                                <img src="/img/flags/{{flag}}" alt="{{name}}" class="img-thumbnail"
-                                    style="width: 40px; height: 30px; object-fit: cover;">
+                                <img src="/img/flags/{{flag}}" alt="{{name}}" class="rounded shadow-sm"
+                                    style="width: 40px; height: 26px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
                             </td>
-                            <td class="fw-bold">{{name}}</td>
-                            <td><span class="badge bg-secondary">{{group}}</span></td>
-                            <td class="text-muted">{{tag}}</td>
+                            <td class="fw-bold team-name">{{name}}</td>
+                            <td><span class="badge team-group bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25 px-3">{{group}}</span></td>
+                            <td class="text-muted small italic">{{tag}}</td>
                             <td class="text-center">
-                                <a href="/admin/teams/edit/{{_id}}" class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="fas fa-edit me-1"></i>Editar
+                                <a href="/admin/teams/edit/{{_id}}" class="btn btn-sm btn-outline-primary border-0 rounded-circle p-2" title="Editar">
+                                    <i class="fas fa-edit"></i>
                                 </a>
                             </td>
                         </tr>
@@ -44,9 +55,78 @@
         </div>
     </div>
 
-    <div class="mt-4">
-        <a href="/routegames" class="btn btn-outline-secondary">
+    <div class="mt-4 d-flex justify-content-between align-items-center">
+        <a href="/routegames" class="btn btn-outline-secondary border-0">
             <i class="fas fa-arrow-left me-2"></i>Volver al Panel Principal
         </a>
+        <div class="small text-muted italic">Total: <span class="fw-bold">{{teams.length}}</span> equipos</div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.getElementById('teamsTable');
+    const headers = table.querySelectorAll('.sortable');
+    let sortDirection = 1; // 1 for ascending, -1 for descending
+    let currentColumn = -1;
+
+    headers.forEach(header => {
+        header.addEventListener('click', function() {
+            const columnIdx = parseInt(this.getAttribute('data-column'));
+            
+            // Toggle direction if same column, else default to ascending
+            if (currentColumn === columnIdx) {
+                sortDirection *= -1;
+            } else {
+                sortDirection = 1;
+                currentColumn = columnIdx;
+            }
+
+            // Update icons
+            headers.forEach(h => {
+                const icon = h.querySelector('i');
+                icon.className = 'fas fa-sort ms-2 small opacity-50';
+            });
+            const activeIcon = this.querySelector('i');
+            activeIcon.className = `fas fa-sort-${sortDirection === 1 ? 'up' : 'down'} ms-2 small text-primary`;
+
+            sortTable(columnIdx, sortDirection);
+        });
+    });
+
+    function sortTable(columnIdx, direction) {
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+        const sortedRows = rows.sort((a, b) => {
+            let valA, valB;
+            
+            if (columnIdx === 1) { // Nombre
+                valA = a.querySelector('.team-name').textContent.trim().toLowerCase();
+                valB = b.querySelector('.team-name').textContent.trim().toLowerCase();
+            } else if (columnIdx === 2) { // Grupo
+                valA = a.querySelector('.team-group').textContent.trim().toLowerCase();
+                valB = b.querySelector('.team-group').textContent.trim().toLowerCase();
+            }
+
+            if (valA < valB) return -1 * direction;
+            if (valA > valB) return 1 * direction;
+            return 0;
+        });
+
+        // Re-append sorted rows
+        tbody.innerHTML = '';
+        sortedRows.forEach(row => tbody.appendChild(row));
+    }
+});
+</script>
+
+<style>
+    .cursor-pointer { cursor: pointer; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.1em; }
+    .Modern-Card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .table-hover tbody tr { transition: background-color 0.2s; }
+    .table-hover tbody tr:hover { background-color: rgba(0,0,0,0.02) !important; }
+    .italic { font-style: italic; }
+</style>
