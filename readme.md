@@ -506,6 +506,52 @@ Pasos para el montaje de la polla
 3. Ingresar TODOS LOS JUEGOS DEL TORNEO, incluyendo el juego fantasma. Desde los juegos por fases, colocar equipos genericos.
 4. Ingresar TODAS LAS CLASIFICACIONES de manera generica, incluyendo la de la final
 5. Generar llaves para creacion de usuarios
+6. Tener apagada el menu de apuestas de fase
+7. Invitar a los usuarios que creen las apuestas de juegos por grupos y clasificaciones (encender apuestas)
+8. Terminada la fase de apuesta de grupos apagar boton de apuestas y activar (ver apuestas de otros jugadores)
+9. Ir calculando los puntajes totales despues de cada juego (updatepoint)
+10. Terminada la fase de grupos, llenar los juegos de 16 avos
+11. Activar el menu de apuestas por fases
+12. Invitar a los usuarios hacer la apuesta hasta el final
+13. El admon debe ir diligenciando los partidos con sus resultados
+14. Actualizar resultados (updatepoint)
+15. Admon llena clasificaicon final real
+16. Admon debe diligenciar el juego fantasma con los ganadores del partido de 3 y 4 puesto y el de final para el calculo de los 3 puntos que da acertar el ganador.
+
+
+
+Si tengo como verificar que al usuario no le falte nada?
+En el boton de apuesta clasificacion poner apuesta clasificacion
+Agregar un boton en admin que permita usar /updatepoint
+Ponerunas estadisticas en cada grupo y fase (cuantas apuestas faltan por diligenciar y clasificaciones )
+poner apuestas del juego en las apuestas de fase, asi comoo existen en la fase de grupo
+Poner temporizador de cuanto falta para cerrar la apuesta
+Poner en algun logar los partios del dia.
+Para la actualizacion de TODOS LOS PUNTAJES de OTROS JUGADORES, se debe poner un boton admin que active la ruta /updatepoint
+buscar la manera en el forntedn que se seva que ya un juego está apostado jugar con los colores rojos y o verdes
+
+PRIORIDAD
+
+(ATENDIDO) Revisar muy bien la totalizacion del resultados
+(ATENDIDO) EN EL REPORTE DEL GRAN TOTAL NO coincide el gran total con el total verdadero
+(ATENDIDO) En el reporte de puntaje de OTROS JUGADORES, no se ven reflejados los puntajes totales (ES MI ACTUALIZACIÓN).. 
+(ATENDIDO) Quitar la zona gris del reporte total de puntaja en las clasificaiones, sin embargo si está sumando es como si los numero estuvieran ocultos.
+(ATENDIDO, NO SE PERO YA FUNCIONA)En los botones de apuestas del juego de la fase de octavos no funciona, ni cuartos... y quizas losotros tambien
+
+
+En el frontend pedir validacion antes de eliminar un grupo o juego dado que esto tiene implicaciones en la estructar de las apuesta de los jugadores.
+
+Asi como se ven las apuesta del juego se debe ver las apuesta de las clasificaiones (Existe pero no funciona)
+
+Hace falta ver las apuestas de la clasificacion final
+
+
+Comprobacion de resultados
+GRUPOS
+
+
+
+
 
 ## Maolink Software
 Diciembre 30 2022

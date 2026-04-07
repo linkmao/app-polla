@@ -44,6 +44,8 @@ const getGameByGroup = async (group) => {
   const teams = await Team.find({ group }).lean()
   const games = await Game.find({ group }).lean()
   data = []
+  // console.log("teamas", teams)
+  // console.log("games", games)
   for (game of games) {
     const idGame = game._id
     const gameNumber = game.gameNumber
@@ -57,6 +59,8 @@ const getGameByGroup = async (group) => {
     const localFlag = teams.find(t => t._id == idLocalTeam).flag
     const visitTeam = teams.find(t => t._id == idVisitTeam).name
     const visitFlag = teams.find(t => t._id == idVisitTeam).flag
+    console.log("local team", localTeam)
+    console.log("visit team", visitTeam)
     { localScore == -1 ? localScore = "-" : localScore }
     { visitScore == -1 ? visitScore = "-" : visitScore }
     { analogScore == -1 ? analogScore = "-" : analogScore }
@@ -797,13 +801,22 @@ const getPointGameGroup = async (group, idUser) => {
 }
 
 // Controlador encargado de sumar todos los puntos del los partidos de las phases  entrega {phase, idUser, totalScore, totalAnalog, totalLocal, totalVisit, totalByClass}
+
+// Debo evitar que se sume lo ganad por local y visitante coinicdente del juego fantasma, ya que este se calcula por aparte y se muestra
+
 const getPointGamePhase = async (phase, idUser) => {
   const betGames = await BetGame.find({ idUser }).lean()
   const games = await Game.find({ phase }).lean()
+  const gamePhantom = await Game.find({ gameNumber: config.gamePhantom })
+  const idGamePhantom = gamePhantom[0]._id.toString()
+  
+
   const sumPuntajes = [0, 0, 0, 0]
   games.forEach(g => {
+    if(g._id.toString() !== idGamePhantom) {
     const puntajes = betGames.find(b => b.idGame == g._id).earnedScore
     puntajes.forEach((p, i) => { sumPuntajes[i] += p })
+    }
   })
   let total = 0
   sumPuntajes.forEach(s => { total += s })
@@ -896,7 +909,7 @@ const createGameThirdhAndFourth = async (idUser, gameStruct) => {
 
 // FUNCIONES TOTALIZADORAS DE PUNTAJE DE UN JUGADOR CON ID
 const totalPointByGameGroups = async (idUser) => {
-  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H"]
+  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
   let total = 0
   for (group of iterator) {
     total += (await getPointGameGroup(group, idUser)).total
@@ -905,7 +918,7 @@ const totalPointByGameGroups = async (idUser) => {
 }
 
 const totalPointByGamePhases = async (idUser) => {
-  const iterator = [config.phaseEighth, config.phaseFourth, config.phaseSemiFinals, config.phaseFinal]
+  const iterator = [config.phaseSixteenth, config.phaseEighth, config.phaseFourth, config.phaseSemiFinals, config.phaseFinal]
   let total = 0
   for (phase of iterator) {
     total += (await getPointGamePhase(phase, idUser)).total
@@ -915,7 +928,7 @@ const totalPointByGamePhases = async (idUser) => {
 }
 
 const totalPointByClassification = async (idUser) => {
-  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H"]
+  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
   let total = 0
   for (group of iterator) {
     total += (await getPointClassification(group, idUser)).total
@@ -999,8 +1012,8 @@ const getAllGamersPointOptimizated = async () => {
 
 const dataForTableGame = async idUser => {
   const data = []
-  const iteratorGroup = ["A", "B", "C", "D", "E", "F", "G", "H"]
-  const iteratorPhase = [config.phaseEighth, config.phaseFourth, config.phaseSemiFinals, config.phaseFinal]
+  const iteratorGroup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+  const iteratorPhase = [config.phaseSixteenth, config.phaseEighth, config.phaseFourth, config.phaseSemiFinals, config.phaseFinal]
   let dataTablePoint = null
   let totalizerGame = 0 // Totaliza los puntajes verticalmeente de la columna total
   let dataFlags = {}
@@ -1010,14 +1023,25 @@ const dataForTableGame = async idUser => {
     totalizerGame += dataTablePoint.total
     data.push({ dataTablePoint, dataFlags })
   }
-
+console.log("PUNATJE POR GRUPOS", totalizerGame)
   for (phase of iteratorPhase) {
     dataTablePoint = await getPointGamePhase(phase, idUser)
     totalizerGame += dataTablePoint.total
-    if (phase == config.phaseEighth) dataFlags = { phase: "Octavos" }
+    // Si el juego es el fanatsma debo sacar el puntaje de local y visitante coincidente para no sumarlo en el totalizador general, ya que este se muestra por aparte en la vista, ademas de mostrar el total del juego fantasma en la vista
+
+    if (phase == config.phaseSixteenth) dataFlags = { phase: "16 avos" }
+    if (phase == config.phaseEighth) dataFlags = { phase: "Octavos", renderLocalEqual: true }
     if (phase == config.phaseFourth) dataFlags = { phase: "Cuartos", renderLocalEqual: true }
     if (phase == config.phaseSemiFinals) dataFlags = { phase: "Semifinal", renderLocalEqual: true }
     if (phase == config.phaseFinal) {
+
+    const game = await Game.find({ gameNumber:config.gamePhantom }).lean()
+    const idGamePhantom = game[0]._id
+    const betGamePhantom = await BetGame.find({ idUser,idGame:idGamePhantom }).lean()
+    totalizerGame += betGamePhantom[0].earnedScore[config.xPointByLocalEqual] + betGamePhantom[0].earnedScore[config.xPointByVisitEqual] // Se le suma el puntaje de local y visitante coincidente del juego fantasma al totalizador general, ya que este no se muestra por aparte en la vista, a diferencia del total del juego fantasma que si se muestra por aparte
+    console.log("BET GAME PHANTOM", betGamePhantom)
+
+
       dataGamePhantom = await getPointGamePhantom(config.gamePhantom, idUser)
       dataTablePoint.total += dataGamePhantom.total  // Se le suma el puntaje de phantom game
       dataFlags = { phase: "Final", dataGamePhantom, renderLocalEqual: true, totalizerGame }
@@ -1031,7 +1055,7 @@ const dataForTableClass = async idUser => {
   const data = []
   let totalizerClass = 0 // Totaliza la columna de puntaje, usanto total en cada peticion
   let dataFlags = {}
-  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H", "FINAL"]
+  const iterator = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "FINAL"]
 
   for (group of iterator) {
     dataTablePoint = await getPointClassification(group, idUser)

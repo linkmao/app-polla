@@ -13,20 +13,28 @@ const calculatePointByGame = async (id) => {
   // Actualizo el juego con parametro played en true 
   await game.findByIdAndUpdate(id, { played: true }, { new: true })
   games = await game.find({ _id: id })
+  gamePhantom = await game.find({ gameNumber: config.gamePhantom })
+  idGamePhantom = gamePhantom[0]._id.toString()
+  console.log("juego fantasma: ", gamePhantom)
+  console.log("id juego fantasma: ", idGamePhantom)
   betGames = await betGame.find({ idGame: id })
 
   betGames.forEach(async e => {
     // Analisis por puntaje y por localia
     let earnedScore = [0, 0, 0, 0]
-    if (games[0].localScore == e.localScore && games[0].visitScore == e.visitScore) {
-      earnedScore[config.xPointByScore] = config.pointByScore
+
+
+    if (e.idGame !== idGamePhantom) {
+      
+      if (games[0].localScore == e.localScore && games[0].visitScore == e.visitScore) {
+        earnedScore[config.xPointByScore] = config.pointByScore
+      }
+      if (games[0].analogScore == e.analogScore) {
+        earnedScore[config.xPointByAnalogScore] = config.pointByAnalogScore
+      }
     }
-    if (games[0].analogScore == e.analogScore) {
-      earnedScore[config.xPointByAnalogScore] = config.pointByAnalogScore
-    }
-    // Si el juego es de cuartos, semi-final, tercer-cuarto, y final se gana puntaje por equipo acertado en la clasificacion de cada etapa
-    if (games[0].phase == config.phaseFourth || games[0].phase == config.phaseSemiFinals ||
-      games[0].phase == config.phaseThirdFourth || games[0].phase == config.phaseFinal) {
+    // Si el juego es de octavos, cuartos, semi-final, tercer-cuarto, y final se gana puntaje por equipo acertado en la clasificacion de cada etapa
+    if (games[0].phase == config.phaseEighth || games[0].phase == config.phaseFourth || games[0].phase == config.phaseSemiFinals || games[0].phase == config.phaseThirdFourth || games[0].phase == config.phaseFinal) {
       if (e.betLocalTeam == games[0].localTeam) {
         earnedScore[config.xPointByLocalEqual] = config.pointByTeamClassificated
       }
