@@ -35,14 +35,32 @@
                             <td><span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25 fw-normal px-2 py-1">{{fourthTeamName}}</span></td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="/admin/classifications/edit/{{_id}}" class="btn btn-sm btn-outline-primary border-0">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="/api/classifications/{{_id}}?_method=DELETE" method="POST" style="display:inline;">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger border-0" onclick="return confirm('¿Estás seguro de eliminar esta clasificación?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                                                        <a href="/admin/classifications/edit/{{_id}}" class="btn btn-sm btn-outline-primary border-0" style="font-weight:bold; color:#0d6efd;">
+                                                                                Editar
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-sm btn-outline-danger border-0" style="font-weight:bold; color:#dc3545;" data-bs-toggle="modal" data-bs-target="#deleteModal-{{_id}}">
+                                                                                Eliminar
+                                                                        </button>
+                                                                        <!-- Modal de confirmación de eliminación -->
+                                                                        <div class="modal fade" id="deleteModal-{{_id}}" tabindex="-1" aria-labelledby="deleteModalLabel-{{_id}}" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                                <div class="modal-content bg-dark text-white">
+                                                                                    <div class="modal-header border-0">
+                                                                                        <h5 class="modal-title" id="deleteModalLabel-{{_id}}">Confirmar eliminación</h5>
+                                                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        ¿Estás seguro de que deseas eliminar esta clasificación del grupo <span class="fw-bold text-primary">{{group}}</span>?
+                                                                                    </div>
+                                                                                    <div class="modal-footer border-0">
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                        <form action="/api/classifications/{{_id}}?_method=DELETE" method="POST" style="display:inline;">
+                                                                                            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                 </div>
                             </td>
                         </tr>

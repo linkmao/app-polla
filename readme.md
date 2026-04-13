@@ -463,25 +463,7 @@ Reinciar la app en heroku
 
 
 
-### Notas borrador
-Estas son notas de borrador, no son notas oficiales
-paridos
-Grupo A (Camerun, Colombia, Irlanda, Japo)
-A1: Camerun vs Colombia
-A2: Irlanda vs Japo
-A3: Camerun vs Irlanda
-A4: Colombia vs Japo
-A5: Camerun vs Japo
-A6: Colombia vs Irlanda
 
-Grupo B (Mexico, Paraguay, Portugal, Somalia)
-B1: Mexico vs Paraguay
-B2: Portugal vs Somalia
-B3: Mexico vs Portugal
-B4: Paraguay vs Somalia
-B5: Mexico vs Somalia
-B6: Paraguay vs Portugal
-***
 
 Cambio en esta version
 Se implementa el puntaje por clasificacion de grupo donde esta vez en vez de ganar 3 puntos por acertar el equipo en el orden correcto, se ganan 5 puntos, esto es para los 4 equipos por grupo.
@@ -520,14 +502,14 @@ Pasos para el montaje de la polla
 
 
 
+(ATENDIDO) (Agregar un boton en admin que permita usar /updatepoint)
 Si tengo como verificar que al usuario no le falte nada?
 En el boton de apuesta clasificacion poner apuesta clasificacion
-Agregar un boton en admin que permita usar /updatepoint
 Ponerunas estadisticas en cada grupo y fase (cuantas apuestas faltan por diligenciar y clasificaciones )
 poner apuestas del juego en las apuestas de fase, asi comoo existen en la fase de grupo
 Poner temporizador de cuanto falta para cerrar la apuesta
 Poner en algun logar los partios del dia.
-Para la actualizacion de TODOS LOS PUNTAJES de OTROS JUGADORES, se debe poner un boton admin que active la ruta /updatepoint
+OS PUNTAJES de OTROS JUGADORES, se debe poner un boton admin que active la ruta /updatepoint
 buscar la manera en el forntedn que se seva que ya un juego está apostado jugar con los colores rojos y o verdes
 
 PRIORIDAD
@@ -539,9 +521,7 @@ PRIORIDAD
 (ATENDIDO, NO SE PERO YA FUNCIONA)En los botones de apuestas del juego de la fase de octavos no funciona, ni cuartos... y quizas losotros tambien
 (Atendido) Asi como se ven las apuesta del juego se debe ver las apuesta de las clasificaiones (Existe pero no funciona)
 (Atendido) Hace falta ver las apuestas de la clasificacion final
-
-
-En el frontend pedir validacion antes de eliminar un grupo o juego dado que esto tiene implicaciones en la estructar de las apuesta de los jugadores.
+(ATENDIDO)En el frontend pedir validacion antes de eliminar un grupo o juego dado que esto tiene implicaciones en la estructar de las apuesta de los jugadores.
 
 
 

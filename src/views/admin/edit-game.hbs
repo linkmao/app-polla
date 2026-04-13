@@ -1,11 +1,15 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card bg-dark text-white shadow-lg border-success">
-                <div class="card-header border-bottom border-success">
-                    <h3 class="text-center mb-0">Editar Juego (Partido)</h3>
+            <div class="card bg-dark text-white rounded-4 border-0 shadow-lg overflow-hidden">
+                <div class="card-header bg-success bg-opacity-10 border-bottom border-success border-opacity-25 text-center py-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fas fa-futbol text-success fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-0 text-success">Editar Juego (Partido)</h3>
+                    <p class="text-muted small mb-0 uppercase tracking-wider">Ajusta los datos del partido</p>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body p-4 p-md-5">
                     {{>mensajes}}
                     <form action="/api/games/{{game._id}}?_method=PUT" method="POST">
                         <div class="row">
@@ -94,15 +98,20 @@
                             </label>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success btn-lg">Actualizar Juego</button>
+                        <div class="d-grid gap-3 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm py-3">
+                                <i class="fas fa-save me-2"></i>Actualizar Juego
+                            </button>
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <a href="/admin/games" class="btn btn-outline-light w-100">Cancelar</a>
+                                    <a href="/admin/games" class="btn btn-outline-light w-100 py-2">
+                                        <i class="fas fa-times me-2"></i>Cancelar
+                                    </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="/routegames" class="btn btn-outline-secondary w-100 text-white">Volver al
-                                        Panel</a>
+                                    <a href="/routegames" class="btn btn-outline-secondary w-100 text-white border-secondary py-2">
+                                        <i class="fas fa-home me-2"></i>Panel
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -111,4 +120,15 @@
             </div>
         </div>
     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.1em; }
+    .card { transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+</style>

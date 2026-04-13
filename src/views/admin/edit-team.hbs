@@ -1,84 +1,44 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card bg-dark text-white shadow-lg border-0">
-                <div class="card-header border-bottom border-secondary text-center py-4">
-                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                        style="width: 60px; height: 60px;">
-                        <img src="/img/iconos/game-by-group.png" alt="Equipos" style="width: 35px;">
-                    </div>
-                    <h3 class="fw-bold mb-0 text-primary">Editar Equipo</h3>
-                    <p class="text-muted small mb-0">Actualiza la información y la bandera oficial</p>
+            <div class="card bg-dark text-white shadow-lg">
+                <div class="card-header border-bottom border-secondary">
+                    <h3 class="text-center mb-0">Editar Equipo</h3>
                 </div>
                 <div class="card-body p-4">
                     {{>mensajes}}
                     <form action="/api/teams/{{team._id}}?_method=PUT" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="name" class="form-label fw-bold text-primary">Nombre del Equipo</label>
-                            <input type="text" name="name" id="name"
-                                class="form-control bg-light text-dark border-0 shadow-sm" value="{{team.name}}"
-                                required autofocus>
+                            <label for="name" class="form-label">Nombre del Equipo</label>
+                            <input type="text" name="name" id="name" class="form-control bg-light text-dark" value="{{team.name}}" required autofocus>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="group" class="form-label fw-bold text-primary">Grupo</label>
-                                <input type="text" name="group" id="group"
-                                    class="form-control bg-light text-dark border-0 shadow-sm" value="{{team.group}}"
-                                    required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="tag" class="form-label fw-bold text-primary">Etiqueta (Tag)</label>
-                                <input type="text" name="tag" id="tag"
-                                    class="form-control bg-light text-dark border-0 shadow-sm" value="{{team.tag}}"
-                                    placeholder="Ej: A1, B2">
-                            </div>
+                        <div class="mb-3">
+                            <label for="group" class="form-label">Grupo</label>
+                            <input type="text" name="group" id="group" class="form-control bg-light text-dark" value="{{team.group}}" required>
                         </div>
-
-                        <div class="mb-4">
-                            <label class="form-label fw-bold text-primary d-block">Bandera Actual</label>
-                            <div
-                                class="d-flex align-items-center bg-primary bg-opacity-10 p-3 rounded-3 border border-primary border-opacity-25">
-                                <img src="/img/flags/{{team.flag}}" alt="{{team.name}}"
-                                    class="img-thumbnail border-0 shadow-sm me-3"
-                                    style="width: 80px; height: 60px; object-fit: cover;">
+                        <div class="mb-3">
+                            <label for="tag" class="form-label">Etiqueta (Tag)</label>
+                            <input type="text" name="tag" id="tag" class="form-control bg-light text-dark" value="{{team.tag}}" placeholder="Ej: A1, B2">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bandera Actual</label>
+                            <div class="d-flex align-items-center bg-primary bg-opacity-10 p-2 rounded-3 border border-primary border-opacity-25">
+                                <img src="/img/flags/{{team.flag}}" alt="{{team.name}}" class="img-thumbnail border-0 shadow-sm me-3" style="width: 80px; height: 60px; object-fit: cover;">
                                 <div class="text-white">
                                     <p class="mb-1 fw-bold small">Archivo: {{team.flag}}</p>
-                                    <p class="mb-0 text-muted smaller text-uppercase tracking-wider">Imagen en servidor
-                                    </p>
+                                    <p class="mb-0 text-muted smaller text-uppercase tracking-wider">Imagen en servidor</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mb-4">
-                            <label for="flag" class="form-label fw-bold text-primary">Cambiar Bandera</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-0"><i
-                                        class="fas fa-upload text-primary"></i></span>
-                                <input type="file" name="flag" id="flag"
-                                    class="form-control bg-light text-dark border-0 shadow-sm" accept="image/*">
-                            </div>
-                            <div class="form-text text-muted smaller mt-2">Sube una nueva imagen (PNG/JPG) para
-                                reemplazar la actual.</div>
+                        <div class="mb-3">
+                            <label for="flag" class="form-label">Cambiar Bandera</label>
+                            <input type="file" name="flag" id="flag" class="form-control bg-light text-dark" accept="image/*">
+                            <div class="form-text text-muted smaller mt-2">Sube una nueva imagen (PNG/JPG) para reemplazar la actual.</div>
                         </div>
-
-                        <div class="d-grid gap-3">
-                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm">
-                                <i class="fas fa-save me-2"></i>Actualizar Equipo
-                            </button>
-
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <a href="/admin/teams" class="btn btn-outline-light w-100">
-                                        <i class="fas fa-times me-2"></i>Cancelar
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="/routegames"
-                                        class="btn btn-outline-secondary w-100 text-white border-secondary">
-                                        <i class="fas fa-home me-2"></i>Panel
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Guardar Cambios</button>
+                            <a href="/admin/teams" class="btn btn-outline-light">Volver a Equipos</a>
+                            <a href="/routegames" class="btn btn-outline-secondary text-white">Panel</a>
                         </div>
                     </form>
                 </div>
@@ -86,25 +46,5 @@
         </div>
     </div>
 </div>
-
-<style>
-    .smaller {
-        font-size: 0.75rem;
-    }
-
-    .uppercase {
-        text-transform: uppercase;
-    }
-
-    .tracking-wider {
-        letter-spacing: 0.05em;
-    }
-
-    .card {
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-    }
+  
 </style>

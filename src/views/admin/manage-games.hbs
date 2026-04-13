@@ -58,11 +58,51 @@
                                 <span class="text-muted small italic">-</span>
                                 {{/if}}
                             </td>
-                            <td class="text-center">
-                                <a href="/admin/games/edit/{{_id}}" class="btn btn-sm btn-outline-success border-0">
+                            <td class="text-center d-flex justify-content-center align-items-center gap-2">
+                                <a href="/admin/games/edit/{{_id}}" class="btn btn-sm btn-outline-success border-0" title="Editar">
                                     <i class="fas fa-edit me-1"></i>Editar
                                 </a>
+                                <button type="button" class="btn btn-sm p-0 ms-1" title="Eliminar" data-bs-toggle="modal" data-bs-target="#deleteGameModal" data-game-id="{{_id}}" style="background: none; border: none; color: #dc3545; font-weight: bold;">
+                                    Eliminar
+                                </button>
                             </td>
+                        <!-- Modal de confirmación para eliminar juego -->
+                        <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-danger" id="deleteGameModalLabel">Confirmar Eliminación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas eliminar este juego? Esta acción no se puede deshacer.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form id="deleteGameForm" method="POST">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Modal eliminar juego
+                            var deleteGameModal = document.getElementById('deleteGameModal');
+                            var deleteGameForm = document.getElementById('deleteGameForm');
+                            var gameIdToDelete = null;
+
+                            deleteGameModal.addEventListener('show.bs.modal', function (event) {
+                                var button = event.relatedTarget;
+                                gameIdToDelete = button.getAttribute('data-game-id');
+                                // Set form action
+                                deleteGameForm.action = '/admin/games/delete/' + gameIdToDelete;
+                            });
+                        });
+                        </script>
                         </tr>
                         {{/each}}
                     </tbody>

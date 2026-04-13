@@ -42,11 +42,36 @@
                             <td class="fw-bold team-name">{{name}}</td>
                             <td><span class="badge team-group bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25 px-3">{{group}}</span></td>
                             <td class="text-muted small italic">{{tag}}</td>
-                            <td class="text-center">
-                                <a href="/admin/teams/edit/{{_id}}" class="btn btn-sm btn-outline-primary border-0 rounded-circle p-2" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
+                                                        <td class="text-center">
+                                                                <div class="d-flex justify-content-center gap-2">
+                                                                        <a href="/admin/teams/edit/{{_id}}" class="btn btn-sm btn-outline-primary border-0" style="font-weight:bold; color:#0d6efd;">
+                                                                                Editar
+                                                                        </a>
+                                                                        <button type="button" class="btn btn-sm btn-outline-danger border-0" style="font-weight:bold; color:#dc3545;" data-bs-toggle="modal" data-bs-target="#deleteTeamModal-{{_id}}">
+                                                                                Eliminar
+                                                                        </button>
+                                                                </div>
+                                                                <!-- Modal de confirmación de eliminación -->
+                                                                <div class="modal fade" id="deleteTeamModal-{{_id}}" tabindex="-1" aria-labelledby="deleteTeamModalLabel-{{_id}}" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content bg-dark text-white">
+                                                                            <div class="modal-header border-0">
+                                                                                <h5 class="modal-title" id="deleteTeamModalLabel-{{_id}}">Confirmar eliminación</h5>
+                                                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                ¿Estás seguro de que deseas eliminar el equipo <span class="fw-bold text-primary">{{name}}</span>?
+                                                                            </div>
+                                                                            <div class="modal-footer border-0">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                                                <form action="/api/teams/{{_id}}?_method=DELETE" method="POST" style="display:inline;">
+                                                                                    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -129,4 +154,4 @@ document.addEventListener('DOMContentLoaded', function() {
     .table-hover tbody tr { transition: background-color 0.2s; }
     .table-hover tbody tr:hover { background-color: rgba(0,0,0,0.02) !important; }
     .italic { font-style: italic; }
-</style>
+</style>

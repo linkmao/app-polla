@@ -101,8 +101,45 @@
                 </div>
             </div>
         </div>
+
+        <!-- Estado de Diligenciamiento de Jugadores -->
+        <div class="col-md-12">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-info border-3">
+                <div class="card-body text-center p-4">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <i class="fas fa-tasks text-info fs-2"></i>
+                    </div>
+                    <h3 class="card-title h4 mb-3">Estado de Diligenciamiento</h3>
+                    <p class="card-text text-muted mb-4">Consulta qué jugadores han diligenciado o no sus apuestas y clasificaciones.</p>
+                    <div class="d-grid">
+                        <a href="/admin/completion-status" class="btn btn-info btn-lg">Ver Estado de Diligenciamiento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+    <!-- Actualizar Puntajes -->
+    <div class="col-md-12">
+        <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-success border-3">
+            <div class="card-body text-center p-4">
+                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                    style="width: 80px; height: 80px;">
+                    <i class="fas fa-sync-alt text-success fs-2"></i>
+                </div>
+                <h3 class="card-title h4 mb-3">Actualizar Puntajes</h3>
+                <p class="card-text text-muted mb-4">Actualiza los puntajes de todos los jugadores según los resultados más recientes.</p>
+                <div class="d-grid">
+                    <button id="btn-update-point" class="btn btn-success btn-lg">Actualizar Puntajes</button>
+                </div>
+                <div id="update-point-message" class="alert alert-success mt-3 d-none" role="alert">
+                    Puntajes actualizados correctamente.
+                </div>
+            </div>
+        </div>
+    </div>
 
 <style>
     .hover-shadow:hover {
@@ -114,3 +151,29 @@
         transition: all 0.3s ease-in-out;
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnUpdate = document.getElementById('btn-update-point');
+        const msg = document.getElementById('update-point-message');
+        if (btnUpdate) {
+            btnUpdate.addEventListener('click', async function () {
+                btnUpdate.disabled = true;
+                btnUpdate.textContent = 'Actualizando...';
+                try {
+                    const res = await fetch('/updatepoint');
+                    if (res.ok) {
+                        msg.classList.remove('d-none');
+                        setTimeout(() => { msg.classList.add('d-none'); }, 3000);
+                    } else {
+                        alert('Error al actualizar puntajes');
+                    }
+                } catch (e) {
+                    alert('Error de red al actualizar puntajes');
+                }
+                btnUpdate.disabled = false;
+                btnUpdate.textContent = 'Actualizar Puntajes';
+            });
+        }
+    });
+</script>

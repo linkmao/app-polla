@@ -124,6 +124,8 @@ app.use('/api/classifications', classifications)
 app.use('/api/users', users)
 app.use('/api/bet-games', betGame)
 app.use('/api/bet-classifications', betClassification)
+app.use('/api/admin', require('./routes/admin-completion'))
+app.use('/admin', require('./routes/admin-panel'))
 
 
 //Iniciode del servidor
