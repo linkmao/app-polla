@@ -16,8 +16,12 @@
       {{else }}
       <th scope="col" style="text-align: center">Primero</th>
       <th scope="col" style="text-align: center">Segundo</th>
+      <th scope="col" style="text-align: center">Tercero</th>
+      <th scope="col" style="text-align: center">Cuarto</th>
       <th scope="col" style="text-align: center">Puntos primero</th>
       <th scope="col" style="text-align: center">Puntos segundo</th>
+      <th scope="col" style="text-align: center">Puntos tercero</th>
+      <th scope="col" style="text-align: center">Puntos cuarto</th>
       {{/if}}
       <th scope="col" style="text-align: center">TOTAL </th>
     </tr>
@@ -51,8 +55,7 @@
         </div>
       </td>
 
-      {{#if renderFinal}}
-      <td scope="col" style="text-align: center">
+       <td scope="col" style="text-align: center">
         <div class="row">
           <div class="col">
             <img src="/img/flags/{{thirdFlag}}" alt="flag" width="30%">
@@ -63,24 +66,21 @@
         </div>
       </td>
 
-      <td scope="col" style="text-align: center">
-        <div class="row">
-          <div class="col">
-            <img src="/img/flags/{{fourthFlag}}" alt="flag" width="30%">
+        <td scope="col" style="text-align: center">
+          <div class="row">
+            <div class="col">
+              <img src="/img/flags/{{fourthFlag}}" alt="flag" width="30%">
+            </div>
+            <div class="col">
+              {{fourthTeam}}
+            </div>
           </div>
-          <div class="col">
-            {{fourthTeam}}
-          </div>
-        </div>
-      </td>
-      {{/if}}
+
 
       <td scope="col" style="text-align: center">{{pointByFirst}}</td>
       <td scope="col" style="text-align: center">{{pointBySecond}}</td>
-      {{#if renderFinal}}
       <td scope="col" style="text-align: center">{{pointByThird}}</td>
       <td scope="col" style="text-align: center">{{pointByFourth}}</td>
-      {{/if}}
       <td scope="col" style="text-align: center">{{total}}</td>
 
     </tr>

@@ -537,17 +537,14 @@ PRIORIDAD
 (ATENDIDO) En el reporte de puntaje de OTROS JUGADORES, no se ven reflejados los puntajes totales (ES MI ACTUALIZACIÓN).. 
 (ATENDIDO) Quitar la zona gris del reporte total de puntaja en las clasificaiones, sin embargo si está sumando es como si los numero estuvieran ocultos.
 (ATENDIDO, NO SE PERO YA FUNCIONA)En los botones de apuestas del juego de la fase de octavos no funciona, ni cuartos... y quizas losotros tambien
+(Atendido) Asi como se ven las apuesta del juego se debe ver las apuesta de las clasificaiones (Existe pero no funciona)
+(Atendido) Hace falta ver las apuestas de la clasificacion final
 
 
 En el frontend pedir validacion antes de eliminar un grupo o juego dado que esto tiene implicaciones en la estructar de las apuesta de los jugadores.
 
-Asi como se ven las apuesta del juego se debe ver las apuesta de las clasificaiones (Existe pero no funciona)
-
-Hace falta ver las apuestas de la clasificacion final
 
 
-Comprobacion de resultados
-GRUPOS
 
 
 

@@ -52,5 +52,5 @@ module.exports = {
   enableMenuRoundPhases: true, // Activa el Menu para acceder a los juegos de las fases
   renderBetRoundPhases: false, // Permite que el usuario puda usar la zonas de apuesas de la ronda por fases
   renderViewOtherBetPhases: true, // Activa el boton que permita ver las apuestas de los otros jugadores
-  renderViewOtherBetClassFinal: false,// Muestra o no el boton para ver las clasificaciones FINAL
+  renderViewOtherBetClassFinal: true,// Muestra o no el boton para ver las clasificaciones FINAL
 }
