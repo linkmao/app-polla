@@ -1,134 +1,102 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card bg-dark text-white rounded-4 border-0 shadow-lg overflow-hidden">
-                <div class="card-header bg-success bg-opacity-10 border-bottom border-success border-opacity-25 text-center py-4">
-                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                        <i class="fas fa-futbol text-success fs-3"></i>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-success fw-bold mb-0">Editar Juego (Partido)</h2>
+    </div>
+
+    {{>mensajes}}
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+            <form action="/api/games/{{game._id}}?_method=PUT" method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="gameNumber" class="form-label">Número de Juego</label>
+                        <input type="number" name="gameNumber" id="gameNumber"
+                            class="form-control bg-light" value="{{game.gameNumber}}" required
+                            readonly>
                     </div>
-                    <h3 class="fw-bold mb-0 text-success">Editar Juego (Partido)</h3>
-                    <p class="text-muted small mb-0 uppercase tracking-wider">Ajusta los datos del partido</p>
+                    <div class="col-md-6 mb-3">
+                        <label for="phase" class="form-label">Fase (Número)</label>
+                        <select name="phase" id="phase" class="form-select" required>
+                            <option value="1" {{#if (eq game.phase 1)}}selected{{/if}}>1 - Ronda de Grupos</option>
+                            <option value="2" {{#if (eq game.phase 2)}}selected{{/if}}>2 - 16 avo de Final</option>
+                            <option value="3" {{#if (eq game.phase 3)}}selected{{/if}}>3 - Octavos de Final</option>
+                            <option value="4" {{#if (eq game.phase 4)}}selected{{/if}}>4 - Cuartos de Final</option>
+                            <option value="5" {{#if (eq game.phase 5)}}selected{{/if}}>5 - Semifinal</option>
+                            <option value="6" {{#if (eq game.phase 6)}}selected{{/if}}>6 - Final / 3er Puesto</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="card-body p-4 p-md-5">
-                    {{>mensajes}}
-                    <form action="/api/games/{{game._id}}?_method=PUT" method="POST">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="gameNumber" class="form-label">Número de Juego</label>
-                                <input type="number" name="gameNumber" id="gameNumber"
-                                    class="form-control bg-light text-dark" value="{{game.gameNumber}}" required
-                                    readonly>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="phase" class="form-label">Fase (Número)</label>
-                                <select name="phase" id="phase" class="form-select bg-light text-dark" required>
-                                    <option value="1" {{#if (eq game.phase 1)}}selected{{/if}}>1 - Ronda de Grupos
-                                    </option>
-                                    <option value="2" {{#if (eq game.phase 2)}}selected{{/if}}>2 - 16 avo de Final
-                                    </option>
-                                    <option value="3" {{#if (eq game.phase 3)}}selected{{/if}}>3 - Octavos de Final
-                                    </option>
-                                    <option value="4" {{#if (eq game.phase 4)}}selected{{/if}}>4 - Cuartos de Final
-                                    </option>
-                                    <option value="5" {{#if (eq game.phase 5)}}selected{{/if}}>5 - Semifinal</option>
-                                    <option value="6" {{#if (eq game.phase 6)}}selected{{/if}}>6 - Final / 3er Puesto
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="localTeam" class="form-label">Equipo Local</label>
-                                <select name="localTeam" id="localTeam" class="form-select bg-light text-dark" required>
-                                    <option value="GENERIC LOCAL TEAM">Genérico (Para Fases)</option>
-                                    {{#each teams}}
-                                    <option value="{{_id}}" {{#if (eq ../game.localTeam _id)}}selected{{/if}}>{{name}}
-                                    </option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="visitTeam" class="form-label">Equipo Visitante</label>
-                                <select name="visitTeam" id="visitTeam" class="form-select bg-light text-dark" required>
-                                    <option value="GENERIC VISIT TEAM">Genérico (Para Fases)</option>
-                                    {{#each teams}}
-                                    <option value="{{_id}}" {{#if (eq ../game.visitTeam _id)}}selected{{/if}}>{{name}}
-                                    </option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="localScore" class="form-label">Goles Local</label>
-                                <input type="number" name="localScore" id="localScore"
-                                    class="form-control bg-light text-dark" value="{{game.localScore}}">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="visitScore" class="form-label">Goles Visitante</label>
-                                <input type="number" name="visitScore" id="visitScore"
-                                    class="form-control bg-light text-dark" value="{{game.visitScore}}">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="analogScore" class="form-label">Analog (L/E/V)</label>
-                                <input type="text" name="analogScore" id="analogScore"
-                                    class="form-control bg-light text-dark" value="{{game.analogScore}}">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="group" class="form-label">Grupo del Partido</label>
-                            <input type="text" name="group" id="group" class="form-control bg-light text-dark"
-                                value="{{game.group}}" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Descripción</label>
-                            <input type="text" name="description" id="description"
-                                class="form-control bg-light text-dark" value="{{game.description}}" required>
-                        </div>
-
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" name="forCalculate" id="forCalculate"
-                                value="true">
-                            <label class="form-check-label" for="forCalculate">
-                                ¿Calcular puntajes de apostadores? (Solo si el partido ya terminó)
-                            </label>
-                        </div>
-
-                        <div class="d-grid gap-3 mt-4">
-                            <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm py-3">
-                                <i class="fas fa-save me-2"></i>Actualizar Juego
-                            </button>
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <a href="/admin/games" class="btn btn-outline-light w-100 py-2">
-                                        <i class="fas fa-times me-2"></i>Cancelar
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="/routegames" class="btn btn-outline-secondary w-100 text-white border-secondary py-2">
-                                        <i class="fas fa-home me-2"></i>Panel
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="localTeam" class="form-label">Equipo Local</label>
+                        <select name="localTeam" id="localTeam" class="form-select" required>
+                            <option value="GENERIC LOCAL TEAM">Genérico (Para Fases)</option>
+                            {{#each teams}}
+                            <option value="{{_id}}" {{#if (eq ../game.localTeam _id)}}selected{{/if}}>{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="visitTeam" class="form-label">Equipo Visitante</label>
+                        <select name="visitTeam" id="visitTeam" class="form-select" required>
+                            <option value="GENERIC VISIT TEAM">Genérico (Para Fases)</option>
+                            {{#each teams}}
+                            <option value="{{_id}}" {{#if (eq ../game.visitTeam _id)}}selected{{/if}}>{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="localScore" class="form-label">Goles Local</label>
+                        <input type="number" name="localScore" id="localScore"
+                            class="form-control" value="{{game.localScore}}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="visitScore" class="form-label">Goles Visitante</label>
+                        <input type="number" name="visitScore" id="visitScore"
+                            class="form-control" value="{{game.visitScore}}">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="analogScore" class="form-label">Analog (L/E/V)</label>
+                        <input type="text" name="analogScore" id="analogScore"
+                            class="form-control" value="{{game.analogScore}}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="group" class="form-label">Grupo del Partido</label>
+                    <input type="text" name="group" id="group" class="form-control"
+                        value="{{game.group}}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <input type="text" name="description" id="description"
+                        class="form-control" value="{{game.description}}" required>
+                </div>
+
+                <div class="form-check mb-4 mt-4">
+                    <input class="form-check-input" type="checkbox" name="forCalculate" id="forCalculate"
+                        value="true">
+                    <label class="form-check-label text-muted" for="forCalculate">
+                        ¿Calcular puntajes de apostadores? (Solo si el partido ya terminó)
+                    </label>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success px-4">Guardar Cambios</button>
+                </div>
+            </form>
         </div>
     </div>
-                </div>
-            </div>
-        </div>
+
+    <div class="mt-4">
+        <a href="/admin/games" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Listado
+        </a>
     </div>
 </div>
-
-<style>
-    .uppercase { text-transform: uppercase; }
-    .tracking-wider { letter-spacing: 0.1em; }
-    .card { transition: transform 0.3s ease; }
-    .card:hover { transform: translateY(-5px); }
-</style>

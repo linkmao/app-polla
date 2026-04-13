@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-info fw-bold mb-0">Editar Usuario</h2>
+    </div>
+
+    {{>mensajes}}
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+            <form action="/admin/users/edit/{{editUser._id}}" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label text-muted">Correo Electrónico (No editable)</label>
+                    <input type="email" class="form-control bg-light" id="email" name="email" value="{{editUser.email}}" readonly disabled>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{editUser.name}}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{editUser.lastName}}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Teléfono / Celular</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{editUser.phone}}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="pass" class="form-label text-warning fw-bold">Nueva Contraseña (Opcional)</label>
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Dejar en blanco para mantener la actual">
+                    <small class="form-text text-muted">Si ingresas una contraseña aquí, reemplazará a la actual.</small>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-info px-4 text-white">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="/admin/users" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Listado
+        </a>
+    </div>
+</div>

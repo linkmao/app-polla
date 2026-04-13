@@ -7,7 +7,7 @@
 <section class="bet-games">
   {{!-- RENDERIZADO DEL GAME --}}
   <a name="{{dataBet.idBet1}}"></a>
-  <div class="card mt-5" style="width: 200 px;">
+  <div class="card mt-5 shadow-sm border-0" style="width: 200 px; {{#if (eq dataGame.localScore1 '-')}}background-color: #ffebee;{{else}}background-color: #E8F5E9;{{/if}}">
     {{!-- <img src="..." class="card-img-top" alt="..."> --}}
     <div class="card-body">
       <h6 class="card-title">Juego número: {{dataGame.gameNumber1}}</h6>
@@ -42,10 +42,10 @@
 
   {{!-- INICIO RENDERIZADO BET 1 --}}
 
-  <div class="card" style="width: 200 px;">
+  <div class="card shadow-sm mb-4 border-0" style="width: 200 px; {{#if (eq dataBet.localScore1 '')}}background-color: #ffebee;{{else}}background-color: #E8F5E9;{{/if}}">
     {{!-- <img src="..." class="card-img-top" alt="..."> --}}
     <div class="card-body">
-      <h5 class="card-title">Mi apuesta</h5>
+      <h5 class="card-title text-success"><i class="fas fa-check-circle me-1"></i>Mi apuesta</h5>
       <div class="row">
         <div class="col"><img src="/img/flags/{{dataBet.localFlag1}}" alt="flag" width="50%"></div>
         <div class="col">
@@ -177,7 +177,7 @@
   {{!-- INICIO DE LA INFORMACIÓN DEL SEGUNDO PARTIDO --}}
 
   <a name="{{dataBet.idBet2}}"></a>
-  <div class="card mt-3" style="width: 200 px;">
+  <div class="card mt-3 shadow-sm border-0" style="width: 200 px; {{#if (eq dataGame.localScore2 '-')}}background-color: #ffebee;{{else}}background-color: #E8F5E9;{{/if}}">
     {{!-- <img src="..." class="card-img-top" alt="..."> --}}
     <div class="card-body">
       <h6 class="card-title">Juego número: {{dataGame.gameNumber2}}</h6>
@@ -214,10 +214,10 @@
 
   {{!-- INICIO DE BET 2 --}}
 
-  <div class="card" style="width: 200 px;">
+  <div class="card shadow-sm mb-4 border-0" style="width: 200 px; {{#if (eq dataBet.localScore2 '')}}background-color: #ffebee;{{else}}background-color: #E8F5E9;{{/if}}">
     {{!-- <img src="..." class="card-img-top" alt="..."> --}}
     <div class="card-body">
-      <h5 class="card-title">Mi apuesta</h5>
+      <h5 class="card-title text-success"><i class="fas fa-check-circle me-1"></i>Mi apuesta</h5>
       <div class="row">
         <div class="col"><img src="/img/flags/{{dataBet.localFlag2}}" alt="flag" width="50%"></div>
         <div class="col">

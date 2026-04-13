@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-10">
       <div class="card bg-dark text-white border-info shadow-lg">
         <div class="card-header border-info text-center py-4">
           <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
@@ -9,17 +9,55 @@
           </div>
           <h3 class="fw-bold mb-0 text-info">Gestión de Usuarios</h3>
         </div>
-        <div class="card-body p-4 text-center">
-          <p class="text-muted mb-4">Haz clic en el botón para consultar el listado completo de jugadores registrados en
-            el sistema.</p>
-
-          <form action="/api/users" method="GET" class="mb-4">
-            <div class="d-grid">
-              <button type="submit" class="btn btn-info btn-lg text-white fw-bold shadow-sm">
-                <i class="fas fa-users me-2"></i>Obtener Listado de Usuarios
-              </button>
-            </div>
-          </form>
+        <div class="card-body p-4 text-center overflow-auto">
+          <table class="table table-dark table-hover table-striped text-center align-middle">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each users}}
+              <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.lastName}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone}}</td>
+                <td>{{this.role}}</td>
+                <td>
+                  <a href="/admin/users/edit/{{this._id}}" class="btn btn-sm btn-info text-white">Editar</a>
+                  <button type="button" class="btn btn-sm btn-danger text-white ms-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{this._id}}">Eliminar</button>
+                  
+                  <!-- Modal de Confirmación -->
+                  <div class="modal fade text-start" id="deleteModal{{this._id}}" tabindex="-1" aria-labelledby="deleteModalLabel{{this._id}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content bg-dark text-white border-danger">
+                        <div class="modal-header border-danger">
+                          <h5 class="modal-title text-danger" id="deleteModalLabel{{this._id}}"><i class="fas fa-exclamation-triangle me-2"></i>Confirmar Eliminación</h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ¿Estás seguro de que deseas eliminar permanentemente al usuario <strong>{{this.name}} {{this.lastName}}</strong> ({{this.email}})? Esta acción no se puede deshacer.
+                        </div>
+                        <div class="modal-footer border-danger">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          <form action="/admin/users/delete/{{this._id}}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Sí, Eliminar Usuario</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
 
           <hr class="border-secondary opacity-25">
 

@@ -8,6 +8,9 @@
       {{>bet-classification}}
     </div>
     <div class="col">
+      {{#if completionStatus}}
+      {{>completion-status-box}}
+      {{/if}}
       {{>report-total-point}}
     </div>
   </div>
