@@ -1,0 +1,96 @@
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 bg-dark p-4 rounded-3 shadow-sm border-bottom border-primary">
+        <div>
+            <h1 class="text-white fw-bold mb-0">Configuración del Sistema</h1>
+            <p class="text-primary mb-0 small uppercase tracking-wider">Ajustes Generales y Reglas del Torneo</p>
+        </div>
+        <a href="/routegames" class="btn btn-outline-light px-4">
+            <i class="fas fa-arrow-left me-2"></i>Volver al Panel
+        </a>
+    </div>
+
+    {{>mensajes}}
+
+    <form action="/admin/config" method="POST">
+        <div class="row">
+            {{#each groupedConfig}}
+            <div class="col-12 mb-5">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white p-3">
+                        <h2 class="h5 mb-0 fw-bold"><i class="fas fa-cog me-2"></i>{{name}}</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            {{#each items}}
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group mb-3 p-3 rounded-2 border bg-light bg-opacity-50">
+                                    <label class="form-label fw-bold d-block mb-2">
+                                        {{label}} <span class="text-muted small">({{key}})</span>
+                                    </label>
+
+                                    {{#if isBoolean}}
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" name="{{key}}" id="{{key}}" {{#if value}}checked{{/if}} style="width: 3em; height: 1.5em; cursor: pointer;">
+                                        <label class="form-check-label ms-2 mt-1" for="{{key}}">
+                                            {{#if value}}Activado{{else}}Desactivado{{/if}}
+                                        </label>
+                                    </div>
+                                    {{/if}}
+
+                                    {{#if isNumber}}
+                                    <input type="number" name="{{key}}" class="form-control form-control-lg border-primary border-opacity-25" value="{{value}}" step="any">
+                                    {{/if}}
+
+                                    {{#if isString}}
+                                    <input type="text" name="{{key}}" class="form-control form-control-lg border-primary border-opacity-25" value="{{value}}">
+                                    {{/if}}
+
+                                    {{#if isDate}}
+                                    <input type="text" name="{{key}}" class="form-control form-control-lg border-primary border-opacity-25" value="{{value}}" placeholder="YYYY-MM-DDTHH:mm:ss">
+                                    <small class="text-muted">Formato: Año-Mes-DíaTHora:Min:Seg (ISO 8601)</small>
+                                    {{/if}}
+
+                                    {{#if isJson}}
+                                    <textarea name="{{key}}" class="form-control border-primary border-opacity-25 font-monospace" rows="4" style="font-size: 0.85rem;">{{value}}</textarea>
+                                    <small class="text-danger">Aviso: Editar JSON requiere cuidado con la sintaxis [ ].</small>
+                                    {{/if}}
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="sticky-bottom bg-white p-4 border-top shadow-lg d-flex justify-content-end rounded-pill mb-4" style="z-index: 1000;">
+            <button type="reset" class="btn btn-outline-secondary btn-lg px-5 me-3">
+                <i class="fas fa-undo me-2"></i>Restablecer
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
+                <i class="fas fa-save me-2"></i>Guardar Cambios
+            </button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s ease;
+    }
+    .form-control:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .15);
+        border-color: #0d6efd;
+    }
+    .form-check-input:checked {
+        background-color: #198754;
+        border-color: #198754;
+    }
+    .sticky-bottom {
+        bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: fit-content;
+    }
+</style>

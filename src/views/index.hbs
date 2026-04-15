@@ -1,44 +1,267 @@
 {{#each dataFlags}}
-<div class="row bg-dark">
+<div class="main-login-container card border-0 shadow-lg overflow-hidden">
+    <div class="row g-0">
+        <!-- Columna Hero con Imagen -->
+        <div class="col-md-7 position-relative hero-section" style="background: url('/img/front/world_cup_hero.png') center/cover no-repeat;">
+            <div class="hero-overlay d-flex flex-column justify-content-center px-5 py-4">
+                <div class="hero-content">
+                    <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Polla Mundialista 2026</span>
+                    <h1 class="display-3 fw-bold text-white mb-3">Siente la pasión del fútbol</h1>
+                    <p class="lead text-white-50 mb-4 opacity-75">Demuestra tus conocimientos, realiza tus apuestas y compite con amigos para llegar a la cima del ranking.</p>
+                    
+                    {{#if viewInitDateTournament}}
+                    <div class="tournament-countdown mb-4">
+                        <p class="text-white-50 small text-uppercase mb-2 tracking-wider">El mundial comienza en:</p>
+                        <div id="tournament-timer" class="d-flex gap-3">
+                            <div class="timer-box">
+                                <span id="days-t" class="h2 fw-bold text-white d-block mb-0">00</span>
+                                <small class="text-white-50 small">Días</small>
+                            </div>
+                            <div class="timer-box">
+                                <span id="hours-t" class="h2 fw-bold text-white d-block mb-0">00</span>
+                                <small class="text-white-50 small">Horas</small>
+                            </div>
+                            <div class="timer-box">
+                                <span id="minutes-t" class="h2 fw-bold text-white d-block mb-0">00</span>
+                                <small class="text-white-50 small">Minutos</small>
+                            </div>
+                            <div class="timer-box">
+                                <span id="seconds-t" class="h2 fw-bold text-warning d-block mb-0">00</span>
+                                <small class="text-white-50 small">Segundos</small>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
 
-  <div class="col-md-5 m-0 p-0">
-    <form action="/auth/signin" method="POST">
-      <div class="px-2">
-        
-        <div >
-          <p class="text-warning m-0">For user guest use:</p>
-        <p class="text-warning m-0">user: <b>guest@guest.com</b></p>
-        <p class="text-warning m-0">password: <b>guest</b></p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-item text-white">
+                            <span class="d-block h3 fw-bold mb-0">32</span>
+                            <span class="text-white-50 small">Equipos</span>
+                        </div>
+                        <div class="vr bg-white opacity-25" style="height: 40px;"></div>
+                        <div class="stat-item text-white">
+                            <span class="d-block h3 fw-bold mb-0">64</span>
+                            <span class="text-white-50 small">Partidos</span>
+                        </div>
+                        <div class="vr bg-white opacity-25" style="height: 40px;"></div>
+                        <div class="stat-item text-white">
+                            <span class="d-block h3 fw-bold mb-0">1</span>
+                            <span class="text-white-50 small">Campeón</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <label for="email" class="form-label">Correo</label>
-        <input type="email" class="form-control" name="email" placeholder="Tu correo">
-      </div>
-      <div class="mb-1 px-2">
-        <label for="pass" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" name="password" placeholder="Contraseña">
-      </div>
-      <div class="row justify-content-center mt-3 px-2">
-        <div class="col text-center"><button type="submit" class="btn btn-primary mb-1 container">Ingresa</button></div>
-        {{#if enableRegisterButton}}
-        <div class="col text-center"><a class="btn btn-primary mb-1 container" href="/signup">Registro</a></div>
-        {{else}}
-        <div class="col text-center mt-10"><button class="btn btn-secondary mb-1 container" disabled>Registro</button></div>
-        {{/if}}
-      </div>
-      <div class="row justify-content-center mt-3">
-        {{!-- <a href="passrestore">¿Olvidó su contraseña?</a> --}}
-      </div>
-    </form>
-  </div>
 
+        <!-- Columna de Login -->
+        <div class="col-md-5 bg-white d-flex align-items-center">
+            <div class="login-wrapper w-100 p-5 mx-lg-4">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-dark mb-1">Bienvenido</h2>
+                    <p class="text-muted small">Ingresa tus credenciales para continuar</p>
+                </div>
 
-  <div class="col-md-7 m-0 p-0">
-    {{!-- <img src="./img/front/caratula.png" alt="Caratula inicial" width="80%"> --}}
-    {{!-- <img src="https://images2.imgbox.com/70/bc/gZj95he7_o.png" width="140%" alt="Caratula inicial"> --}}
-    <img src="https://images2.imgbox.com/25/25/vd0HSxIe_o.png" width="100%" alt="Caratula inicial">
+                {{!-- Información de invitado con estilo discreto --}}
+                {{#if renderGuestInfo}}
+                <div class="alert alert-soft-warning border-0 rounded-3 mb-4 p-3 shadow-none bg-info bg-opacity-10">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-info-circle text-info me-2"></i>
+                        <span class="text-info fw-bold small uppercase">Acceso Rápido (Invitado)</span>
+                    </div>
+                    <div class="small">
+                        <p class="mb-1 text-dark"><strong>Usuario:</strong> guest@guest.com</p>
+                        <p class="mb-0 text-dark"><strong>Contraseña:</strong> guest</p>
+                    </div>
+                </div>
+                {{/if}}
 
+                <form action="/auth/signin" method="POST" class="needs-validation">
+                    <div class="mb-4">
+                        <label for="email" class="form-label text-secondary small fw-bold">CORREO ELECTRÓNICO</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 border-primary-subtle rounded-start-2">
+                                <i class="far fa-envelope text-muted"></i>
+                            </span>
+                            <input type="email" class="form-control bg-light border-start-0 border-primary-subtle rounded-end-2 p-3" name="email" id="email" placeholder="ejemplo@correo.com" required>
+                        </div>
+                    </div>
 
-  </div>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label text-secondary small fw-bold">CONTRASEÑA</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 border-primary-subtle rounded-start-2">
+                                <i class="fas fa-lock text-muted"></i>
+                            </span>
+                            <input type="password" class="form-control bg-light border-start-0 border-primary-subtle rounded-end-2 p-3" name="password" id="pass" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mb-4">
+                        {{!-- Opcional: <a href="passrestore" class="text-decoration-none small">¿Olvidaste tu contraseña?</a> --}}
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm transition-all hover-translate-y">
+                                <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                            </button>
+                        </div>
+                        {{#if enableRegisterButton}}
+                        <div class="col-12">
+                            <a class="btn btn-outline-primary btn-lg w-100 rounded-pill" href="/signup">
+                                <i class="fas fa-user-plus me-2"></i>Crear cuenta
+                            </a>
+                        </div>
+                        {{else}}
+                        <div class="col-12">
+                            <button class="btn btn-secondary btn-lg w-100 rounded-pill" disabled title="Registros cerrados temporalmente">
+                                <i class="fas fa-user-slash me-2"></i>Registro Cerrado
+                            </button>
+                        </div>
+                        {{/if}}
+                    </div>
+                </form>
+
+                <div class="text-center mt-5 pt-4 border-top">
+                    <p class="text-muted small">© 2026 Polla Mundialista. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {{/each}}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+        --dark-overlay: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 100%);
+    }
+
+    body {
+        background-color: #f4f7fe;
+    }
+
+    .main-login-container {
+        min-height: 85vh;
+        margin: 2rem auto;
+        max-width: 1200px;
+        background-color: transparent !important;
+    }
+
+    .hero-section {
+        min-height: 600px;
+    }
+
+    .timer-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        padding: 1rem;
+        border-radius: 12px;
+        min-width: 90px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--dark-overlay);
+    }
+
+    .tracking-wider {
+        letter-spacing: 0.125rem;
+    }
+
+    .alert-soft-warning {
+        border-left: 4px solid #0dcaf0 !important;
+    }
+
+    .btn-primary {
+        background: var(--primary-gradient);
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-gradient);
+        filter: brightness(1.1);
+        transform: translateY(-2px);
+    }
+
+    .hover-translate-y:hover {
+        transform: translateY(-2px);
+    }
+
+    .transition-all {
+        transition: all 0.25s ease-in-out;
+    }
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .1);
+    }
+
+    .form-control::placeholder {
+        color: #adb5bd;
+        opacity: 0.7;
+    }
+
+    .input-group-text {
+        color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+        .main-login-container {
+            margin: 0;
+            border-radius: 0;
+            min-height: 100vh;
+        }
+        .hero-section {
+            min-height: 250px;
+        }
+        .hero-section h1 {
+            font-size: 2rem !important;
+        }
+        .hero-section .stat-item span.h3 {
+            font-size: 1.25rem !important;
+        }
+        .login-wrapper {
+            padding: 2rem 1.5rem !important;
+        }
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        {{#each dataFlags}}
+        const startDateStr = "{{initDateTournament}}";
+        const viewFlag = "{{viewInitDateTournament}}";
+        
+        if (viewFlag === "true" || viewFlag === true) {
+            const targetDate = new Date(startDateStr).getTime();
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+                const timerEl = document.getElementById('tournament-timer');
+                if (!timerEl) return;
+                if (diff < 0) {
+                    timerEl.innerHTML = '<span class="badge bg-success p-3 fs-5">¡El mundial ha comenzado!</span>';
+                    return;
+                }
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                if (document.getElementById('days-t')) document.getElementById('days-t').innerText = String(d).padStart(2, '0');
+                if (document.getElementById('hours-t')) document.getElementById('hours-t').innerText = String(h).padStart(2, '0');
+                if (document.getElementById('minutes-t')) document.getElementById('minutes-t').innerText = String(m).padStart(2, '0');
+                if (document.getElementById('seconds-t')) document.getElementById('seconds-t').innerText = String(s).padStart(2, '0');
+            };
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+        {{/each}}
+    });
+</script>

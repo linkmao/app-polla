@@ -3,15 +3,18 @@ const router = Router()
 const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, getAllGamersPointOptimizated, updateTotalPoint } = require('../controllers/index')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
+const adminConfig = require('../controllers/admin-config')
 
 // Ejemplo para el envio de datos (borrar cuando sea necesario)
 // router.get('/',(req,res)=> res.render('index',{message:"Radiohead Home", name:"Maolink"}) )
 router.get('/', (req, res) => {
   const enableRegisterButton = config.renderButtonRegister
-  const dataFlags = [{ enableRegisterButton }]
+  const renderGuestInfo = config.renderGuestInfo
+  const viewInitDateTournament = config.viewInitDateTournament
+  const initDateTournament = config.initDateTournament
+  const dataFlags = [{ enableRegisterButton, renderGuestInfo, viewInitDateTournament, initDateTournament }]
   res.render('index', { dataFlags })
-}
-)
+})
 router.get('/about', (req, res) => res.render('about'))
 
 router.get('/passrestore', (req, res) => res.render('user/pass-forget'))
@@ -463,5 +466,8 @@ router.get('/admin/classifications/edit/:id', validar.isAuth, validar.isAdmin, a
   if (!groups.includes('FINAL')) groups.push('FINAL')
   res.render('admin/edit-classification', { classification, teams, groups })
 })
+
+router.get('/admin/config', validar.isAuth, validar.isAdmin, adminConfig.getConfig)
+router.post('/admin/config', validar.isAuth, validar.isAdmin, adminConfig.updateConfig)
 
 module.exports = router

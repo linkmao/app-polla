@@ -1,0 +1,131 @@
+{
+  "secretword": "Palabra que solo yo conozco",
+  "tokenDuration": 5184000,
+  "pointByScore": 2,
+  "pointByAnalogScore": 2,
+  "pointByGroupClassification": 5,
+  "pointByTeamClassificated": 3,
+  "pointByFinalistFirstTeam": 10,
+  "pointByFinalistSecondTeam": 10,
+  "pointByFinalistThirdTeam": 10,
+  "pointByFinalistFourthTeam": 10,
+  "phaseInitial": 1,
+  "phaseSixteenth": 2,
+  "phaseEighth": 3,
+  "phaseFourth": 4,
+  "phaseSemiFinals": 5,
+  "phaseFinal": 6,
+  "gamesSixteenth": [
+    [
+      74,
+      77,
+      89
+    ],
+    [
+      73,
+      75,
+      90
+    ],
+    [
+      76,
+      78,
+      91
+    ],
+    [
+      79,
+      80,
+      92
+    ],
+    [
+      83,
+      84,
+      93
+    ],
+    [
+      81,
+      82,
+      94
+    ],
+    [
+      86,
+      88,
+      95
+    ],
+    [
+      85,
+      87,
+      96
+    ]
+  ],
+  "gamesEighth": [
+    [
+      89,
+      90,
+      97
+    ],
+    [
+      93,
+      94,
+      98
+    ],
+    [
+      91,
+      92,
+      99
+    ],
+    [
+      95,
+      96,
+      100
+    ]
+  ],
+  "gamesFourth": [
+    [
+      97,
+      98,
+      101
+    ],
+    [
+      99,
+      100,
+      102
+    ]
+  ],
+  "gamesSemi": [
+    [
+      101,
+      102,
+      104
+    ]
+  ],
+  "gamePhantom": 105,
+  "finalStruct": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "xPointByScore": 0,
+  "xPointByAnalogScore": 1,
+  "xPointByLocalEqual": 2,
+  "xPointByVisitEqual": 3,
+  "xPointByFirst": 0,
+  "xPointBySecond": 1,
+  "xPointByThirdh": 2,
+  "xPointByFourth": 3,
+  "viewInitDateTournament": true,
+  "initDateTournament": "2026-06-11T15:00:00",
+  "viewCloseBetGroups": true,
+  "closeBetGroups": "2026-06-10T14:00:00",
+  "viewCloseBetPhases": true,
+  "closeBetPhases": "2026-07-11T14:00:00",
+  "renderGuestInfo": false,
+  "renderButtonRegister": true,
+  "renderBetRoundGroup": true,
+  "renderViewOtherBetGroup": true,
+  "enableMenuRoundPhases": true,
+  "renderBetRoundPhases": true,
+  "renderViewOtherBetPhases": true,
+  "renderViewOtherBetClassFinal": true
+}
