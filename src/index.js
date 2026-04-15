@@ -86,6 +86,12 @@ app.use((req, res, next) => {
   res.locals.localUsuario = req.user || null // Se guarda el user que envia passport, y se guarda en una variable local
   res.locals.enableMenuPhases = config.enableMenuRoundPhases // Habilita o no el menú phases
   res.locals.localBody = req.body || null
+  res.locals.initDateTournament = config.initDateTournament // Fecha de inicio del torneo
+  res.locals.viewInitDateTournament = config.viewInitDateTournament // Visibilidad inicio torneo
+  res.locals.closeBetGroups = config.closeBetGroups // Cierre de apuestas de grupos
+  res.locals.viewCloseBetGroups = config.viewCloseBetGroups // Visibilidad cierre grupos
+  res.locals.closeBetPhases = config.closeBetPhases // Cierre de apuestas de fases
+  res.locals.viewCloseBetPhases = config.viewCloseBetPhases // Visibilidad cierre fases
   // const temporal=res.locals.localBody
   // console.log("BODY GUARDADO: ", temporal)
   // Cuando se quuiere acceder en handlebars a usuario.name, no permite su uso, entonces se guadan todos los datos de usuario en variables locales así como se muestra a continuación

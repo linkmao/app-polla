@@ -3,11 +3,14 @@
     {{>links-bet}}
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-lg-6 order-2 order-lg-1">
       {{>bet-games}}
       {{>bet-classification}}
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-6 order-1 order-lg-2 mb-4">
+      {{#if showCountdown}}
+      {{>countdown}}
+      {{/if}}
       {{#if completionStatus}}
       {{>completion-status-box}}
       {{/if}}

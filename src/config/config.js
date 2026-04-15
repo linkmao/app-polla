@@ -41,6 +41,14 @@ module.exports = {
   xPointByThirdh: 2,
   xPointByFourth: 3,
 
+  // Fechas de incio del torneo, y vencimiento para las apuestas grupo y las apuestas fases formato año-mes-diaThora:minutos:segundos
+  viewInitDateTournament: true,
+  initDateTournament: "2026-06-11T15:00:00",
+  viewCloseBetGroups: true,
+  closeBetGroups: "2026-06-10T14:00:00",
+  viewCloseBetPhases: true,
+  closeBetPhases: "2026-07-11T14:00:00",
+
 
 
   // Valores y configuraciones para el renderizado o no de algunos elementos segun la etapa del juego.

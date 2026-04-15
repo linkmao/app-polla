@@ -507,7 +507,7 @@ Pasos para el montaje de la polla
 (ATENDIDO)En el boton de apuesta clasificacion poner apuesta clasificacion
 (Atendido) Ponerunas estadisticas en cada grupo y fase (cuantas apuestas faltan por diligenciar y clasificaciones )
 (Atendido)poner apuestas del juego en las apuestas de fase, asi comoo existen en la fase de grupo
-Poner temporizador de cuanto falta para cerrar la apuesta
+(ATENDIDO)Poner temporizador de cuanto falta para cerrar la apuesta
 Poner en algun logar los partios del dia.
 
 (ATENDIDO)buscar la manera en el forntedn que se seva que ya un juego está apostado jugar con los colores rojos y o verdes

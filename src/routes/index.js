@@ -51,7 +51,7 @@ router.get('/routegames', validar.isAuth, async (req, res) => {
     res.render('admin/panel')
   } else {
     console.log("Estoy en el no")
-    res.render('games')
+    res.render('games', { showCountdown: true })
   }
 
 })
@@ -86,7 +86,13 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
     if (dataBetClassification[0].betFirstTeam !== "Sin asignar") betClassCount = 1;
   }
 
-  const completionStatus = { totalGames: dataGame.length, betGames: betGamesCount, totalClass: 1, betClass: betClassCount, renderClassCompletion: true };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { if (g.localScore !== "-") realGamesCount++; });
+  const realClassData = await getClassification(req.params.g);
+  let realClassCount = 0;
+  if (realClassData && realClassData[0].firstTeam !== "Sin clasificado") realClassCount = 1;
+
+  const completionStatus = { totalGames: dataGame.length, betGames: betGamesCount, realGames: realGamesCount, totalClass: 1, betClass: betClassCount, realClass: realClassCount, renderClassCompletion: true };
 
   res.render('games', { dataGameAndBet, dataBetClassification, dataPoint, completionStatus })
 })
@@ -113,7 +119,12 @@ router.get('/sixteenth', validar.isAuth, async (req, res) => {
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
-  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, renderClassCompletion: false };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { 
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  });
+  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
   res.render('games-by-phase', { dataGameAndBet, dataPoint, completionStatus })
 })
@@ -144,7 +155,12 @@ router.get('/eighth', validar.isAuth, async (req, res) => {
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
-  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, renderClassCompletion: false };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { 
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  });
+  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
   res.render('games-by-phase', { dataGameAndBet, dataPoint, completionStatus })
 })
@@ -176,7 +192,12 @@ router.get('/fourth', validar.isAuth, async (req, res) => {
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
-  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, renderClassCompletion: false };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { 
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  });
+  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
   res.render('games-by-phase', { dataGameAndBet, dataPoint, completionStatus })
 })
@@ -207,7 +228,12 @@ router.get('/semi', validar.isAuth, async (req, res) => {
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
-  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, renderClassCompletion: false };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { 
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  });
+  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
   res.render('games-by-phase', { dataGameAndBet, dataPoint, completionStatus })
 })
@@ -251,7 +277,16 @@ router.get('/finals', validar.isAuth, async (req, res) => {
     if (dataBetClassification[0].betFirstTeam !== "Sin asignar") betClassCount = 1;
   }
 
-  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, totalClass: 1, betClass: betClassCount, renderClassCompletion: true };
+  let realGamesCount = 0;
+  if (dataGame) dataGame.forEach(g => { 
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  });
+  const realClassData = await getClassification("FINAL");
+  let realClassCount = 0;
+  if (realClassData && realClassData[0].firstTeam !== "Sin clasificado") realClassCount = 1;
+
+  const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, totalClass: 1, betClass: betClassCount, realClass: realClassCount, renderClassCompletion: true };
 
   res.render('games-by-phase', { dataGameAndBet, dataBetClassification, dataPoint, completionStatus })
 })

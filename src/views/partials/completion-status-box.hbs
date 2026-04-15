@@ -11,10 +11,29 @@
     </div>
     
     {{#if completionStatus.renderClassCompletion}}
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <span class="text-muted">Clasificaciones apostadas:</span>
       <span class="badge {{#if (eq completionStatus.betClass completionStatus.totalClass)}}bg-success{{else}}bg-warning text-dark{{/if}} fs-6">
         {{completionStatus.betClass}} de {{completionStatus.totalClass}}
+      </span>
+    </div>
+    {{/if}}
+
+    <hr>
+    <p class="text-secondary fw-semibold mb-2" style="font-size: 0.85em;">DATOS OFICIALES (ADMIN)</p>
+    
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="text-muted">Partidos jugados:</span>
+      <span class="badge {{#if (eq completionStatus.realGames completionStatus.totalGames)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
+        {{completionStatus.realGames}} de {{completionStatus.totalGames}}
+      </span>
+    </div>
+
+    {{#if completionStatus.renderClassCompletion}}
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted">Clasif. consolidadas:</span>
+      <span class="badge {{#if (eq completionStatus.realClass completionStatus.totalClass)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
+        {{completionStatus.realClass}} de {{completionStatus.totalClass}}
       </span>
     </div>
     {{/if}}
