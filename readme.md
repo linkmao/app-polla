@@ -276,29 +276,6 @@ La base de datos se desplegló en mongodb Atlas y su funcionamiento fue realment
 
 Fueron munchos los retos que se presentaron durante el desarrollo e implementación, uno de ellos tuvo que ver con la obtención del consolidado del puntaje de todos los apostadores, inicialmente esos calculos se hacia cada vez que un usuario los solicitaba, en heroku el tiempo de calculo era prudente, pero en las otras nubes fue realemnte desastrozos (con tiempos de hasta 70 segundos para el calculo de los resultados consolidados), lo que se hizo entonces fue hacer otra implementación la cual consiste en que solo el admin realice la petición de calculos consolidados y estos se actualizan en cada user, posteriormente fue mas optimizado simpemente hacer la consulta de esos consolidados ya calculados. 
 
-
-## To do
-- Desarrollo de un frontend completo para el admin
-- Hacer manual de usuario apostadores dentro de la app
-- En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)
-- Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
-- Posibilidad de foto o avatar para cada usuario.
-- Sismta de colores en la tarjeta del juego de tal manera que adquiera un color, por ejemplo rojo, cuando este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado
-- Persitencia de los datos diligenciados en el formulario de registro cuando no se colocan datos válidos y aevitar así reescribir todo
-- Sistema de recuperación de contraseña por parte del jugador
-- Diseño de cronometro que indique el tiempo faltante para el cierre de las apuestas
-- Cronometro de inicio de torneo
-- Sistema de aviso que informe al jugador cuantos juegos o clasificaciones tiene sin diligenciar
-- sistema de notificación push cuando un juego o clasificación se ha cargado
-- Permitir ordenar el consolidado de puntajes de mayor a menor o viceversa.
-- Notificacion de los partidos del dia, o que estos se vean en la pantalla de inicio justo despues del lógin
-- implementar fecha y hora correctamente en el modelo game y no como texto (lo hice dada la premura)
-- Sistema de envio automatico por correo electrónico o whatsappp la key que permite el registro de un usuario nuevo
-- Automatización del registro de los resultados conectando la app con una api que entregue los resultados en tiempo real
--   En el consolidado de puntajes en total tener el puntaje alcanzado/total posible (incluso esto puede luego traducirse en un % de rendimiento)
--   En el detalle de las apuestas de un juego de ocatavo a finales (apuestas del juego), debe mostrarse, cual fue el equipo que se eligió como ganador y que pasa a la siguiente ronda
-- Visualización del puntaje de CADA UNO de los juego syclasificaciones por usuariom y que los demás usuarios puedan ver el de cualquier usuario.
-
 ## To do refactoring and optimizated
 Algunos elementos no necesariamente visuales que se pueden implementar en el futuro con el que se busca optmizar el código son:
 
@@ -329,7 +306,79 @@ Se hace lanzamiento al público por primera vez de la app-polla el domingo 13 de
 - Se implementa una ruta para crear un usuario admin, protegido con palabra clave en variable de entorono
 - Se deja en firme la actual documentación
 
+## Version 2.0.0 (12.04.26)
+- IMPORTANTE: Esta versión deja funcional el nuevo sistema del mundial con 48 equipos y una etapa adicional en los partidos de fase
+- Cambios significativos en el frontend y sistema de puntuación
+- Sistema de puntaje de las clasificaciones: se dan 5 puntos por la coincidencia por la  clasificación en la etapa de grupo, tomando en cuenta los 4 equipos en su estricto orden. (5 puntos por cada equipo concidente en cada clasificacion de grupo)
+- Se dan 10 puntos por la coincidencia por la  clasificación final, tomando en cuenta los 4 equipos en su estricto orden. (10 puntos por cada equipo coincidente en la clasificación final)
+- Cambios IMPORTANTES EN EL FRONTEND QUE INCLUYE
+    - Panel de administración para la gestión de equipos, partidos, clasificaciones, llaves para usuarios, gestion de usuarios, verificación de estado de las apuestas
+    - Temporizadores de inicio de torneo y cierre de apuestas.
+    - Usuario ve la cantidad de apuestas sin realizar
 ***
+
+# Pasos para el correcto funcionamiento de la configuración del torneo
+
+1. Crear el usuario admin (tener en cuenta la variable de entorno KEY_ADMIN, cuyo valor debe usarse como Key al momento de crear el usuario )
+2. Ingresar todos los equipos del torneo
+3. Ingresar TODOS LOS JUEGOS DEL TORNEO, incluyendo el juego fantasma. Desde los juegos por fases, colocar equipos genericos.
+4. Ingresar TODAS LAS CLASIFICACIONES de manera generica, incluyendo la de la final
+5. Generar llaves para creacion de usuarios
+6. Tener apagada el menu de apuestas de fase, dado que al inicio solo se apuesta por grupos
+7. Invitar a los usuarios que creen las apuestas de juegos por grupos y clasificaciones (encender apuestas)
+8. Terminada la fase de apuesta de grupos apagar boton de apuestas de cada juego y de la clasificacion y activar (ver apuestas de otros jugadores de los juegos y de la clasificación)
+9. IMPORTANTE: Ir calculando los puntajes totales despues de cada juego (updatepoint) 
+10. Terminada la fase de grupos, llenar los juegos de 16 avos
+11. Activar el menu de apuestas por fases
+12. Invitar a los usuarios hacer la apuesta hasta el final
+13. El admon debe ir diligenciando los partidos con sus resultados
+14. Actualizar resultados (updatepoint)
+15. Admon llena clasificaicon final real
+16. Admon debe diligenciar el juego fantasma con los ganadores del partido de 3 y 4 puesto y el de final para el calculo de los 3 puntos que da acertar el ganador.
+
+Aspectos importantes
+Los apostadores no pueden ingresar a la apuesta de los 16 avos, hasta que el administrador no haya ingresado los juegos reales que se van a dar en esa fase. Por lo tanto la opción debe estar deshabilitada
+
+Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
+
+# TODO 2026
+
+## TODO Prioritarios 
+Atender antes de desplegar
+- Arreglar el bug que no muestra el conteo regresivo del inicio del mundial en el login.
+
+
+
+## TODO mediano plazo
+- Implementar que al eliminar un usuario se eliminen tambien todos los datos asocioados a sus apuestas por juegos y clasificaciones
+- Modificar el modelo game para incluir dateGame, hourGame y placeGame de tal manera que estos parametros puedan ser usados por ejemplo en la busqueda de los juegos de una fecha determinada.
+- Implementar en la pantalla principal los juegos del dia y los próximos juegos
+- En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description.
+- Hacer manual de usuario apostadores dentro de la app
+- En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)
+- Posibilidad de foto o avatar para cada usuario.
+- Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
+- Persitencia de los datos diligenciados en el formulario de registro cuando no se colocan datos válidos y aevitar así reescribir todo
+- Sistema de recuperación de contraseña por parte del jugador
+- sistema de notificación push cuando un juego o clasificación se ha cargado
+- Permitir ordenar el consolidado de puntajes de mayor a menor o viceversa.
+- Notificacion de los partidos del dia, o que estos se vean en la pantalla de inicio justo despues del lógin
+- implementar fecha y hora correctamente en el modelo game y no como texto (lo hice dada la premura)
+- Sistema de envio automatico por correo electrónico o whatsappp la key que permite el registro de un usuario nuevo
+- Automatización del registro de los resultados conectando la app con una api que entregue los resultados en tiempo real
+-   En el consolidado de puntajes en total tener el puntaje alcanzado/total posible (incluso esto puede luego traducirse en un % de rendimiento)
+-   En el detalle de las apuestas de un juego de ocatavo a finales (apuestas del juego), debe mostrarse, cual fue el equipo que se eligió como ganador y que pasa a la siguiente ronda
+
+## TODO ATENDIDO
+- 01.04.2026: Desarrollo de un frontend completo para el admin
+- 10.04.2026: Sistema de colores en la tarjeta del juego de tal manera que adquiera un color, por ejemplo rojo, cuando 
+este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado.
+- 10:04.2026: Sistema de aviso que informe al jugador cuantos juegos o clasificaciones tiene sin diligenciar
+- 13.04.2026: Diseño de cronometro que indique el tiempo faltante para el cierre de las apuestas
+- 13.04.2026: Cronometro de inicio de torneo
+- Visualización del puntaje de CADA UNO de los juego syclasificaciones por usuario m y que los demás usuarios puedan ver el de cualquier usuario. (Verificar).
+- 15.04.2026: Implementar el tema oscuro
+
 # Apuntes técnicos para este y otros proyectos
 ## Fase de despliegue
 ## EXPORTACION DE BD
@@ -358,7 +407,6 @@ $ mongorestore [ruta a dump]
 
 (Una coleccion en particular)
 $ mongorestore --db [como la quiero llamar] --collection [como la quiero llamar] dump/collection.bson
-
 
 4. IMPORTAR base de datos en CLOUD
 (Lee la BD de la carpeta dump, por eso la bd quedará con el nombre de la carpeta dentro de dump, se ejecuta desde un nivel fuera de dump)
@@ -418,10 +466,7 @@ Otra opcion es usar heroku cli, luego de haber hecho heroku login y usar la sigu
 
 heroku config:set MONGODB_URI=mongodb+srv://maolink:<password>@mongo-cluster.h360t.mongodb.net/<bdname>?retryWrites=true&w=majority
 
-
-
 Con esto hecho.. es de esperarse que todo corra ok
-
 
 ## Algunos comandos útiles de heroku
 Hacer login
@@ -445,7 +490,6 @@ Despues de que se hace push con git los comandos de heroku estan asociados a la 
    heroku config:set [varable-entorno=valor] coloca la variable de entorno en la app asociada a la carpeta actual, si se desea acceder a otra app desde cualquier carpeta se debe agregar --app [nombre-app]
     heroku config:set [varable-entorno=valor] --app [nombre-app]
 
-
 Ver la consola de una app
     heroku logs --tail [nombre-app]    
 
@@ -461,75 +505,5 @@ Abrir la app
 Reinciar la app en heroku
     heroku restart --app [nombre-app]
 
-
-
-
-
-Cambio en esta version
-Se implementa el puntaje por clasificacion de grupo donde esta vez en vez de ganar 3 puntos por acertar el equipo en el orden correcto, se ganan 5 puntos, esto es para los 4 equipos por grupo.
-
-Se implementa el puntaje  por clasificacion final de 10 puntos por cada uno de los 4 equipos finalistas acertados, en el orden correcto. En el caso de que no se acierte el orden correcto se dan 0 puntos.
-
-Pendiente
-En la pantalla de agregar juego, que se haya un boton para eliminar un juego
-En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description
-Al momento de crear las clasificaciones esta bien el hecho de que aparezcan lso equipos del respectivo grupo, sin embargo en el grupo FINAL no aparece ningun equipo, mejorarpara que aparezcan TODOS los equipos en ese grupo final
-
-Solucionar luego lo de las bandera spara los equipos genericos
-
-Importante: Los apostadores no pueden ingresar a la apuesta de los 16 avos, hasta que el administrador no haya ingresado los juegos reales que se van a dar en esa fase
-
-Importante: Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
-
-
-Pasos para el montaje de la polla
-1. Crear el usuario admin
-2. Ingresar todos los equipos del torneo
-3. Ingresar TODOS LOS JUEGOS DEL TORNEO, incluyendo el juego fantasma. Desde los juegos por fases, colocar equipos genericos.
-4. Ingresar TODAS LAS CLASIFICACIONES de manera generica, incluyendo la de la final
-5. Generar llaves para creacion de usuarios
-6. Tener apagada el menu de apuestas de fase
-7. Invitar a los usuarios que creen las apuestas de juegos por grupos y clasificaciones (encender apuestas)
-8. Terminada la fase de apuesta de grupos apagar boton de apuestas y activar (ver apuestas de otros jugadores)
-9. Ir calculando los puntajes totales despues de cada juego (updatepoint)
-10. Terminada la fase de grupos, llenar los juegos de 16 avos
-11. Activar el menu de apuestas por fases
-12. Invitar a los usuarios hacer la apuesta hasta el final
-13. El admon debe ir diligenciando los partidos con sus resultados
-14. Actualizar resultados (updatepoint)
-15. Admon llena clasificaicon final real
-16. Admon debe diligenciar el juego fantasma con los ganadores del partido de 3 y 4 puesto y el de final para el calculo de los 3 puntos que da acertar el ganador.
-
-
-
-(ATENDIDO) (Agregar un boton en admin que permita usar /updatepoint)
-(ATENDIDO)Si tengo como verificar que al usuario no le falte nada?
-(ATENDIDO)En el boton de apuesta clasificacion poner apuesta clasificacion
-(Atendido) Ponerunas estadisticas en cada grupo y fase (cuantas apuestas faltan por diligenciar y clasificaciones )
-(Atendido)poner apuestas del juego en las apuestas de fase, asi comoo existen en la fase de grupo
-(ATENDIDO)Poner temporizador de cuanto falta para cerrar la apuesta
-Poner en algun logar los partios del dia.
-
-(ATENDIDO)buscar la manera en el forntedn que se seva que ya un juego está apostado jugar con los colores rojos y o verdes
-
-PRIORIDAD
-
-(ATENDIDO) Revisar muy bien la totalizacion del resultados
-(ATENDIDO) EN EL REPORTE DEL GRAN TOTAL NO coincide el gran total con el total verdadero
-(ATENDIDO) En el reporte de puntaje de OTROS JUGADORES, no se ven reflejados los puntajes totales (ES MI ACTUALIZACIÓN).. 
-(ATENDIDO) Quitar la zona gris del reporte total de puntaja en las clasificaiones, sin embargo si está sumando es como si los numero estuvieran ocultos.
-(ATENDIDO, NO SE PERO YA FUNCIONA)En los botones de apuestas del juego de la fase de octavos no funciona, ni cuartos... y quizas losotros tambien
-(Atendido) Asi como se ven las apuesta del juego se debe ver las apuesta de las clasificaiones (Existe pero no funciona)
-(Atendido) Hace falta ver las apuestas de la clasificacion final
-(ATENDIDO)En el frontend pedir validacion antes de eliminar un grupo o juego dado que esto tiene implicaciones en la estructar de las apuesta de los jugadores.
-
-
-
-
-
-
-
-
 ## Maolink Software
 Diciembre 30 2022
-

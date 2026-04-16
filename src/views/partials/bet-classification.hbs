@@ -4,7 +4,7 @@
 
   <form action="../api/bet-classifications/me/bet/group/{{group}}/?_method=PUT" method="POST">
     <input type="hidden" name="_method" value="PUT">
-    <div class="card shadow-sm border-0" style="width: 20rem; {{#if (eq betFirstTeam 'Sin asignar')}}background-color: #ffebee;{{else}}background-color: #E8F5E9;{{/if}}">
+    <div class="card shadow-sm border-0 {{#if (eq betFirstTeam 'Sin asignar')}}bg-card-danger{{else}}bg-card-success{{/if}}" style="width: 20rem;">
       <img src="/img/iconos/classification.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h4 class="card-title">Apuesta actual del grupo {{group}}</h4>

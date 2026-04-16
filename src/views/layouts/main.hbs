@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-bs-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -16,12 +16,28 @@
     crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-bs-theme', theme);
+    })();
+  </script>
 </head>
 
 
 <body>
   <div class="container-fluid">
     {{#if localAdmin}}
+    <div class="admin-theme-toggle-container d-flex justify-content-end p-2">
+        <button id="theme-toggle" class="btn btn-link nav-link px-3" type="button" aria-label="Toggle theme">
+          <i class="bi bi-sun-fill" id="theme-icon-light" style="display: none;"></i>
+          <i class="bi bi-moon-stars-fill" id="theme-icon-dark" style="display: none;"></i>
+        </button>
+    </div>
     {{{body}}}
     {{else}}
     {{>mensajes}}
@@ -31,6 +47,38 @@
     {{/if}}
   </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      if (!themeToggle) return;
+      
+      const lightIcon = document.getElementById('theme-icon-light');
+      const darkIcon = document.getElementById('theme-icon-dark');
+      
+      const updateIcons = (theme) => {
+        if (!lightIcon || !darkIcon) return;
+        if (theme === 'dark') {
+          lightIcon.style.display = 'inline-block';
+          darkIcon.style.display = 'none';
+        } else {
+          lightIcon.style.display = 'none';
+          darkIcon.style.display = 'inline-block';
+        }
+      };
+
+      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+      updateIcons(currentTheme);
+
+      themeToggle.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-bs-theme');
+        const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcons(newTheme);
+      });
+    });
+  </script>
 </body>
 
 </html>
