@@ -10,6 +10,8 @@ const GameSchema = new Schema({
     visitScore: { type: Number, default: -1 },
     analogScore: { type: String, default: "-1" }, // Despues que un juego se actualiza, esta propiedad será L, E, V 
     played: { type: Boolean, default: false },
+    dateGame: { type: String, default: "YYYY-MM-DD" },
+    hourGame: { type: String, default: "HH:mm" },
     description: { type: String, default: "GENERIC-DESCRIPTION" },
     created_at: { type: Date, default: Date.now }
 },

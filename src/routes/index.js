@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, getAllGamersPointOptimizated, updateTotalPoint } = require('../controllers/index')
+const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, getAllGamersPointOptimizated, updateTotalPoint, getGamesByDate, getNextGames } = require('../controllers/index')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
 const adminConfig = require('../controllers/admin-config')
@@ -50,11 +50,21 @@ router.get('/signup', (req, res) => res.render('user/signup'))
 router.get('/routegames', validar.isAuth, async (req, res) => {
   console.log("estoy en routesgame")
   if (req.user.role == 'admin') {
-    console.log("Estoy en el si")
     res.render('admin/panel')
   } else {
-    console.log("Estoy en el no")
-    res.render('games', { showCountdown: true })
+    // Obtener juegos del día y próximos con zona horaria local (Colombia)
+    const today = new Date().toLocaleDateString('sv', { timeZone: 'America/Bogota' });
+    console.log("FECHA DE HOY (Local):", today)
+    const gamesToday = await getGamesByDate(today, req.user.id);
+    const gamesNext = await getNextGames(today, req.user.id);
+
+    res.render('games', {
+      showCountdown: true,
+      gamesToday,
+      gamesNext,
+      hasGamesToday: gamesToday.length > 0,
+      hasGamesNext: gamesNext.length > 0
+    })
   }
 
 })
@@ -78,12 +88,12 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   const dataPointClass = await getPointClassification(req.params.g, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass])
   const dataPoint = [{ dataPointGames, dataPointClass, dataFlags: { renderGroup: true, renderClassification: true, total } }]
-  
+
   let betGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
-    if (b && b.localScore !== "") betGamesCount++; 
+  if (dataBet) dataBet.forEach(b => {
+    if (b && b.localScore !== "") betGamesCount++;
   });
-  
+
   let betClassCount = 0;
   if (dataBetClassification && dataBetClassification.length > 0) {
     if (dataBetClassification[0].betFirstTeam !== "Sin asignar") betClassCount = 1;
@@ -113,19 +123,19 @@ router.get('/sixteenth', validar.isAuth, async (req, res) => {
   const dataPointGames = await getPointGamePhase(config.phaseSixteenth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
   const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: false, renderPhase: true, phase: "Dieciseisavos", total } }]
-  
+
   let betGamesCount = 0;
   let totalGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
+  if (dataBet) dataBet.forEach(b => {
     if (b) {
       if (b.localScore1 !== undefined) { totalGamesCount++; if (b.localScore1 !== "") betGamesCount++; }
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
   let realGamesCount = 0;
-  if (dataGame) dataGame.forEach(g => { 
-    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
-    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  if (dataGame) dataGame.forEach(g => {
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++;
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++;
   });
   const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
@@ -149,19 +159,19 @@ router.get('/eighth', validar.isAuth, async (req, res) => {
   const dataPointGames = await getPointGamePhase(config.phaseEighth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
   const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Octavos", total } }]
-  
+
   let betGamesCount = 0;
   let totalGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
+  if (dataBet) dataBet.forEach(b => {
     if (b) {
       if (b.localScore1 !== undefined) { totalGamesCount++; if (b.localScore1 !== "") betGamesCount++; }
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
   let realGamesCount = 0;
-  if (dataGame) dataGame.forEach(g => { 
-    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
-    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  if (dataGame) dataGame.forEach(g => {
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++;
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++;
   });
   const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
@@ -186,19 +196,19 @@ router.get('/fourth', validar.isAuth, async (req, res) => {
   const dataPointGames = await getPointGamePhase(config.phaseFourth, req.user.id)
   const total = sumTotalPoint([dataPointGames])
   const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Cuartos", total } }]
-  
+
   let betGamesCount = 0;
   let totalGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
+  if (dataBet) dataBet.forEach(b => {
     if (b) {
       if (b.localScore1 !== undefined) { totalGamesCount++; if (b.localScore1 !== "") betGamesCount++; }
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
   let realGamesCount = 0;
-  if (dataGame) dataGame.forEach(g => { 
-    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
-    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  if (dataGame) dataGame.forEach(g => {
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++;
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++;
   });
   const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
@@ -222,19 +232,19 @@ router.get('/semi', validar.isAuth, async (req, res) => {
   const dataPointGames = await getPointGamePhase(config.phaseSemiFinals, req.user.id)
   const total = sumTotalPoint([dataPointGames])
   const dataPoint = [{ dataPointGames, dataFlags: { renderEqualTeam: true, renderPhase: true, phase: "Semifinal", total } }]
-  
+
   let betGamesCount = 0;
   let totalGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
+  if (dataBet) dataBet.forEach(b => {
     if (b) {
       if (b.localScore1 !== undefined) { totalGamesCount++; if (b.localScore1 !== "") betGamesCount++; }
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
   let realGamesCount = 0;
-  if (dataGame) dataGame.forEach(g => { 
-    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
-    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  if (dataGame) dataGame.forEach(g => {
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++;
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++;
   });
   const completionStatus = { totalGames: totalGamesCount, betGames: betGamesCount, realGames: realGamesCount, renderClassCompletion: false };
 
@@ -265,25 +275,25 @@ router.get('/finals', validar.isAuth, async (req, res) => {
   const dataPointGamePhantom = await getPointGamePhantom(config.gamePhantom, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass, dataPointGamePhantom])
   const dataPoint = [{ dataPointGames, dataPointClass, dataPointGamePhantom, dataFlags: { renderClassification: true, renderEqualTeam: true, renderGamePhantom: true, renderPhase: true, phase: "Final", total } }]
-  
+
   let betGamesCount = 0;
   let totalGamesCount = 0;
-  if (dataBet) dataBet.forEach(b => { 
+  if (dataBet) dataBet.forEach(b => {
     if (b) {
       if (b.localScore1 !== undefined) { totalGamesCount++; if (b.localScore1 !== "") betGamesCount++; }
       if (b.localScore2 !== undefined) { totalGamesCount++; if (b.localScore2 !== "") betGamesCount++; }
     }
   });
-  
+
   let betClassCount = 0;
   if (dataBetClassification && dataBetClassification.length > 0) {
     if (dataBetClassification[0].betFirstTeam !== "Sin asignar") betClassCount = 1;
   }
 
   let realGamesCount = 0;
-  if (dataGame) dataGame.forEach(g => { 
-    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++; 
-    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++; 
+  if (dataGame) dataGame.forEach(g => {
+    if (g.localScore1 !== undefined && g.localScore1 !== "-") realGamesCount++;
+    if (g.localScore2 !== undefined && g.localScore2 !== "-") realGamesCount++;
   });
   const realClassData = await getClassification("FINAL");
   let realClassCount = 0;

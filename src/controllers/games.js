@@ -25,8 +25,8 @@ const getGameByGroup = async (req, res) => {
 
 const addGame = async (req, res) => {
   try {
-    const { gameNumber, localTeam, visitTeam, phase, group, description } = req.body
-    const newGame = new Game({ gameNumber, localTeam, visitTeam, phase, group, description })
+    const { gameNumber, localTeam, visitTeam, phase, group, description, dateGame, hourGame } = req.body
+    const newGame = new Game({ gameNumber, localTeam, visitTeam, phase, group, description, dateGame, hourGame })
     await newGame.save()
     if (req.headers['content-type'] === 'application/json') {
       res.status(201).json({ "message": "Juego guardado" })

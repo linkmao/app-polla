@@ -10,6 +10,85 @@
     <div class="col-12 col-lg-6 order-1 order-lg-2 mb-4">
       {{#if showCountdown}}
       {{>countdown}}
+
+      {{!-- Sección de Partidos del Día --}}
+      {{#if hasGamesToday}}
+      <div
+        class="card shadow-lg border-0 mb-4 bg-dark text-white rounded-4 overflow-hidden animate__animated animate__fadeIn">
+        <div class="card-header bg-gradient-primary py-3 border-0">
+          <h5 class="mb-0 fw-bold d-flex align-items-center">
+            <span class="badge bg-light text-primary me-2 px-3">HOY</span>
+            Partidos del día ({{gamesToday.0.dateGame}})
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            {{#each gamesToday}}
+            <div class="list-group-item bg-transparent text-white border-secondary py-4 px-3">
+              <div class="row align-items-center justify-content-between">
+                <div class="col text-center">
+                  <img src="/img/flags/{{localFlag}}" alt="{{localTeam}}" class="mb-2 shadow border border-secondary"
+                    style="width: 50px; height: 32px; object-fit: cover; border-radius: 4px;">
+                  <div class="small fw-bold text-truncate">{{localTeam}}</div>
+                </div>
+                <div class="col-5 text-center px-0">
+                  <div class="badge bg-secondary mb-2 opacity-75">{{hourGame}}</div>
+                  <div class="h4 mb-2 fw-black">{{localScore}} <span class="text-primary">-</span> {{visitScore}}</div>
+                  <a href="{{urlBet}}" class="btn btn-sm btn-primary rounded-pill px-4 shadow-sm fw-bold">Ver
+                    Apuestas</a>
+                </div>
+                <div class="col text-center">
+                  <img src="/img/flags/{{visitFlag}}" alt="{{visitTeam}}" class="mb-2 shadow border border-secondary"
+                    style="width: 50px; height: 32px; object-fit: cover; border-radius: 4px;">
+                  <div class="small fw-bold text-truncate">{{visitTeam}}</div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      {{!-- Sección de Próximos Partidos --}}
+      {{#if hasGamesNext}}
+      <div
+        class="card shadow-lg border-0 mb-4 bg-dark text-white rounded-4 overflow-hidden animate__animated animate__fadeIn">
+        <div class="card-header bg-gradient-success py-3 border-0">
+          <h5 class="mb-0 fw-bold d-flex align-items-center">
+            <span class="badge bg-light text-success me-2 px-3">PRÓXIMOS</span>
+            Partidos del {{gamesNext.0.dateGame}}
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            {{#each gamesNext}}
+            <div class="list-group-item bg-transparent text-white border-secondary py-4 px-3">
+              <div class="row align-items-center justify-content-between">
+                <div class="col text-center">
+                  <img src="/img/flags/{{localFlag}}" alt="{{localTeam}}" class="mb-2 shadow border border-secondary"
+                    style="width: 50px; height: 32px; object-fit: cover; border-radius: 4px;">
+                  <div class="small fw-bold text-truncate">{{localTeam}}</div>
+                </div>
+                <div class="col-5 text-center px-0">
+                  <div class="badge bg-secondary mb-2 opacity-75">{{hourGame}}</div>
+                  <div class="h5 mb-2 fw-light">vs</div>
+                  <a href="{{urlBet}}" class="btn btn-sm btn-success rounded-pill px-4 shadow-sm fw-bold">Ver
+                    apuesta</a>
+                </div>
+                <div class="col text-center">
+                  <img src="/img/flags/{{visitFlag}}" alt="{{visitTeam}}" class="mb-2 shadow border border-secondary"
+                    style="width: 50px; height: 32px; object-fit: cover; border-radius: 4px;">
+                  <div class="small fw-bold text-truncate">{{visitTeam}}</div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
       {{/if}}
       {{#if completionStatus}}
       {{>completion-status-box}}

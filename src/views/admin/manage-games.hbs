@@ -1,3 +1,9 @@
+<style>
+    .sortable:hover {
+        background-color: #e9ecef !important;
+        color: #0d6efd !important;
+    }
+</style>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-success fw-bold mb-0">Gestionar Juegos</h2>
@@ -12,12 +18,19 @@
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
+                    <thead class="bg-light shadow-sm">
                         <tr>
-                            <th class="ps-4">No.</th>
+                            <th class="ps-4 cursor-pointer sortable text-primary" data-sort="number" style="cursor: pointer; transition: background-color 0.2s;">
+                                No. <i class="fas fa-sort ms-1 opacity-50 small"></i>
+                            </th>
                             <th>Local vs Visitante</th>
                             <th>Fase / Grupo</th>
-                            <th class="text-center">Estado</th>
+                            <th class="cursor-pointer sortable text-primary" data-sort="date" style="cursor: pointer; transition: background-color 0.2s;">
+                                Fecha / Hora <i class="fas fa-sort ms-1 opacity-50 small"></i>
+                            </th>
+                            <th class="text-center cursor-pointer sortable text-primary" data-sort="status" style="cursor: pointer; transition: background-color 0.2s;">
+                                Estado <i class="fas fa-sort ms-1 opacity-50 small"></i>
+                            </th>
                             <th class="text-center">Resultado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -43,6 +56,10 @@
                                 <span class="badge bg-info text-dark opacity-75">F{{phase}}</span>
                                 <span class="badge bg-secondary opacity-75">{{group}}</span>
                             </td>
+                            <td>
+                                <div class="small fw-semibold text-dark">{{dateGame}}</div>
+                                <div class="text-muted small">{{hourGame}}</div>
+                            </td>
                             <td class="text-center">
                                 {{#if played}}
                                 <span class="badge rounded-pill bg-success px-3">Jugado</span>
@@ -66,43 +83,6 @@
                                     Eliminar
                                 </button>
                             </td>
-                        <!-- Modal de confirmación para eliminar juego -->
-                        <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-danger" id="deleteGameModalLabel">Confirmar Eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar este juego? Esta acción no se puede deshacer.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form id="deleteGameForm" method="POST">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // Modal eliminar juego
-                            var deleteGameModal = document.getElementById('deleteGameModal');
-                            var deleteGameForm = document.getElementById('deleteGameForm');
-                            var gameIdToDelete = null;
-
-                            deleteGameModal.addEventListener('show.bs.modal', function (event) {
-                                var button = event.relatedTarget;
-                                gameIdToDelete = button.getAttribute('data-game-id');
-                                // Set form action
-                                deleteGameForm.action = '/admin/games/delete/' + gameIdToDelete;
-                            });
-                        });
-                        </script>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -110,6 +90,96 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de confirmación para eliminar juego -->
+    <div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="deleteGameModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este juego? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <form id="deleteGameForm" method="POST">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Modal eliminar juego
+        var deleteGameModal = document.getElementById('deleteGameModal');
+        var deleteGameForm = document.getElementById('deleteGameForm');
+        var gameIdToDelete = null;
+
+        if (deleteGameModal) {
+            deleteGameModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                gameIdToDelete = button.getAttribute('data-game-id');
+                deleteGameForm.action = '/admin/games/delete/' + gameIdToDelete;
+            });
+        }
+
+        // --- Lógica de ordenamiento ---
+        const table = document.querySelector('table');
+        const headers = table.querySelectorAll('th.sortable');
+        const tbody = table.querySelector('tbody');
+        let currentSort = { column: null, direction: 'asc' };
+
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const sortType = header.dataset.sort;
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                
+                if (currentSort.column === sortType) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.column = sortType;
+                    currentSort.direction = 'asc';
+                }
+
+                headers.forEach(h => {
+                    const icon = h.querySelector('i');
+                    icon.className = 'fas fa-sort ms-1 opacity-50 small';
+                });
+                const currentIcon = header.querySelector('i');
+                currentIcon.className = `fas fa-sort-${currentSort.direction === 'asc' ? 'up' : 'down'} ms-1 opacity-100 text-success small`;
+
+                rows.sort((a, b) => {
+                    let valA, valB;
+                    if (sortType === 'number') {
+                        valA = parseInt(a.cells[0].textContent.trim());
+                        valB = parseInt(b.cells[0].textContent.trim());
+                    } else if (sortType === 'date') {
+                        // Combinamos fecha y hora para la comparación
+                        const dateA = a.cells[3].querySelector('.small').textContent.trim();
+                        const hourA = a.cells[3].querySelector('.text-muted').textContent.trim();
+                        const dateB = b.cells[3].querySelector('.small').textContent.trim();
+                        const hourB = b.cells[3].querySelector('.text-muted').textContent.trim();
+                        valA = dateA + ' ' + hourA;
+                        valB = dateB + ' ' + hourB;
+                    } else if (sortType === 'status') {
+                        valA = a.cells[4].textContent.trim();
+                        valB = b.cells[4].textContent.trim();
+                    }
+
+                    if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+                    if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+                    return 0;
+                });
+
+                rows.forEach(row => tbody.appendChild(row));
+            });
+        });
+    });
+    </script>
 
     <div class="mt-4">
         <a href="/routegames" class="btn btn-outline-secondary">

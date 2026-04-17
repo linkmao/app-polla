@@ -1200,4 +1200,79 @@ const updateTotalPoint = async () => {
   console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
 }
 
-module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, getAllGamersPointOptimizated, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, updateTotalPoint }
+const getGamesByDate = async (date, idUser) => {
+  if (date === "YYYY-MM-DD" || date === "") return []
+  const teams = await Team.find().lean()
+  const betGames = await BetGame.find({ idUser }).lean()
+  const games = await Game.find({ 
+    dateGame: date, 
+    hourGame: { $nin: ["HH:mm", ""] } 
+  }).lean().sort({ hourGame: 1 })
+  const data = []
+  for (const game of games) {
+    const idGame = game._id
+    const gameNumber = game.gameNumber
+    const idLocalTeam = game.localTeam
+    const idVisitTeam = game.visitTeam
+    const gameDescription = game.description
+    let localScore = game.localScore
+    let visitScore = game.visitScore
+    let analogScore = game.analogScore
+    const phase = game.phase
+    const group = game.group
+    const hourGame = game.hourGame
+    
+    let localTeam = "Sin asignar", localFlag = "no-flag.png"
+    let visitTeam = "Sin asignar", visitFlag = "no-flag.png"
+
+    const teamL = teams.find(t => t._id == idLocalTeam)
+    if (teamL) {
+      localTeam = teamL.name
+      localFlag = teamL.flag
+    }
+    const teamV = teams.find(t => t._id == idVisitTeam)
+    if (teamV) {
+      visitTeam = teamV.name
+      visitFlag = teamV.flag
+    }
+
+    { localScore == -1 ? localScore = "-" : localScore }
+    { visitScore == -1 ? visitScore = "-" : visitScore }
+    { analogScore == "-1" ? analogScore = "-" : analogScore }
+    
+    // Calcular URL de apuesta
+    let urlBet = "#"
+    if (phase == config.phaseInitial) urlBet = `/groups/${group}`
+    else if (phase == config.phaseSixteenth) urlBet = `/sixteenth`
+    else if (phase == config.phaseEighth) urlBet = `/eighth`
+    else if (phase == config.phaseFourth) urlBet = `/fourth`
+    else if (phase == config.phaseSemiFinals) urlBet = `/semi`
+    else if (phase == config.phaseFinal) urlBet = `/finals`
+
+    // Añadir ancla para scroll a la apuesta
+    const bet = betGames.find(b => String(b.idGame) == String(idGame))
+    if (bet) {
+      // Nota: Para fases de eliminación directa, el partial usa idBet1 o idBet2. 
+      // Por simplicidad, si es ronda inicial usamos _id. 
+      // Si es fase, necesitamos saber si es el juego 1 o 2 del par en el partial.
+      // Sin embargo, el partial bet-games (grupos) usa idBet directamente.
+      urlBet += `#${bet._id}`
+    }
+
+    data.push({ idGame, gameNumber, gameDescription, localTeam, localFlag, localScore, analogScore, visitScore, visitFlag, visitTeam, dateGame: date, hourGame, urlBet })
+  }
+  return data
+}
+
+const getNextGames = async (today, idUser) => {
+  const nextGame = await Game.findOne({ 
+    dateGame: { $gt: today, $nin: ["YYYY-MM-DD", ""] },
+    hourGame: { $nin: ["HH:mm", ""] }
+  }).sort({ dateGame: 1 }).lean();
+  if (nextGame) {
+    return await getGamesByDate(nextGame.dateGame, idUser);
+  }
+  return [];
+}
+
+module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, getAllGamersPointOptimizated, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, updateTotalPoint, getGamesByDate, getNextGames }

@@ -67,6 +67,19 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="dateGame" class="form-label">Fecha del Juego</label>
+                        <input type="date" name="dateGame" id="dateGame" class="form-control"
+                            value="{{game.dateGame}}" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="hourGame" class="form-label">Hora del Juego</label>
+                        <input type="time" name="hourGame" id="hourGame" class="form-control"
+                            value="{{game.hourGame}}" required>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="group" class="form-label">Grupo del Partido</label>
                     <input type="text" name="group" id="group" class="form-control"

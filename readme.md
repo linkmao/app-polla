@@ -345,14 +345,15 @@ Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
 
 ## TODO Prioritarios 
 Atender antes de desplegar
+- No está eliminado los Game (lo intente con el ultimo) como no lo habia intentado entonces esta funcionalidad no se habia verificado. HACER ESTO DE ULTIMAS PARA NO DAÑAR LA ESTRUCTURA DE JUEGOS Y APUESTAS Y SEGUIR HACIENDO OTRAS PRUEBAS
 - Arreglar el bug que no muestra el conteo regresivo del inicio del mundial en el login.
 
 
 
+
 ## TODO mediano plazo
+
 - Implementar que al eliminar un usuario se eliminen tambien todos los datos asocioados a sus apuestas por juegos y clasificaciones
-- Modificar el modelo game para incluir dateGame, hourGame y placeGame de tal manera que estos parametros puedan ser usados por ejemplo en la busqueda de los juegos de una fecha determinada.
-- Implementar en la pantalla principal los juegos del dia y los próximos juegos
 - En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description.
 - Hacer manual de usuario apostadores dentro de la app
 - En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)
@@ -363,7 +364,6 @@ Atender antes de desplegar
 - sistema de notificación push cuando un juego o clasificación se ha cargado
 - Permitir ordenar el consolidado de puntajes de mayor a menor o viceversa.
 - Notificacion de los partidos del dia, o que estos se vean en la pantalla de inicio justo despues del lógin
-- implementar fecha y hora correctamente en el modelo game y no como texto (lo hice dada la premura)
 - Sistema de envio automatico por correo electrónico o whatsappp la key que permite el registro de un usuario nuevo
 - Automatización del registro de los resultados conectando la app con una api que entregue los resultados en tiempo real
 -   En el consolidado de puntajes en total tener el puntaje alcanzado/total posible (incluso esto puede luego traducirse en un % de rendimiento)
@@ -378,6 +378,9 @@ este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado.
 - 13.04.2026: Cronometro de inicio de torneo
 - Visualización del puntaje de CADA UNO de los juego syclasificaciones por usuario m y que los demás usuarios puedan ver el de cualquier usuario. (Verificar).
 - 15.04.2026: Implementar el tema oscuro
+- 16:04.2026 poner un ordenador de datos en los game de la vista del admin (organizar por fecha, por # de partido, por estado jugado o no)
+- 16.04.2026: Modificar el modelo game para incluir dateGame, hourGame y placeGame de tal manera que estos parametros puedan ser usados por ejemplo en la busqueda de los juegos de una fecha determinada.
+- 16.04.2026: Implementar en la pantalla principal los juegos del dia y los próximos juegos
 
 # Apuntes técnicos para este y otros proyectos
 ## Fase de despliegue
