@@ -252,9 +252,10 @@
         }
     }
 </style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        { { #each dataFlags } }
+        {{#each dataFlags}}
         const startDateStr = "{{initDateTournament}}";
         const viewFlag = "{{viewInitDateTournament}}";
 
@@ -265,22 +266,30 @@
                 const diff = targetDate - now;
                 const timerEl = document.getElementById('tournament-timer');
                 if (!timerEl) return;
+                
                 if (diff < 0) {
                     timerEl.innerHTML = '<span class="badge bg-success p-3 fs-5">¡El mundial ha comenzado!</span>';
                     return;
                 }
+                
                 const d = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((diff % (1000 * 60)) / 1000);
-                if (document.getElementById('days-t')) document.getElementById('days-t').innerText = String(d).padStart(2, '0');
-                if (document.getElementById('hours-t')) document.getElementById('hours-t').innerText = String(h).padStart(2, '0');
-                if (document.getElementById('minutes-t')) document.getElementById('minutes-t').innerText = String(m).padStart(2, '0');
-                if (document.getElementById('seconds-t')) document.getElementById('seconds-t').innerText = String(s).padStart(2, '0');
+                
+                const daysEl = document.getElementById('days-t');
+                const hoursEl = document.getElementById('hours-t');
+                const minsEl = document.getElementById('minutes-t');
+                const secsEl = document.getElementById('seconds-t');
+                
+                if (daysEl) daysEl.innerText = String(d).padStart(2, '0');
+                if (hoursEl) hoursEl.innerText = String(h).padStart(2, '0');
+                if (minsEl) minsEl.innerText = String(m).padStart(2, '0');
+                if (secsEl) secsEl.innerText = String(s).padStart(2, '0');
             };
             setInterval(updateTimer, 1000);
             updateTimer();
         }
-        { {/each } }
+        {{/each}}
     });
 </script>

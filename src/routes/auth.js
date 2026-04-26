@@ -13,7 +13,7 @@ router.post('/signup/admin', auth.signUpAdmin)
 // No se como poner a funcionar los mensajes flash con el uso de passport
 router.post('/signin', passport.authenticate('local', {
   successRedirect: '../../routegames',
-  failureRedirect: '../../',
+  failureRedirect: '/login',
   failureFlash: true
 }), (req, res) => { req.flash('mensajeError', 'Usuario o contraseña no valido') })
 

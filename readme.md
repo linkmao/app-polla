@@ -346,16 +346,11 @@ Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
 ## TODO Prioritarios 
 Atender antes de desplegar
 - No está eliminado los Game (lo intente con el ultimo) como no lo habia intentado entonces esta funcionalidad no se habia verificado. HACER ESTO DE ULTIMAS PARA NO DAÑAR LA ESTRUCTURA DE JUEGOS Y APUESTAS Y SEGUIR HACIENDO OTRAS PRUEBAS
-- Arreglar el bug que no muestra el conteo regresivo del inicio del mundial en el login.
-
-
-
 
 ## TODO mediano plazo
 
 - Implementar que al eliminar un usuario se eliminen tambien todos los datos asocioados a sus apuestas por juegos y clasificaciones
 - En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description.
-- Hacer manual de usuario apostadores dentro de la app
 - En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)
 - Posibilidad de foto o avatar para cada usuario.
 - Revisar banderas (NO SE VEN EN LA VISTA DE CLASIFICACIONES DETALLADO EN EL CELULAR) de Qtar, EEUU, Gales, Francia, Costa rica, Belgica, Siuza, Ghana
@@ -381,6 +376,7 @@ este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado.
 - 16:04.2026 poner un ordenador de datos en los game de la vista del admin (organizar por fecha, por # de partido, por estado jugado o no)
 - 16.04.2026: Modificar el modelo game para incluir dateGame, hourGame y placeGame de tal manera que estos parametros puedan ser usados por ejemplo en la busqueda de los juegos de una fecha determinada.
 - 16.04.2026: Implementar en la pantalla principal los juegos del dia y los próximos juegos
+- 27.04.2026: Se implementa un landigpage con información de las reglas de juego
 
 # Apuntes técnicos para este y otros proyectos
 ## Fase de despliegue

@@ -1,7 +1,7 @@
 {
   "secretword": "Palabra que solo yo conozco",
   "tokenDuration": 5184000,
-  "pointByScore": 2,
+  "pointByScore": 3,
   "pointByAnalogScore": 2,
   "pointByGroupClassification": 5,
   "pointByTeamClassificated": 3,

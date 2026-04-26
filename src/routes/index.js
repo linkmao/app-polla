@@ -8,6 +8,15 @@ const adminConfig = require('../controllers/admin-config')
 // Ejemplo para el envio de datos (borrar cuando sea necesario)
 // router.get('/',(req,res)=> res.render('index',{message:"Radiohead Home", name:"Maolink"}) )
 router.get('/', (req, res) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    return res.redirect('/routegames')
+  }
+  const viewInitDateTournament = config.viewInitDateTournament
+  const initDateTournament = config.initDateTournament
+  res.render('landing', { layout: 'main', viewInitDateTournament, initDateTournament })
+})
+
+router.get('/login', (req, res) => {
   const enableRegisterButton = config.renderButtonRegister
   const renderGuestInfo = config.renderGuestInfo
   const viewInitDateTournament = config.viewInitDateTournament
@@ -15,6 +24,15 @@ router.get('/', (req, res) => {
   const dataFlags = [{ enableRegisterButton, renderGuestInfo, viewInitDateTournament, initDateTournament }]
   res.render('index', { dataFlags })
 })
+
+router.get('/rules-groups', (req, res) => {
+  res.render('rules-groups')
+})
+
+router.get('/rules-phases', (req, res) => {
+  res.render('rules-phases')
+})
+
 router.get('/about', (req, res) => res.render('about'))
 
 router.get('/passrestore', (req, res) => res.render('user/pass-forget'))
