@@ -1,36 +1,113 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col" style="text-align: center">Pos</th>
-      <th scope="col" style="text-align: center">Jugador</th>
-      <th scope="col" colspan="2" style="text-align: center">Grupos</th>
-      <th scope="col" colspan="2" style="text-align: center">Fases</th>
-      <th scope="col" style="text-align: center">TOTAL </th>
-    </tr>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col" style="text-align: center" class="text-success">Juegos</th>
-      <th scope="col" style="text-align: center" class="text-success">Clasificación</th>
-      <th scope="col" style="text-align: center" class="text-success">Juegos</th>
-      <th scope="col" style="text-align: center" class="text-success">Clasificación final</th>
+<div class="table-responsive rounded-3 shadow-sm border mt-3">
+    <table class="table table-hover align-middle mb-0" id="gamersTable">
+        <thead class="table-dark">
+            <tr class="text-white border-0">
+                <th scope="col" class="text-center py-3 sortable" data-sort="pos" style="cursor: pointer">
+                    Pos <i class="fas fa-sort ms-1 opacity-50"></i>
+                </th>
+                <th scope="col" class="text-center py-3 sortable" data-sort="name" style="cursor: pointer">
+                    Jugador <i class="fas fa-sort ms-1 opacity-50"></i>
+                </th>
+                <th scope="col" colspan="2" class="text-center py-3 border-start border-white border-opacity-10">Grupos</th>
+                <th scope="col" colspan="2" class="text-center py-3 border-start border-white border-opacity-10">Fases</th>
+                <th scope="col" class="text-center py-3 border-start border-white border-opacity-10 sortable" data-sort="total" style="cursor: pointer">
+                    TOTAL <i class="fas fa-sort ms-1 opacity-50"></i>
+                </th>
+            </tr>
+            <tr class="table-secondary text-uppercase x-small-text fw-bold border-bottom">
+                <th></th>
+                <th></th>
+                <th class="text-center text-success border-start">Juegos</th>
+                <th class="text-center text-success">Clasif.</th>
+                <th class="text-center text-success border-start">Juegos</th>
+                <th class="text-center text-success">Clasif. Final</th>
+                <th class="border-start"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr class="gamer-row" data-pos="{{pos}}" data-name="{{name}}" data-total="{{totalJugador}}">
+                <td class="text-center">
+                    {{#if (eq pos 1)}}
+                        <span class="badge bg-warning text-dark rounded-circle p-2" title="Primer Puesto">1</span>
+                    {{else if (eq pos 2)}}
+                        <span class="badge bg-secondary text-white rounded-circle p-2" title="Segundo Puesto">2</span>
+                    {{else if (eq pos 3)}}
+                        <span class="badge border border-warning text-warning rounded-circle p-2" title="Tercer Puesto">3</span>
+                    {{else}}
+                        <span class="fw-bold text-muted">{{pos}}</span>
+                    {{/if}}
+                </td>
+                <td class="text-center fw-bold text-primary">{{name}}</td>
+                <td class="text-center text-secondary border-start small">{{puntajePorJuegosGrupos}}</td>
+                <td class="text-center text-secondary small">{{puntajePorClasificacionGrupos}}</td>
+                <td class="text-center text-secondary border-start small">{{puntajePorJuegosFases}}</td>
+                <td class="text-center text-secondary small">{{puntajePorClasificacionFinal}}</td>
+                <td class="text-center border-start">
+                    <span class="h5 mb-0 fw-black text-primary">{{totalJugador}}</span>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
 
-    </tr>
-  </thead>
-  {{#each data}}
-  <tbody>
-    <tr>
-      <td></td>
-      <td scope="col" style="text-align: center" class="text-primary">{{name}}</td>
-      <td scope="col" style="text-align: center" class="text-theme-primary opacity-75">{{puntajePorJuegosGrupos}}</td>
-      <td scope="col" style="text-align: center" class="text-theme-primary opacity-75">{{puntajePorClasificacionGrupos}}</td>
-      <td scope="col" style="text-align: center">{{puntajePorJuegosFases}}</td>
-      <td scope="col" style="text-align: center">{{puntajePorClasificacionFinal}}</td>
-      <td scope="col" style="text-align: center">
-        <h3 class="text-theme-primary fw-bold">{{totalJugador}}</h3>
-      </td>
-    </tr>
-  </tbody>
-  {{/each}}
+<style>
+    .x-small-text { font-size: 0.65rem; }
+    .table-hover tbody tr:hover { background-color: rgba(var(--bs-primary-rgb), 0.05); }
+    .sortable:hover { background-color: rgba(255,255,255,0.1); }
+    .fw-black { font-weight: 900; }
+</style>
 
-</table>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const table = document.getElementById('gamersTable');
+    const tbody = table.querySelector('tbody');
+    const headers = table.querySelectorAll('.sortable');
+    let currentSort = { column: 'pos', direction: 'asc' };
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = header.getAttribute('data-sort');
+            const direction = (currentSort.column === column && currentSort.direction === 'asc') ? 'desc' : 'asc';
+            
+            sortTable(column, direction);
+            
+            // Actualizar iconos
+            headers.forEach(h => {
+                const icon = h.querySelector('i');
+                icon.className = 'fas fa-sort ms-1 opacity-50';
+            });
+            const activeIcon = header.querySelector('i');
+            activeIcon.className = `fas fa-sort-${direction === 'asc' ? 'up' : 'down'} ms-1 opacity-100`;
+            
+            currentSort = { column, direction };
+        });
+    });
+
+    function sortTable(column, direction) {
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        
+        const sortedRows = rows.sort((a, b) => {
+            let valA = a.getAttribute(`data-${column}`);
+            let valB = b.getAttribute(`data-${column}`);
+            
+            // Convertir a número si es posible
+            if (!isNaN(valA) && !isNaN(valB)) {
+                valA = parseFloat(valA);
+                valB = parseFloat(valB);
+            } else {
+                valA = valA.toLowerCase();
+                valB = valB.toLowerCase();
+            }
+            
+            if (valA < valB) return direction === 'asc' ? -1 : 1;
+            if (valA > valB) return direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+        
+        tbody.innerHTML = '';
+        sortedRows.forEach(row => tbody.appendChild(row));
+    }
+});
+</script>

@@ -990,6 +990,11 @@ const getAllGamersPoint = async () => {
     const totalJugador = puntajePorJuegosGrupos + puntajePorJuegosFases + puntajePorClasificacionGrupos + puntajePorClasificacionFinal
     data.push({ name, puntajePorJuegosGrupos, puntajePorJuegosFases, puntajePorClasificacionGrupos, puntajePorClasificacionFinal, totalJugador })
   }
+
+  // Ordenar por total de mayor a menor y asignar posición
+  data.sort((a, b) => b.totalJugador - a.totalJugador)
+  data.forEach((item, index) => { item.pos = index + 1 })
+
   return data
 }
 
@@ -1006,6 +1011,11 @@ const getAllGamersPointOptimizated = async () => {
     const totalJugador = user.totalPoint[4]
     data.push({ name, puntajePorJuegosGrupos, puntajePorClasificacionGrupos, puntajePorJuegosFases, puntajePorClasificacionFinal, totalJugador })
   }
+
+  // Ordenar por total de mayor a menor y asignar posición
+  data.sort((a, b) => b.totalJugador - a.totalJugador)
+  data.forEach((item, index) => { item.pos = index + 1 })
+
   return data
 }
 

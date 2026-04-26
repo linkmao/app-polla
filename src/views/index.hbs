@@ -8,35 +8,11 @@
                 <div class="hero-content">
                     <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Polla
                         Mundialista 2026</span>
-                    <h1 class="display-3 fw-bold text-white mb-3">Siente la pasión del fútbol</h1>
+                    <h1 class="display-3 fw-bold text-white mb-3">México - USA - Canadá</h1>
                     <p class="lead text-white-50 mb-4 opacity-75">Demuestra tus conocimientos, realiza tus apuestas y
-                        compite con amigos para llegar a la cima del ranking.</p>
+                        compite para llegar a la cima del ranking.</p>
 
-                    {{#if viewInitDateTournament}}
-                    <div class="tournament-countdown mb-4">
-                        <p class="text-white-50 small text-uppercase mb-2 tracking-wider">El mundial comienza en:</p>
-                        <div id="tournament-timer" class="d-flex gap-3">
-                            <div class="timer-box">
-                                <span id="days-t" class="h2 fw-bold text-white d-block mb-0">00</span>
-                                <small class="text-white-50 small">Días</small>
-                            </div>
-                            <div class="timer-box">
-                                <span id="hours-t" class="h2 fw-bold text-white d-block mb-0">00</span>
-                                <small class="text-white-50 small">Horas</small>
-                            </div>
-                            <div class="timer-box">
-                                <span id="minutes-t" class="h2 fw-bold text-white d-block mb-0">00</span>
-                                <small class="text-white-50 small">Minutos</small>
-                            </div>
-                            <div class="timer-box">
-                                <span id="seconds-t" class="h2 fw-bold text-warning d-block mb-0">00</span>
-                                <small class="text-white-50 small">Segundos</small>
-                            </div>
-                        </div>
-                    </div>
-                    {{/if}}
-
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-3 mt-4">
                         <div class="stat-item text-white">
                             <span class="d-block h3 fw-bold mb-0">48</span>
                             <span class="text-white-50 small">Equipos</span>
@@ -133,7 +109,8 @@
                 </form>
 
                 <div class="text-center mt-5 pt-4 border-top">
-                    <p class="text-muted small">© 2026 Polla Mundialista. Todos los derechos reservados.</p>
+                    <p class="text-muted small">© 2026 Polla Mundialista. Todos los derechos reservados. maolink
+                        software.</p>
                 </div>
             </div>
         </div>
@@ -165,16 +142,6 @@
 
     .hero-section {
         min-height: 600px;
-    }
-
-    .timer-box {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        padding: 1rem;
-        border-radius: 12px;
-        min-width: 90px;
-        text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero-overlay {
@@ -252,44 +219,3 @@
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        {{#each dataFlags}}
-        const startDateStr = "{{initDateTournament}}";
-        const viewFlag = "{{viewInitDateTournament}}";
-
-        if (viewFlag === "true" || viewFlag === true) {
-            const targetDate = new Date(startDateStr).getTime();
-            const updateTimer = () => {
-                const now = new Date().getTime();
-                const diff = targetDate - now;
-                const timerEl = document.getElementById('tournament-timer');
-                if (!timerEl) return;
-                
-                if (diff < 0) {
-                    timerEl.innerHTML = '<span class="badge bg-success p-3 fs-5">¡El mundial ha comenzado!</span>';
-                    return;
-                }
-                
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                const daysEl = document.getElementById('days-t');
-                const hoursEl = document.getElementById('hours-t');
-                const minsEl = document.getElementById('minutes-t');
-                const secsEl = document.getElementById('seconds-t');
-                
-                if (daysEl) daysEl.innerText = String(d).padStart(2, '0');
-                if (hoursEl) hoursEl.innerText = String(h).padStart(2, '0');
-                if (minsEl) minsEl.innerText = String(m).padStart(2, '0');
-                if (secsEl) secsEl.innerText = String(s).padStart(2, '0');
-            };
-            setInterval(updateTimer, 1000);
-            updateTimer();
-        }
-        {{/each}}
-    });
-</script>
