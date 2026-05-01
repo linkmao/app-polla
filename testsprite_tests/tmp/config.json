@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "loginUser": "mariangel@gmail.com",
+  "loginPassword": "mariangel",
+  "executionArgs": {
+    "projectName": "app-polla",
+    "projectPath": "d:\\AP\\app-polla",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-6vxw0iaKN4tP1mEtxgiYPw-CjuXY1G1fdsxdoBFFtFakYfOAcR4UogDZyosiOnRiuzEmLIPLD0CcDyZpc5x53xId-DN6Gz7f-erpLx9MRpb0v57OTJjOKFvRQlZ-2_XCK0I"
+    }
+  },
+  "serverPort": 54744
+}

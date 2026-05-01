@@ -1,0 +1,66 @@
+[
+	{
+		"id": "login-user",
+		"description": "El usuario puede iniciar sesión con credenciales válidas.",
+		"steps": [
+			{"action": "navigate", "url": "/"},
+			{"action": "type", "selector": "input[name='email']", "value": "guest@guest.com"},
+			{"action": "type", "selector": "input[name='password']", "value": "guest"},
+			{"action": "click", "selector": "button[type='submit']"},
+			{"action": "assert", "selector": "h1", "text": "Panel de Juego"}
+		]
+	},
+	{
+		"id": "add-team",
+		"description": "El usuario puede agregar un nuevo equipo desde el panel de administración.",
+		"steps": [
+			{"action": "navigate", "url": "/admin/teams/add"},
+			{"action": "type", "selector": "input[name='name']", "value": "Equipo TestSprite"},
+			{"action": "type", "selector": "input[name='group']", "value": "A"},
+			{"action": "type", "selector": "input[name='tag']", "value": "TS1"},
+			{"action": "upload", "selector": "input[name='flag']", "filePath": "testsprite_tests/tmp/test-flag.png"},
+			{"action": "click", "selector": "button[type='submit']"},
+			{"action": "assert", "selector": "h2", "text": "Gestionar Equipos"}
+		]
+	},
+	{
+		"id": "add-game",
+		"description": "El usuario puede agregar un nuevo juego desde el panel de administración.",
+		"steps": [
+			{"action": "navigate", "url": "/admin/games/add"},
+			{"action": "type", "selector": "input[name='gameNumber']", "value": "999"},
+			{"action": "select", "selector": "select[name='phase']", "value": "1"},
+			{"action": "select", "selector": "select[name='localTeam']", "value": "GENERIC LOCAL TEAM"},
+			{"action": "select", "selector": "select[name='visitTeam']", "value": "GENERIC VISIT TEAM"},
+			{"action": "type", "selector": "input[name='dateGame']", "value": "2026-06-01"},
+			{"action": "type", "selector": "input[name='hourGame']", "value": "12:00"},
+			{"action": "click", "selector": "button[type='submit']"},
+			{"action": "assert", "selector": "h2", "text": "Gestionar Juegos"}
+		]
+	},
+	{
+		"id": "add-classification",
+		"description": "El usuario puede agregar una nueva clasificación desde el panel de administración.",
+		"steps": [
+			{"action": "navigate", "url": "/admin/classifications/add"},
+			{"action": "select", "selector": "select[name='group']", "value": "A"},
+			{"action": "select", "selector": "select[name='firstTeam']", "value": "Generic Team"},
+			{"action": "select", "selector": "select[name='secondTeam']", "value": "Generic Team"},
+			{"action": "select", "selector": "select[name='thirdTeam']", "value": "Generic Team"},
+			{"action": "select", "selector": "select[name='fourthTeam']", "value": "Generic Team"},
+			{"action": "click", "selector": "button[type='submit']"},
+			{"action": "assert", "selector": "h2", "text": "Gestionar Clasificaciones"}
+		]
+	},
+	{
+		"id": "manage-keys",
+		"description": "El usuario puede crear una nueva llave de registro desde el panel de administración.",
+		"steps": [
+			{"action": "navigate", "url": "/admin/keys"},
+			{"action": "type", "selector": "input[name='keyNumber']", "value": "12345"},
+			{"action": "type", "selector": "input[name='keyCode']", "value": "TS-KEY-001"},
+			{"action": "click", "selector": "button[type='submit']"},
+			{"action": "assert", "selector": "h2", "text": "Gestionar Llaves de Registro"}
+		]
+	}
+]

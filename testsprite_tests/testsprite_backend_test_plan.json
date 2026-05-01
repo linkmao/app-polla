@@ -1,0 +1,42 @@
+[
+  {
+    "id": "TC-001",
+    "requirement": "Registro y autenticación de usuarios",
+    "description": "El usuario puede registrarse con datos válidos.",
+    "endpoint": "/register",
+    "method": "POST",
+    "expected_result": "Usuario registrado exitosamente."
+  },
+  {
+    "id": "TC-002",
+    "requirement": "Registro y autenticación de usuarios",
+    "description": "El usuario puede iniciar sesión con credenciales válidas.",
+    "endpoint": "/login",
+    "method": "POST",
+    "expected_result": "Inicio de sesión exitoso."
+  },
+  {
+    "id": "TC-003",
+    "requirement": "Gestión de apuestas",
+    "description": "El usuario puede realizar una apuesta en un juego.",
+    "endpoint": "/bet-games",
+    "method": "POST",
+    "expected_result": "Apuesta registrada exitosamente."
+  },
+  {
+    "id": "TC-004",
+    "requirement": "Panel de administración",
+    "description": "El administrador puede crear un nuevo equipo.",
+    "endpoint": "/teams",
+    "method": "POST",
+    "expected_result": "Equipo creado exitosamente."
+  },
+  {
+    "id": "TC-005",
+    "requirement": "Visualización de resultados y clasificaciones",
+    "description": "El usuario puede consultar la clasificación general.",
+    "endpoint": "/classifications",
+    "method": "GET",
+    "expected_result": "Clasificación mostrada correctamente."
+  }
+]

@@ -1,0 +1,139 @@
+version: "2"
+type: backend
+tech_stack:
+  - Node.js
+  - Express
+  - MongoDB
+  - Mongoose
+  - Passport.js
+  - Handlebars
+  - SCSS
+  - Bootstrap
+routes:
+  - path: /login
+    file: src/routes/auth.js
+    auth_required: false
+    description: Página de inicio de sesión de usuario
+  - path: /register
+    file: src/routes/auth.js
+    auth_required: false
+    description: Registro de usuario
+  - path: /logout
+    file: src/routes/auth.js
+    auth_required: true
+    description: Cierre de sesión
+  - path: /admin
+    file: src/routes/admin-panel.js
+    auth_required: true
+    description: Panel de administración
+  - path: /games
+    file: src/routes/games.js
+    auth_required: true
+    description: Consulta de juegos
+  - path: /teams
+    file: src/routes/teams.js
+    auth_required: true
+    description: Consulta de equipos
+  - path: /users
+    file: src/routes/users.js
+    auth_required: true
+    description: Gestión de usuarios
+  - path: /bet-games
+    file: src/routes/bet-games.js
+    auth_required: true
+    description: Apuestas por juego
+  - path: /bet-classifications
+    file: src/routes/bet-classifications.js
+    auth_required: true
+    description: Apuestas por clasificación
+  - path: /classifications
+    file: src/routes/classifications.js
+    auth_required: true
+    description: Clasificaciones
+features:
+  - name: Registro y autenticación de usuarios
+    description: Permite a los usuarios registrarse, iniciar sesión y cerrar sesión.
+    files:
+      - src/routes/auth.js
+      - src/models/User.js
+      - src/config/passport.js
+    entry_route: /login
+    user_interactions:
+      - Completar formulario de registro
+      - Completar formulario de inicio de sesión
+      - Cerrar sesión
+    api_calls:
+      - method: POST
+        endpoint: /login
+      - method: POST
+        endpoint: /register
+      - method: GET
+        endpoint: /logout
+    auth_required: false
+  - name: Gestión de apuestas
+    description: Realización y consulta de apuestas por juego y clasificación.
+    files:
+      - src/routes/bet-games.js
+      - src/routes/bet-classifications.js
+      - src/models/Bet-game.js
+      - src/models/Bet-classification.js
+    entry_route: /bet-games
+    user_interactions:
+      - Seleccionar juego o clasificación
+      - Ingresar apuesta
+      - Consultar apuestas realizadas
+    api_calls:
+      - method: POST
+        endpoint: /bet-games
+      - method: POST
+        endpoint: /bet-classifications
+      - method: GET
+        endpoint: /bet-games
+      - method: GET
+        endpoint: /bet-classifications
+    auth_required: true
+  - name: Panel de administración
+    description: Gestión de usuarios, equipos, juegos, llaves y configuraciones.
+    files:
+      - src/routes/admin-panel.js
+      - src/routes/teams.js
+      - src/routes/games.js
+      - src/routes/users.js
+      - src/models/Team.js
+      - src/models/Game.js
+      - src/models/User.js
+    entry_route: /admin
+    user_interactions:
+      - Acceder al panel de administración
+      - Crear, editar y eliminar usuarios, equipos y juegos
+      - Configurar reglas y parámetros
+    api_calls:
+      - method: GET
+        endpoint: /admin
+      - method: POST
+        endpoint: /teams
+      - method: POST
+        endpoint: /games
+      - method: POST
+        endpoint: /users
+    auth_required: true
+  - name: Visualización de resultados y clasificaciones
+    description: Consulta de resultados, puntos y clasificaciones de usuarios.
+    files:
+      - src/routes/classifications.js
+      - src/models/Classification.js
+    entry_route: /classifications
+    user_interactions:
+      - Consultar clasificaciones
+      - Ver puntos obtenidos
+    api_calls:
+      - method: GET
+        endpoint: /classifications
+    auth_required: true
+known_limitations:
+  - issue: No hay integración con servicios externos de resultados deportivos
+    location: src/routes/games.js
+    impact: Los resultados deben ser ingresados manualmente por el administrador
+  - issue: No hay pruebas automatizadas implementadas
+    location: src/
+    impact: El testing es manual actualmente
