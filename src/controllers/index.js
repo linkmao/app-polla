@@ -692,28 +692,28 @@ const getClassification = async (group) => {
   const idThirdTeam = classification[0].thirdTeam
   const idFourthTeam = classification[0].fourthTeam
   let firstTeam = null, secondTeam = null, thirdTeam = null, fourthTeam = null, firstFlag = null, secondFlag = null, thirdFlag = null, fourthFlag = null
-  if (idFirstTeam != 'NO-CLASSIFICATION') {
+    if (idFirstTeam != 'Generic Team') {
     firstTeam = team.find(t => t._id == idFirstTeam).name
     firstFlag = team.find(t => t._id == idFirstTeam).flag
   } else {
     firstTeam = msgDefault
     firstFlag = 'no-flag.png'
   }
-  if (idSecondTeam != 'NO-CLASSIFICATION') {
+  if (idSecondTeam != 'Generic Team') {
     secondTeam = team.find(t => t._id == idSecondTeam).name
     secondFlag = team.find(t => t._id == idSecondTeam).flag
   } else {
     secondTeam = msgDefault
     secondFlag = 'no-flag.png'
   }
-  if (idThirdTeam != 'NO-CLASSIFICATION') {
+  if (idThirdTeam != 'Generic Team') {
     thirdTeam = team.find(t => t._id == idThirdTeam).name
     thirdFlag = team.find(t => t._id == idThirdTeam).flag
   } else {
     thirdTeam = msgDefault
     thirdFlag = 'no-flag.png'
   }
-  if (idFourthTeam != 'NO-CLASSIFICATION') {
+  if (idFourthTeam != 'Generic Team') {
     fourthTeam = team.find(t => t._id == idFourthTeam).name
     fourthFlag = team.find(t => t._id == idFourthTeam).flag
   } else {
@@ -1285,4 +1285,4 @@ const getNextGames = async (today, idUser) => {
   return [];
 }
 
-module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, getAllGamersPointOptimizated, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, updateTotalPoint, getGamesByDate, getNextGames }
+module.exports = { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, createGameThirdhAndFourth, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, getAllGamersPointOptimizated, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, verifyPhaseCompleted, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, updateTotalPoint, getGamesByDate, getNextGames }
