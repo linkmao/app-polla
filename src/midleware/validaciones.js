@@ -17,7 +17,7 @@ const verifyToken = async (req, res, next) => {
 
 const isAdminToken = async (req, res, next) => {
     const user = await User.findById(req.userId)
-    console.log(user.role)
+    // console.log(user.role)
     if (user.role != "admin")
         return res.status(403).json({ message: 'No tienes privilegios de administarador para la operacion' })
     next()

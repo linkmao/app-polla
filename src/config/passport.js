@@ -8,20 +8,20 @@ const User = require('../models/User')  // se trae la clase user para su consult
 
 passport.use(new LocalStrategy({usernameField:'email'}, 
 async (email, password, done) =>{
-  console.log("PROBANDO")
-  console.log(email)
+  // console.log("PROBANDO")
+  // console.log(email)
   const user= await User.findOne({email:email})  // Se hace la consulta para buscar si por lo menos el email existe
   if (!user) {
-    console.log("correo no encontrado")
+    // console.log("correo no encontrado")
     
     return done(null, false,{message:"Correo no encontrado"})}
   else {
       const match = await user.comparePass(password) // Uso del metodo comparePass de la instancia user
       if (match) {
-        console.log("logueado, la info del user corresponde a ", user)
+        // console.log("logueado, la info del user corresponde a ", user)
         return done(null,user)} // si la contraseña coincide, se devuleve el usuario
       else {
-        console.log("contraseña no coinidente")
+        // console.log("contraseña no coinidente")
         return done(null, false,{message:"Contraseña no coincidente"})} // Si no se devuelve false
   }
 }))

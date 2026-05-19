@@ -23,7 +23,7 @@ const getBetGameByIdUser = async (req, res) => {
 }
 
 const addMeBetGame = async (req, res) => {
-  console.log(req.body.phase)
+  // console.log(req.body.phase)
   if (req.body.phase == config.phaseInitial || req.body.phase == config.phaseEighth) {
     const { idGame, localScore, visitScore, analogScore, phase } = req.body
     const newMeBet = new BetGame({ idUser: req.user.id, idGame, localScore, visitScore, analogScore })
@@ -81,7 +81,7 @@ const updateMeBetGameAndNextGame = async (req, res) => {
 }
 
 const updateMeBetGameGroup = async (req, res) => {
-  console.log("Actualizando grupo")
+  // console.log("Actualizando grupo")
   const gameMeBetUpdate = await BetGame.findOneAndUpdate({ idUser: req.user.id, _id: req.params.id }, req.body, { new: true })
   const group = req.params.g
   res.redirect(`/groups/${group}#${req.params.id}`)

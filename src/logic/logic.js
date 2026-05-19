@@ -15,8 +15,8 @@ const calculatePointByGame = async (id) => {
   games = await game.find({ _id: id })
   gamePhantom = await game.find({ gameNumber: config.gamePhantom })
   idGamePhantom = gamePhantom[0]._id.toString()
-  console.log("juego fantasma: ", gamePhantom)
-  console.log("id juego fantasma: ", idGamePhantom)
+  // console.log("juego fantasma: ", gamePhantom)
+  // console.log("id juego fantasma: ", idGamePhantom)
   betGames = await betGame.find({ idGame: id })
 
   betGames.forEach(async e => {
@@ -44,11 +44,11 @@ const calculatePointByGame = async (id) => {
     }
 
     await betGame.findOneAndUpdate({ _id: e._id }, { earnedScore })
-    console.log('puntos del juego ' + e.idGame + ' en la apuesta ' + e._id + ' es: ')
-    console.log('Puntos por resultado: ', earnedScore[config.xPointByScore])
-    console.log('Puntos por analog: ', earnedScore[config.xPointByAnalogScore])
-    console.log('Puntos por local coincidente: ', earnedScore[config.xPointByLocalEqual])
-    console.log('Puntos por visitante coincidente: ', earnedScore[config.xPointByVisitEqual])
+    // console.log('puntos del juego ' + e.idGame + ' en la apuesta ' + e._id + ' es: ')
+    // console.log('Puntos por resultado: ', earnedScore[config.xPointByScore])
+    // console.log('Puntos por analog: ', earnedScore[config.xPointByAnalogScore])
+    // console.log('Puntos por local coincidente: ', earnedScore[config.xPointByLocalEqual])
+    // console.log('Puntos por visitante coincidente: ', earnedScore[config.xPointByVisitEqual])
   })
 }
 
@@ -57,9 +57,9 @@ const calculatePointByGame = async (id) => {
 const calculatePointByClassification = async (group) => {
   const classifications = await classification.find({ group })
   const betClassifications = await betClassification.find({ group })
-  console.log("Grupo: ANALIZADO CON DETALLE PARA PUNTUACION ", group)
-  console.log("Clasificaciones: ", classifications)
-  console.log("Apuestas de clasificación: ", betClassifications)
+  // console.log("Grupo: ANALIZADO CON DETALLE PARA PUNTUACION ", group)
+  // console.log("Clasificaciones: ", classifications)
+  // console.log("Apuestas de clasificación: ", betClassifications)
   betClassifications.forEach(async e => {
     let earnedScore = [0, 0, 0, 0]
     if (group != "FINAL") {
@@ -103,7 +103,7 @@ const calculatePointByClassification = async (group) => {
 const updateTotalPoint = async () => {
   const users = await user.find()
   // console.log(users)
-  console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
+  // console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
   for (u of users) {
     if (u.role != "admin") {
       const totalGameGroup = await totalPointByGameGroups(u._id)
@@ -113,10 +113,10 @@ const updateTotalPoint = async () => {
       const greatTotal = totalGameGroup + totalClassGroup + totalGamePhase + totalClassPhase
       const totalPoint = [totalGameGroup, totalClassGroup, totalGamePhase, totalClassPhase, greatTotal]
       const userUpdate = await user.findByIdAndUpdate(u._id, { totalPoint }, { new: true })
-      console.log("Jugador con id: ", u._id, " actualizado ", totalPoint)
+      // console.log("Jugador con id: ", u._id, " actualizado ", totalPoint)
     }
   }
-  console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
+  // console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
 }
 
 module.exports = { calculatePointByGame, calculatePointByClassification, updateTotalPoint }

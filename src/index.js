@@ -71,7 +71,7 @@ app.use(async (req, res, next) => {
     res.locals.octavosCompleted = (await verifyPhaseCompleted(data._id)).octavosCompleted
     res.locals.cuartosCompleted = (await verifyPhaseCompleted(data._id)).cuartosCompleted
     res.locals.semiCompleted = (await verifyPhaseCompleted(data._id)).semiCompleted
-    console.log(res.locals.semiCompleted)
+    // console.log(res.locals.semiCompleted)
   }
   next()
 })
@@ -135,4 +135,4 @@ app.use('/admin', require('./routes/admin-panel'))
 
 
 //Iniciode del servidor
-app.listen(app.get('port'), () => { console.log('app escuchando en el puerto ' + app.get('port')) })
+app.listen(app.get('port'), () => { /* console.log('app escuchando en el puerto ' + app.get('port')) */ })

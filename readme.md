@@ -409,7 +409,7 @@ $ mongorestore --db [como la quiero llamar] --collection [como la quiero llamar]
 
 4. IMPORTAR base de datos en CLOUD
 (Lee la BD de la carpeta dump, por eso la bd quedará con el nombre de la carpeta dentro de dump, se ejecuta desde un nivel fuera de dump)
-$ mongorestore --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net 
+$ mongorestore --uri "mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.net/<DB-NAME>"
 
 
 ## Despliegue
@@ -498,11 +498,36 @@ Asignar una variable de entorno a una app
 Ejemplo:
     heroku config:set MONGODB_URI=mongodb+srv://maolink:<password>@mongo-cluster.h360t.mongodb.net/<bdname>?retryWrites=true&w=majority
 
+
 Abrir la app
     heroku open
 
 Reinciar la app en heroku
     heroku restart --app [nombre-app]
+
+
+## Test de tiempo y otros segun donde se despliegua
+### Seenode + mongodb Atlas
+En seenode se tiene usa la prueba gratuita por 7 dias
+
+
+                            PC      Movil
+Login                      5.17      5.03
+Ingresar Apuestas          7.56      8.00 
+Ingresar clasificacion     7.63      8.33
+Ver puntaje propio         31.54     31.35
+Ver puntaje otros jugadores 3.72     4.38
+
+
+### Despliegue local + mongoDb Atlas
+                            PC      Movil
+Login                       4.35     3.91
+Ingresar Apuestas           6.28     6.29
+Ingresar clasificacion      5.90     6.49
+Ver puntaje propio          27.10    26.86
+Ver puntaje otros jugadores 2.91     2.90
+
+
 
 ## Maolink Software
 Diciembre 30 2022

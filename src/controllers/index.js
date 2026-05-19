@@ -59,8 +59,8 @@ const getGameByGroup = async (group) => {
     const localFlag = teams.find(t => t._id == idLocalTeam).flag
     const visitTeam = teams.find(t => t._id == idVisitTeam).name
     const visitFlag = teams.find(t => t._id == idVisitTeam).flag
-    console.log("local team", localTeam)
-    console.log("visit team", visitTeam)
+    // console.log("local team", localTeam)
+    // console.log("visit team", visitTeam)
     { localScore == -1 ? localScore = "-" : localScore }
     { visitScore == -1 ? visitScore = "-" : visitScore }
     { analogScore == -1 ? analogScore = "-" : analogScore }
@@ -453,7 +453,7 @@ const getGameAndBetByPhase = async (phase, gamesPhase, idUser) => {
     return data
   }
   catch (err) {
-    console.log('apuesta de fase actual no está completa')
+    // console.log('apuesta de fase actual no está completa')
     return null
   }
 }
@@ -565,7 +565,7 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
     return data
   }
   catch (err) {
-    console.log('apuesta de fase actual no está completa, ESTO ES DE PRUEBA')
+    // console.log('apuesta de fase actual no está completa, ESTO ES DE PRUEBA')
     return null
   }
 }
@@ -573,7 +573,7 @@ const getGameAndBetFinal = async (phase, gameStruct, idUser) => {
 //CONTROLADOR PARA OBTENER UN SOLO JUEGO, LAS APUESTAS DE ESE ÚNICO JUEGO Y LOS RPUNTAJES DE ESE ÚNICO JUEGO
 const getOneGame = async (idGame) => {
   const data = []
-  console.log(idGame)
+  // console.log(idGame)
   const game = await Game.find({ _id: idGame }).lean()
   const teams = await Team.find().lean()
   const idLocalTeam = game[0].localTeam
@@ -591,7 +591,7 @@ const getOneGame = async (idGame) => {
   localScore = game[0].localScore
   analogScore = game[0].analogScore
   visitScore = game[0].visitScore
-  console.log("Id Visitante ", idVisitTeam)
+  // console.log("Id Visitante ", idVisitTeam)
   if (idVisitTeam != "GENERIC LOCAL TEAM") { //extrañamente el modelo habla de GENRIC VISIT TEAM, PERO LOS GAME QUEDARON CON GENRIC LOCAL TEAM, A CORREGIR
     visitTeam = teams.find(t => t._id == idVisitTeam).name
     visitFlag = teams.find(t => t._id == idVisitTeam).flag
@@ -721,7 +721,7 @@ const getClassification = async (group) => {
     fourthFlag = 'no-flag.png'
   }
   const data = [{ group, firstTeam, firstFlag, secondTeam, secondFlag, thirdTeam, thirdFlag, fourthTeam, fourthFlag }]
-  console.log(data)
+  // console.log(data)
   return data
 
 }
@@ -1000,7 +1000,7 @@ const getAllGamersPoint = async () => {
 
 const getAllGamersPointOptimizated = async () => {
   const users = await User.find({ role: 'user' }).lean()
-  console.log(users)
+  // console.log(users)
   const data = []
   for (const user of users) {
     const name = user.name
@@ -1033,7 +1033,7 @@ const dataForTableGame = async idUser => {
     totalizerGame += dataTablePoint.total
     data.push({ dataTablePoint, dataFlags })
   }
-console.log("PUNATJE POR GRUPOS", totalizerGame)
+// console.log("PUNATJE POR GRUPOS", totalizerGame)
   for (phase of iteratorPhase) {
     dataTablePoint = await getPointGamePhase(phase, idUser)
     totalizerGame += dataTablePoint.total
@@ -1049,7 +1049,7 @@ console.log("PUNATJE POR GRUPOS", totalizerGame)
     const idGamePhantom = game[0]._id
     const betGamePhantom = await BetGame.find({ idUser,idGame:idGamePhantom }).lean()
     totalizerGame += betGamePhantom[0].earnedScore[config.xPointByLocalEqual] + betGamePhantom[0].earnedScore[config.xPointByVisitEqual] // Se le suma el puntaje de local y visitante coincidente del juego fantasma al totalizador general, ya que este no se muestra por aparte en la vista, a diferencia del total del juego fantasma que si se muestra por aparte
-    console.log("BET GAME PHANTOM", betGamePhantom)
+    // console.log("BET GAME PHANTOM", betGamePhantom)
 
 
       dataGamePhantom = await getPointGamePhantom(config.gamePhantom, idUser)
@@ -1121,10 +1121,10 @@ const verifyPhaseCompleted = async idUser => {
     if ((betGames.find(b => b.idGame == idBet).localScore) == '-1' || (betGames.find(b => b.idGame == idBet).visitScore) == '-1') semiCompleted = false
   }
 
-  console.log("Fase 16 avos", dieciseisAvosCompleted)
-  console.log("Fase octavos", octavosCompleted)
-  console.log("Fase cuartos", cuartosCompleted)
-  console.log("Fase semi", semiCompleted)
+  // console.log("Fase 16 avos", dieciseisAvosCompleted)
+  // console.log("Fase octavos", octavosCompleted)
+  // console.log("Fase cuartos", cuartosCompleted)
+  // console.log("Fase semi", semiCompleted)
   return { dieciseisAvosCompleted, octavosCompleted, cuartosCompleted, semiCompleted }
 }
 
@@ -1141,7 +1141,7 @@ const verifyGamesGroups = async idUser => {
       data.push(betGame)
     }
   }
-  console.log("Cantidad de juegos sin diligenciar ", data.length)
+  // console.log("Cantidad de juegos sin diligenciar ", data.length)
   return data
 }
 
@@ -1156,7 +1156,7 @@ const verifyClassGroups = async idUser => {
       }
     }
   }
-  console.log("Cantidad de clasificaciones sin diligenciar ", data.length)
+  // console.log("Cantidad de clasificaciones sin diligenciar ", data.length)
   return data
 
 }
@@ -1174,7 +1174,7 @@ const verifyGamesPhases = async idUser => {
       }
     }
   }
-  console.log("Cantidad de juegos RONDA FASE sin diligenciar ", data.length)
+  // console.log("Cantidad de juegos RONDA FASE sin diligenciar ", data.length)
   return data
 }
 
@@ -1188,13 +1188,13 @@ const verifyClassFinal = async idUser => {
       data.push(betClass)
     }
   }
-  console.log("Cantidad de clasificaciones sin diligenciar ", data.length)
+  // console.log("Cantidad de clasificaciones sin diligenciar ", data.length)
   return data
 }
 
 const updateTotalPoint = async () => {
   const users = await User.find()
-  console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
+  // console.log("INICIANDO ACTUALIZACIÓN DE RESULTADOS...")
   for (u of users) {
     if (u.role != "admin") {
       const totalGameGroup = await totalPointByGameGroups(u._id)
@@ -1204,10 +1204,10 @@ const updateTotalPoint = async () => {
       const greatTotal = totalGameGroup + totalClassGroup + totalGamePhase + totalClassPhase
       const totalPoint = [totalGameGroup, totalClassGroup, totalGamePhase, totalClassPhase, greatTotal]
       await User.findByIdAndUpdate(u._id, { totalPoint }, { new: true })
-      console.log("Jugador con id: ", u._id, " actualizado ", totalPoint)
+      // console.log("Jugador con id: ", u._id, " actualizado ", totalPoint)
     }
   }
-  console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
+  // console.log("RESULTADOS ACTUALIZADOS SATISFACTORIAMENTE")
 }
 
 const getGamesByDate = async (date, idUser) => {

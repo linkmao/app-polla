@@ -91,7 +91,7 @@ const config = require('../config/config')
 // Signin usando token para e logueo del adminsitrador desde Postman
 const signInAdmin = async (req, res) => {
   const { email, pass } = req.body
-  console.log(email, pass)
+  // console.log(email, pass)
   const userFound = await User.findOne({ email })
   if (!userFound) {
     res.status(400).json({ message: "Usuario no registrado" })

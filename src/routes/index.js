@@ -66,13 +66,13 @@ router.get('/verifyclassfinal/:id', async (req, res) => {
 router.get('/signup', (req, res) => res.render('user/signup'))
 
 router.get('/routegames', validar.isAuth, async (req, res) => {
-  console.log("estoy en routesgame")
+  // console.log("estoy en routesgame")
   if (req.user.role == 'admin') {
     res.render('admin/panel')
   } else {
     // Obtener juegos del día y próximos con zona horaria local (Colombia)
     const today = new Date().toLocaleDateString('sv', { timeZone: 'America/Bogota' });
-    console.log("FECHA DE HOY (Local):", today)
+    // console.log("FECHA DE HOY (Local):", today)
     const gamesToday = await getGamesByDate(today, req.user.id);
     const gamesNext = await getNextGames(today, req.user.id);
 
@@ -271,9 +271,9 @@ router.get('/semi', validar.isAuth, async (req, res) => {
 
 router.get('/finals', validar.isAuth, async (req, res) => {
   // Data para apuestas de final
-  console.log("ESPERANDO INFO")
+  // console.log("ESPERANDO INFO")
   const dataBet = await getGameAndBetFinal(config.phaseFinal, config.finalStruct, req.user.id)
-  console.log("informacion obtenida", dataBet)
+  // console.log("informacion obtenida", dataBet)
   if (dataBet == null) {
     req.flash('mensajeError', 'Para realizar las apuestas de la fase FINAL, debes realizar primero todas las apuestas de la fase SEMI FINAL')
     res.redirect('/semi')

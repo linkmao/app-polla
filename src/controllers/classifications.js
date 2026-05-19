@@ -55,7 +55,7 @@ const updateClassification = async (req, res) => {
 
         // Siempre calculamos si viene del UI, o si forCalculate es true en JSON
         if (req.headers['content-type'] !== 'application/json' || req.body.forCalculate) {
-          console.log("Calculando puntos para el grupo: ", group)
+          // console.log("Calculando puntos para el grupo: ", group)
           await calculatePointByClassification(group)
         }
 
