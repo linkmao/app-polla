@@ -118,14 +118,14 @@
   "initDateTournament": "2026-06-11T14:00:00",
   "viewCloseBetGroups": true,
   "closeBetGroups": "2026-06-10T14:00:00",
-  "viewCloseBetPhases": true,
+  "viewCloseBetPhases": false,
   "closeBetPhases": "2026-07-11T14:00:00",
   "renderGuestInfo": false,
   "renderButtonRegister": true,
   "renderBetRoundGroup": true,
-  "renderViewOtherBetGroup": true,
-  "enableMenuRoundPhases": true,
-  "renderBetRoundPhases": true,
-  "renderViewOtherBetPhases": true,
-  "renderViewOtherBetClassFinal": true
+  "renderViewOtherBetGroup": false,
+  "enableMenuRoundPhases": false,
+  "renderBetRoundPhases": false,
+  "renderViewOtherBetPhases": false,
+  "renderViewOtherBetClassFinal": false
 }

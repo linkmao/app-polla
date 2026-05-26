@@ -401,8 +401,8 @@ $ mongoexport --uri mongodb+srv://<USER>:<PASSWORD>@mongo-cluster.h360t.mongodb.
 ## IMPORTACION DE BD
 
 3. IMPORTAR base de datos en LOCAL
-(todas la BD que estan dump o en el nombre que tenga el directorio)
-$ mongorestore [ruta a dump]
+(todas las colecciones que estan dump)
+$ mongorestore --[como la quiero llamar]
 
 (Una coleccion en particular)
 $ mongorestore --db [como la quiero llamar] --collection [como la quiero llamar] dump/collection.bson
