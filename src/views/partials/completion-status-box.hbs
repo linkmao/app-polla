@@ -1,19 +1,21 @@
 <div class="card mt-4 mb-4 border-info shadow-sm">
   <div class="card-header bg-info bg-opacity-10 text-info fw-bold border-bottom border-info">
-    <i class="fas fa-clipboard-check me-2"></i>Estado de tus Apuestas
+    <i class="fas fa-clipboard-check me-2"></i>Estado de tus apuestas del grupo
   </div>
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <span class="text-muted">Juegos apostados:</span>
-      <span class="badge {{#if (eq completionStatus.betGames completionStatus.totalGames)}}bg-success{{else}}bg-warning text-dark{{/if}} fs-6">
+      <span
+        class="badge {{#if (eq completionStatus.betGames completionStatus.totalGames)}}bg-success{{else}}bg-warning text-dark{{/if}} fs-6">
         {{completionStatus.betGames}} de {{completionStatus.totalGames}}
       </span>
     </div>
-    
+
     {{#if completionStatus.renderClassCompletion}}
     <div class="d-flex justify-content-between align-items-center mb-3">
       <span class="text-muted">Clasificaciones apostadas:</span>
-      <span class="badge {{#if (eq completionStatus.betClass completionStatus.totalClass)}}bg-success{{else}}bg-warning text-dark{{/if}} fs-6">
+      <span
+        class="badge {{#if (eq completionStatus.betClass completionStatus.totalClass)}}bg-success{{else}}bg-warning text-dark{{/if}} fs-6">
         {{completionStatus.betClass}} de {{completionStatus.totalClass}}
       </span>
     </div>
@@ -21,10 +23,11 @@
 
     <hr>
     <p class="text-secondary fw-semibold mb-2" style="font-size: 0.85em;">DATOS OFICIALES (ADMIN)</p>
-    
+
     <div class="d-flex justify-content-between align-items-center mb-2">
       <span class="text-muted">Partidos jugados:</span>
-      <span class="badge {{#if (eq completionStatus.realGames completionStatus.totalGames)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
+      <span
+        class="badge {{#if (eq completionStatus.realGames completionStatus.totalGames)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
         {{completionStatus.realGames}} de {{completionStatus.totalGames}}
       </span>
     </div>
@@ -32,7 +35,8 @@
     {{#if completionStatus.renderClassCompletion}}
     <div class="d-flex justify-content-between align-items-center">
       <span class="text-muted">Clasif. consolidadas:</span>
-      <span class="badge {{#if (eq completionStatus.realClass completionStatus.totalClass)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
+      <span
+        class="badge {{#if (eq completionStatus.realClass completionStatus.totalClass)}}bg-success{{else}}bg-secondary{{/if}} fs-6">
         {{completionStatus.realClass}} de {{completionStatus.totalClass}}
       </span>
     </div>

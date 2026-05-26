@@ -3,6 +3,13 @@
   width: 50%;
 }
 
+@media (max-width: 767.98px) {
+  .img-grupo {
+    width: 85%;
+    max-width: 100px;
+  }
+}
+
 .row-grupo {
   padding: 8px;
 }
@@ -12063,7 +12070,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-/* Estilos personalizados para Partidos del Día */
+/* Estilos personalizados para Partidos del Dï¿½a */
 .bg-gradient-primary { background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%); }
 .bg-gradient-success { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
 .rounded-4 { border-radius: 1rem !important; }

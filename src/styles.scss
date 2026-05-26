@@ -1,5 +1,28 @@
-.img-grupo{
-  width:50%
+
+/* Mejorar visualización de imágenes de grupo */
+.img-grupo {
+  width: 90%;
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: transform 0.2s;
+}
+.img-grupo:hover {
+  transform: scale(1.07);
+}
+
+@media (max-width: 767.98px) {
+  .img-grupo {
+    width: 85%;
+    max-width: 100px;
+    margin-bottom: 12px;
+  }
+  .row-grupo {
+    padding: 2vw;
+  }
 }
 
 .row-grupo{
