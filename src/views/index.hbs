@@ -6,13 +6,13 @@
             style="background: url('/img/front/world_cup_hero.png') center/cover no-repeat;">
             <div class="hero-overlay d-flex flex-column justify-content-center px-5 py-4">
                 <div class="hero-content">
-                    <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Polla
+                    <span class="badge bg-primary px-3 py-2 rounded-pill mb-1 text-uppercase tracking-wider">Polla
                         Mundialista 2026</span>
                     <h1 class="display-3 fw-bold text-white mb-3">México - USA - Canadá</h1>
-                    <p class="lead text-white-50 mb-4 opacity-75">Demuestra tus conocimientos, realiza tus apuestas y
+                    <p class="lead text-white-50 mb-8 opacity-75">Demuestra tus conocimientos, realiza tus apuestas y
                         compite para llegar a la cima del ranking.</p>
 
-                    <div class="d-flex align-items-center gap-3 mt-4">
+                    <div class="d-flex align-items-center gap-3 mt-1">
                         <div class="stat-item text-white">
                             <span class="d-block h3 fw-bold mb-0">48</span>
                             <span class="text-white-50 small">Equipos</span>
@@ -35,9 +35,10 @@
         <!-- Columna de Login -->
         <div class="col-md-5 bg-body d-flex align-items-center">
             <div class="login-wrapper w-100 p-5 mx-lg-4">
-                <div class="text-center mb-5">
+                <div class="text-center mb-2">
                     <h2 class="fw-bold text-body mb-1">Bienvenido</h2>
                     <p class="text-muted small">Ingresa tus credenciales para continuar</p>
+                    {{!-- <p class="text-muted small">o crea tu cuenta si es tu primer ingreso</p> --}}
                 </div>
 
                 {{!-- Información de invitado con estilo discreto --}}
@@ -55,7 +56,7 @@
                 {{/if}}
 
                 <form action="/auth/signin" method="POST" class="needs-validation">
-                    <div class="mb-4">
+                    <div class="mb-2">
                         <label for="email" class="form-label text-secondary small fw-bold">CORREO ELECTRÓNICO</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0 border-primary-subtle rounded-start-2">
@@ -67,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-1">
                         <label for="pass" class="form-label text-secondary small fw-bold">CONTRASEÑA</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0 border-primary-subtle rounded-start-2">

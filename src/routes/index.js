@@ -123,7 +123,7 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   let realClassCount = 0;
   if (realClassData && realClassData[0].firstTeam !== "Sin clasificado") realClassCount = 1;
 
-  const completionStatus = { totalGames: dataGame.length, betGames: betGamesCount, realGames: realGamesCount, totalClass: 1, betClass: betClassCount, realClass: realClassCount, renderClassCompletion: true };
+  const completionStatus = { totalGames: dataGame.length, betGames: betGamesCount, realGames: realGamesCount, totalClass: 1, betClass: betClassCount, realClass: realClassCount, renderClassCompletion: true, group: req.params.g };
 
   res.render('games', { dataGameAndBet, dataBetClassification, dataPoint, completionStatus })
 })
