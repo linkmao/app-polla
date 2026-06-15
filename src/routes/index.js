@@ -101,7 +101,7 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
   dataGame.forEach((g, i) => {
     dataGameAndBet.push({ dataGame: dataGame[i], dataBet: dataBet[i], dataFlagViewBet: config.renderBetRoundGroup, dataFlagViewButton: config.renderViewOtherBetGroup })
   })
-  // Dattos para el tratamiento de los puntajes
+    // Dattos para el tratamiento de los puntajes
   const dataPointGames = await getPointGameGroup(req.params.g, req.user.id)
   const dataPointClass = await getPointClassification(req.params.g, req.user.id)
   const total = sumTotalPoint([dataPointGames, dataPointClass])

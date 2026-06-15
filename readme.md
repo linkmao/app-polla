@@ -345,10 +345,16 @@ Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
 
 ## TODO Prioritarios 
 Atender antes de desplegar
+-El boton de ver apuestas de otros jugadores y el boton de ver otras clasificaciones, al parecer tiene un anchor que (necesario para las apuestas) pues devuelve la pantalla. revisar.
+- Organizar la bandera de republica del conngo
 - No está eliminado los Game (lo intente con el ultimo) como no lo habia intentado entonces esta funcionalidad no se habia verificado. HACER ESTO DE ULTIMAS PARA NO DAÑAR LA ESTRUCTURA DE JUEGOS Y APUESTAS Y SEGUIR HACIENDO OTRAS PRUEBAS
 
 ## TODO mediano plazo
-
+- ALGUNAS ESTATICAS 
+   - TOTAL PARTIDOS JUGADOS, CUANTOS EMPATES, CUANTOS TRIUNFOS
+   - TOTAL 5 PUNTOS OBTENIDOS/POSIBLES POR TODOS LOS JUGADORES
+   - TOTAL DE APUESTAS ACERTADAS HASTA EL MOMENTO POR JUGADOR
+   - TOTAL DE PARTIDOS PERMANECIENDO EN EL PUESTO 1, PUESTO 2 Y PUESTO 3
 - Implementar que al eliminar un usuario se eliminen tambien todos los datos asocioados a sus apuestas por juegos y clasificaciones
 - En la pantalla de gestionar juegos, que ademas de mantener la vsita actual se pueda ver la descripcion del juego, el cual se guarda de description.
 - En el manual de usuario o en el lugar que se considere pertinente, dejar detallado que los perdedores de las semifinales conforman el partido de 3 y 4 puesto (eso causó confusión)

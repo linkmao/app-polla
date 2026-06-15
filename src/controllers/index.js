@@ -52,6 +52,8 @@ const getGameByGroup = async (group) => {
     const idLocalTeam = game.localTeam
     const idVisitTeam = game.visitTeam
     const gameDescription = game.description
+    const gameDate= game.dateGame
+    const gameHour= game.hourGame
     let localScore = game.localScore
     let visitScore = game.visitScore
     let analogScore = game.analogScore
@@ -64,7 +66,7 @@ const getGameByGroup = async (group) => {
     { localScore == -1 ? localScore = "-" : localScore }
     { visitScore == -1 ? visitScore = "-" : visitScore }
     { analogScore == -1 ? analogScore = "-" : analogScore }
-    data.push({ idGame, gameNumber, gameDescription, localTeam, localFlag, localScore, analogScore, visitScore, visitFlag, visitTeam })
+    data.push({ idGame, gameNumber, gameDescription,gameDate,gameHour, localTeam, localFlag, localScore, analogScore, visitScore, visitFlag, visitTeam })
   }
 
   return data
@@ -92,6 +94,8 @@ const getGameByPhase = async (phase, gameStruct) => {
     const idTeamLocal1 = games.find(game => game.gameNumber == gameNumber1).localTeam
     const idTeamVisit1 = games.find(game => game.gameNumber == gameNumber1).visitTeam
     const gameDescription1 = games.find(game => game.gameNumber == gameNumber1).description
+    const gameDate1= games.find(game => game.gameNumber == gameNumber1).dateGame
+    const gameHour1= games.find(game => game.gameNumber == gameNumber1).hourGame
     localScore1 = games.find(game => game.gameNumber == gameNumber1).localScore
     visitScore1 = games.find(game => game.gameNumber == gameNumber1).visitScore
     analogScore1 = games.find(game => game.gameNumber == gameNumber1).analogScore
@@ -125,6 +129,8 @@ const getGameByPhase = async (phase, gameStruct) => {
     const idTeamLocal2 = games.find(game => game.gameNumber == gameNumber2).localTeam
     const idTeamVisit2 = games.find(game => game.gameNumber == gameNumber2).visitTeam
     const gameDescription2 = games.find(game => game.gameNumber == gameNumber2).description
+    const gameDate2= games.find(game => game.gameNumber == gameNumber1).dateGame
+    const gameHour2= games.find(game => game.gameNumber == gameNumber1).hourGame
     localScore2 = games.find(game => game.gameNumber == gameNumber2).localScore
     visitScore2 = games.find(game => game.gameNumber == gameNumber2).visitScore
     analogScore2 = games.find(game => game.gameNumber == gameNumber2).analogScore
@@ -147,7 +153,7 @@ const getGameByPhase = async (phase, gameStruct) => {
       visitTeam2 = teams.find(t => t._id == idTeamVisit2).name
       visitFlag2 = teams.find(t => t._id == idTeamVisit2).flag
     }
-    data.push({ idGame1, gameNumber1, gameDescription1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1, idGame2, gameNumber2, gameDescription2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
+    data.push({ idGame1, gameNumber1, gameDescription1, gameDate1,gameHour1, localTeam1, localFlag1, localScore1, analogScore1, visitScore1, visitFlag1, visitTeam1, idGame2, gameNumber2, gameDescription2,gameDate2,gameHour2, localTeam2, localFlag2, localScore2, analogScore2, visitScore2, visitFlag2, visitTeam2, localTeam2 })
   })
   return data
 }

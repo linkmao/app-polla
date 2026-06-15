@@ -43,7 +43,9 @@
       <th scope="col" style="text-align: center">Visitante</th>
       <th scope="col" style="text-align: center">Puntos por marcador</th>
       <th scope="col" style="text-align: center">Puntos por L-E-V</th>
-      <th scope="col" style="text-align: center">TOTAL </th>
+      <th scope="col" style="text-align: center; cursor: pointer;" id="sortTotalHeader">
+        TOTAL <span id="sortIcon" style="font-size: 0.8em;">⇅</span>
+      </th>
     </tr>
   </thead>
 
@@ -57,9 +59,57 @@
       <td scope="col" style="text-align: center">{{visitScore}}</td>
       <td scope="col" style="text-align: center">{{pointByScore}}</td>
       <td scope="col" style="text-align: center">{{pointByAnalogScore}}</td>
-      <td scope="col" style="text-align: center">{{totalByGame}}</td>
+      <td scope="col" style="text-align: center">
+        {{#if (eq totalByGame 0)}}
+          <span style="color: red;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 2)}}
+          <span style="color: blue;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 3)}}
+          <span style="color: blue;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 5)}}
+          <span style="color: darkgreen; font-weight: bold;">{{totalByGame}}</span>
+        {{else}}
+          {{totalByGame}}
+        {{/if}}
+      </td>
     </tr>
   </tbody>
   {{/each}}
 
 </table>
+
+<script>
+  let isSortedAsc = null; // null = sin ordenar, true = ascendente, false = descendente
+
+  document.getElementById('sortTotalHeader').addEventListener('click', function() {
+    const table = this.closest('table');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const sortIcon = document.getElementById('sortIcon');
+
+    // Obtener los valores numéricos de la columna TOTAL (última columna)
+    rows.sort((a, b) => {
+      // La última celda td es la del TOTAL
+      const aCells = a.querySelectorAll('td');
+      const bCells = b.querySelectorAll('td');
+      
+      const aValue = parseInt(aCells[aCells.length - 1].textContent.trim()) || 0;
+      const bValue = parseInt(bCells[bCells.length - 1].textContent.trim()) || 0;
+
+      if (isSortedAsc === null || isSortedAsc === false) {
+        // Próximo ordenamiento: ascendente
+        isSortedAsc = true;
+        sortIcon.textContent = '▲';
+        return aValue - bValue;
+      } else {
+        // Próximo ordenamiento: descendente
+        isSortedAsc = false;
+        sortIcon.textContent = '▼';
+        return bValue - aValue;
+      }
+    });
+
+    // Re-renderizar las filas
+    rows.forEach(row => tbody.appendChild(row));
+  });
+</script>
