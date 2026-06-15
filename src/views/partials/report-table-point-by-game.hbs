@@ -48,9 +48,8 @@
       </th>
     </tr>
   </thead>
-
-  {{#each dataBet}}
-  <tbody>
+  <tbody id="betsBody">
+    {{#each dataBet}}
     <tr>
       <td></td>
       <td scope="col" style="text-align: center">{{name}}</td>
@@ -63,19 +62,18 @@
         {{#if (eq totalByGame 0)}}
           <span style="color: red;">{{totalByGame}}</span>
         {{else if (eq totalByGame 2)}}
-          <span style="color: blue;">{{totalByGame}}</span>
+          <span style="color: blue; font-size: 1.1em;">{{totalByGame}}</span>
         {{else if (eq totalByGame 3)}}
-          <span style="color: blue;">{{totalByGame}}</span>
+          <span style="color: blue; font-size: 1.1em;">{{totalByGame}}</span>
         {{else if (eq totalByGame 5)}}
-          <span style="color: darkgreen; font-weight: bold;">{{totalByGame}}</span>
+          <span style="color: darkgreen; font-weight: bold; font-size: 1.3em;">{{totalByGame}}</span>
         {{else}}
           {{totalByGame}}
         {{/if}}
       </td>
     </tr>
+    {{/each}}
   </tbody>
-  {{/each}}
-
 </table>
 
 <script>
@@ -87,29 +85,23 @@
     const rows = Array.from(tbody.querySelectorAll('tr'));
     const sortIcon = document.getElementById('sortIcon');
 
-    // Obtener los valores numéricos de la columna TOTAL (última columna)
+    // Alternar dirección de ordenamiento antes de ordenar
+    if (isSortedAsc === null || isSortedAsc === false) {
+      isSortedAsc = true;
+      sortIcon.textContent = '▲';
+    } else {
+      isSortedAsc = false;
+      sortIcon.textContent = '▼';
+    }
+
     rows.sort((a, b) => {
-      // La última celda td es la del TOTAL
       const aCells = a.querySelectorAll('td');
       const bCells = b.querySelectorAll('td');
-      
       const aValue = parseInt(aCells[aCells.length - 1].textContent.trim()) || 0;
       const bValue = parseInt(bCells[bCells.length - 1].textContent.trim()) || 0;
-
-      if (isSortedAsc === null || isSortedAsc === false) {
-        // Próximo ordenamiento: ascendente
-        isSortedAsc = true;
-        sortIcon.textContent = '▲';
-        return aValue - bValue;
-      } else {
-        // Próximo ordenamiento: descendente
-        isSortedAsc = false;
-        sortIcon.textContent = '▼';
-        return bValue - aValue;
-      }
+      return isSortedAsc ? aValue - bValue : bValue - aValue;
     });
 
-    // Re-renderizar las filas
     rows.forEach(row => tbody.appendChild(row));
   });
 </script>
