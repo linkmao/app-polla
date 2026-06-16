@@ -533,7 +533,7 @@ Ingresar clasificacion      5.90     6.49
 Ver puntaje propio          27.10    26.86
 Ver puntaje otros jugadores 2.91     2.90
 
-
+estoa es para el despliegue
 
 ## Maolink Software
 Diciembre 30 2022
