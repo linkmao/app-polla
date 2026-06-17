@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const { getGameAndBet, getBetClassificationByGroup, getGameAndBetByPhase, getGameAndBetFinal, getPointGameGroup, getPointGamePhase, getPointClassification, getPointGamePhantom, sumTotalPoint, totalPointByGameGroups, totalPointByGamePhases, totalPointByClassification, totalPointByClassificationFinal, totalPointPhaseOne, totalPointPhaseTwo, greatTotal, getAllGamersPoint, dataForGeneralPoint, dataForTableGame, dataForTableClass, getGameByGroup, getGameByPhase, getGameByPhaseFinal, getOneGame, getAllBetTheOneGame, getClassification, getBetClassificationAllUsers, getAllBetTheOneGamePhases, verifyGamesGroups, verifyClassGroups, verifyGamesPhases, verifyClassFinal, getAllGamersPointOptimizated, updateTotalPoint, getGamesByDate, getNextGames } = require('../controllers/index')
+const Team = require('../models/Team')
 const config = require('../config/config')
 const validar = require('../midleware/validaciones')
 const adminConfig = require('../controllers/admin-config')
@@ -125,7 +126,18 @@ router.get('/groups/:g', validar.isAuth, async (req, res) => {
 
   const completionStatus = { totalGames: dataGame.length, betGames: betGamesCount, realGames: realGamesCount, totalClass: 1, betClass: betClassCount, realClass: realClassCount, renderClassCompletion: true, group: req.params.g };
 
-  res.render('games', { dataGameAndBet, dataBetClassification, dataPoint, completionStatus })
+  // Prepare teams data for the selected group to render flags and names
+  let teamsForGroup = [];
+  try {
+    const teams = await Team.find({ group: req.params.g }).lean();
+    if (teams && teams.length > 0) {
+      teamsForGroup = teams.map(t => ({ name: t.name, flag: t.flag }));
+    }
+  } catch (err) {
+    console.error('Error fetching teams for group', req.params.g, err.message)
+  }
+
+  res.render('games', { dataGameAndBet, dataBetClassification, dataPoint, completionStatus, selectedGroup: req.params.g, teamsForGroup })
 })
 
 router.get('/sixteenth', validar.isAuth, async (req, res) => {
@@ -404,7 +416,6 @@ router.get('/admin/pass-restore', validar.isAuth, validar.isAdmin, async (req, r
   res.render('admin/pass-restore')
 })
 
-const Team = require('../models/Team')
 const Game = require('../models/Game') // Added this line for the new routes
 const User = require('../models/User')
 
