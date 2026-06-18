@@ -19,6 +19,7 @@ const betGame = require('./routes/bet-games')
 const betClassification = require('./routes/bet-classifications')
 const index = require('./routes/index')
 const config = require('./config/config')
+const subscription = require('./routes/subscription')
 // const cors = require('cors');
 const { verifyPhaseCompleted } = require('./controllers/index')
 
@@ -131,6 +132,7 @@ app.use('/api/users', users)
 app.use('/api/bet-games', betGame)
 app.use('/api/bet-classifications', betClassification)
 app.use('/api/admin', require('./routes/admin-completion'))
+app.use('/api/notification', subscription)
 app.use('/admin', require('./routes/admin-panel'))
 
 

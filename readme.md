@@ -343,6 +343,11 @@ Debo crear igualmente el juego virtual y marcarlo como el juego total mas 1
 
 # TODO 2026
 
+Se da inicio a una serie de modificaiones, esto se trabaja en la rama lab, la rama de despliegue es ia-dev
+
+
+
+
 ## TODO Prioritarios 
 Atender antes de desplegar
 -El boton de ver apuestas de otros jugadores y el boton de ver otras clasificaciones, al parecer tiene un anchor que (necesario para las apuestas) pues devuelve la pantalla. revisar.
@@ -383,6 +388,7 @@ este se le ha diligenciado los resulyatdos y por lo tanto se ha jugado.
 - 16.04.2026: Modificar el modelo game para incluir dateGame, hourGame y placeGame de tal manera que estos parametros puedan ser usados por ejemplo en la busqueda de los juegos de una fecha determinada.
 - 16.04.2026: Implementar en la pantalla principal los juegos del dia y los próximos juegos
 - 27.04.2026: Se implementa un landigpage con información de las reglas de juego
+- 17.04.2026 se implementa colores es y tamaños en los resultados por partidos y se añade una tarjeta con lo equipos en cada grupos
 
 # Apuntes técnicos para este y otros proyectos
 ## Fase de despliegue
