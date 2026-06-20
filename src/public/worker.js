@@ -4,7 +4,10 @@ self.addEventListener('push',e=>{
   self.registration.showNotification(data.title,{
     body:data.message,
     // icon:'./img/iconos/polla-2026.jpg'
+    icon:'cdn-icons-png.flaticon.com/512/5968/5968672.png'
 
   })
-  console.log('notificacion recibida en worker')
+  
+  
+  console.log('esta es la data del worker',data)
 })
