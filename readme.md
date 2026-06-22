@@ -535,5 +535,14 @@ Ver puntaje otros jugadores 2.91     2.90
 
 estoa es para el despliegue
 
+
+Nota: El commit anterior al actual (es decir el commit anterior tiene el nombre 15.06.2026 2245) se considera el commit mas estable de la version de la polla, en caso de que en adelante enconremos errores volver a ese commit.
+
+Lo que que viene en adelante es el merge que se hizo con la rama lab, donde he implementado lo siguiente
+.
+Nombres y banderas de cada grupo (para mejor identificacion)
+Se mejora la tarjeta de los resultados
+Se ha implementado notificaciones, aunque no es funcional 100%
+
 ## Maolink Software
 Diciembre 30 2022
