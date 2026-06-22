@@ -54,6 +54,11 @@
             {{/if}}
 
             <div class="col-12 col-md-6 col-lg-12 animate__animated animate__fadeInRight">
+              {{#if selectedGroup}}
+              {{>teams-for-group groupName=selectedGroup teams=teamsForGroup}}
+              {{/if}}
+            </div>
+            <div class="col-12 col-md-6 col-lg-12 animate__animated animate__fadeInRight">
               {{#if completionStatus}}
               {{>completion-status-box}}
               {{/if}}

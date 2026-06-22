@@ -7,7 +7,7 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-body p-4 p-md-5">
-            <form action="/api/games/{{game._id}}?_method=PUT" method="POST">
+            <form action="/api/games/{{game._id}}?_method=PUT" method="POST" id="form">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="gameNumber" class="form-label">Número de Juego</label>
@@ -34,7 +34,7 @@
                         <select name="localTeam" id="localTeam" class="form-select" required>
                             <option value="GENERIC LOCAL TEAM">Genérico (Para Fases)</option>
                             {{#each teams}}
-                            <option value="{{_id}}" {{#if (eq ../game.localTeam _id)}}selected{{/if}}>{{name}}</option>
+                            <option id="localTeam" value="{{_id}}" {{#if (eq ../game.localTeam _id)}}selected{{/if}}>{{name}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -43,7 +43,7 @@
                         <select name="visitTeam" id="visitTeam" class="form-select" required>
                             <option value="GENERIC VISIT TEAM">Genérico (Para Fases)</option>
                             {{#each teams}}
-                            <option value="{{_id}}" {{#if (eq ../game.visitTeam _id)}}selected{{/if}}>{{name}}</option>
+                            <option id="visitTeam" value="{{_id}}" {{#if (eq ../game.visitTeam _id)}}selected{{/if}}>{{name}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -99,7 +99,7 @@
                         ¿Calcular puntajes de apostadores? (Solo si el partido ya terminó)
                     </label>
                 </div>
-
+<br>
                 <div class="mt-4">
                     <button type="submit" class="btn btn-success px-4">Guardar Cambios</button>
                 </div>
@@ -107,9 +107,42 @@
         </div>
     </div>
 
+<br>
+
+
+<form id="notification">
+    <button type="submit" class="btn btn-primary mt-6">Enviar Notificación</button>
+</form>
+
+<br>
     <div class="mt-4">
         <a href="/admin/games" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left me-2"></i>Volver al Listado
         </a>
     </div>
 </div>
+
+<script>
+    const form=document.getElementById('notification')
+    const localTeam=document.getElementById('localTeam').options[document.getElementById('localTeam').selectedIndex].text
+    const visitTeam=document.getElementById('visitTeam').options[document.getElementById('visitTeam').selectedIndex].text
+    const mensaje= 'El partido entre ' + localTeam + ' y ' + visitTeam + ' ha sido actualizado. ¡Revisa los nuevos resultados!'
+
+    form.addEventListener('submit',  e=>{
+     
+     e.preventDefault()
+     console.log('preparando el terreno')
+     console.log('enviando notificacion')
+        fetch('/api/notification/send-notification', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: '¡El partido ha sido actualizado!',
+            message: mensaje
+        })
+        }
+    )})
+   
+</script>

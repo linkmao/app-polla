@@ -586,7 +586,9 @@ const getOneGame = async (idGame) => {
   const idVisitTeam = game[0].visitTeam
   let localScore = null, analogScore = null, visitScore = null, localTeam = null, localFlag = null, visitTeam = null, visitFlag = null
   const gameNumber = game[0].gameNumber
-
+  const dateGame = game[0].dateGame
+  const hourGame= game[0].hourGame
+  
   if (idLocalTeam != "GENERIC LOCAL TEAM") {
     localTeam = teams.find(t => t._id == idLocalTeam).name
     localFlag = teams.find(t => t._id == idLocalTeam).flag
@@ -608,7 +610,7 @@ const getOneGame = async (idGame) => {
   { localScore == -1 ? localScore = "-" : localScore }
   { analogScore == '-1' ? analogScore = "-" : analogScore }
   { visitScore == -1 ? visitScore = "-" : visitScore }
-  data.push({ gameNumber, localTeam, localFlag, localScore, analogScore, visitScore, visitTeam, visitFlag })
+  data.push({ gameNumber, localTeam, localFlag, localScore, analogScore, visitScore, visitTeam, visitFlag, dateGame, hourGame })
   return data
 }
 

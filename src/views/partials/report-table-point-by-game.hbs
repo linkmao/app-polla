@@ -1,47 +1,39 @@
 {{#each dataGame}}
 <div class="card">
   {{!-- <img src="..." class="card-img-top" alt="..."> --}}
-  <div class="card-body">
-    <h6 class="card-title">Juego número: {{gameNumber}}</h6>
-    <div class="row">
-      <div class="col">
-        <img src="/img/flags/{{localFlag}}" alt="flag" width="100%">
-      </div>
-      <div class="col">
-        <p class="card-text">{{localTeam}}</p>
-      </div>
-      <div class="col">
-        <h2 class="card-text">{{localScore}}</h2>
-      </div>
-      <div class="col">
-        <h2>{{analogScore}}</h2>
-      </div>
-      <div class="col">
-        <h2 class="card-text">{{visitScore}}</h2>
-      </div>
-      <div class="col">
-        <p class="card-text">{{visitTeam}}</p>
-      </div>
-      <div class="col">
-        <img src="/img/flags/{{visitFlag}}" alt="flag" width="100%">
+  <div class="card-body game-card-body">
+    <h6 class="card-title">Juego número: {{gameNumber}}  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp       {{dateGame}}, {{hourGame}}</h6>
+    <div class="game-row">
+      <div class="flags-row">
+        <img class="flag local-flag" src="/img/flags/{{localFlag}}" alt="flag">
+        <img class="flag visit-flag" src="/img/flags/{{visitFlag}}" alt="flag">
       </div>
 
+      <div class="names-row">
+        <p class="team-name local-name">{{localTeam}}</p>
+        <p class="team-name visit-name">{{visitTeam}}</p>
+      </div>
+
+      <div class="scores-row mobile-scores">
+        <span class="score local-score">{{localScore}}</span>
+        <span class="score analog-score">{{analogScore}}</span>
+        <span class="score visit-score">{{visitScore}}</span>
+      </div>
     </div>
   </div>
 </div>
 {{/each}}
 
-<br><br>
+
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col" style="text-align: center">Pos</th>
       <th scope="col" style="text-align: center">Jugador</th>
       <th scope="col" style="text-align: center">Local</th>
-      <th scope="col" style="text-align: center">L-E-V</th>
+      <th scope="col" style="text-align: center"></th>
       <th scope="col" style="text-align: center">Visitante</th>
-      <th scope="col" style="text-align: center">Puntos por marcador</th>
+      <th scope="col" style="text-align: center">Pts marcador</th>
       <th scope="col" style="text-align: center">Puntos por L-E-V</th>
       <th scope="col" style="text-align: center; cursor: pointer;" id="sortTotalHeader">
         TOTAL <span id="sortIcon" style="font-size: 0.8em;">⇅</span>
@@ -51,7 +43,6 @@
   <tbody id="betsBody">
     {{#each dataBet}}
     <tr>
-      <td></td>
       <td scope="col" style="text-align: center">{{name}}</td>
       <td scope="col" style="text-align: center">{{localScore}}</td>
       <td scope="col" style="text-align: center">{{analogScore}}</td>
@@ -105,3 +96,94 @@
     rows.forEach(row => tbody.appendChild(row));
   });
 </script>
+
+<style>
+  /* Mobile-first styles for game card */
+  .game-card-body {
+    padding: 0.1rem 0.8rem;
+  }
+  .game-card-body .card-title {
+    margin-bottom: 0.1rem;
+    font-size: 0.95rem;
+  }
+  /* Mobile-first: column layout */
+  .game-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .flags-row {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+  .flags-row .flag {
+    width: 20%;
+    max-width: 100px;
+    height: auto;
+    object-fit: contain;
+  }
+  .names-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+  .names-row .team-name {
+    width: 60%;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .scores-row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0;
+  }
+  .score {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .analog-score {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0 0.3rem;
+  }
+
+  /* Small screens (mobile) — prioritize mobile view */
+  @media (min-width: 577px) {
+    /* Mantener estructura vertical en PC, con nombres y resultados debajo de las banderas */
+    .game-row {
+      flex-direction: column;
+      align-items: center;
+    }
+    .flags-row {
+      width: 20%;
+      justify-content: center;
+      gap: 3rem;
+    }
+    .flags-row .flag {
+      width: 30%;
+      max-width: 140px;
+    }
+    .names-row {
+      width: 100%;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .names-row .team-name {
+      font-size: 0.95rem;
+      width: 48%;
+    }
+    .scores-row {
+      justify-content: center;
+      width: 100%;
+      gap: 1.5rem;
+    }
+  }
+</style>

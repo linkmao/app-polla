@@ -74,8 +74,12 @@
           </ul>
         </li>
       </ul>
-      
+
       <div class="d-flex align-items-center ms-auto">
+        <button id="notification-toggle" class="btn btn-link nav-link px-3" type="button"
+          aria-label="Toggle notifications">
+          <i class="bi bi-bell-fill" id="notification-icon" aria-hidden="true"></i>
+        </button>
         <button id="theme-toggle" class="btn btn-link nav-link px-3" type="button" aria-label="Toggle theme">
           <i class="bi bi-sun-fill" id="theme-icon-light" style="display: none;"></i>
           <i class="bi bi-moon-stars-fill" id="theme-icon-dark" style="display: none;"></i>
@@ -86,6 +90,33 @@
   </div>
 </nav>
 
+<script>
+  const notification = document.getElementById('notification-toggle');
+  notification.addEventListener('click', () => {
+    const NOTIFICATION_PUBLIC_KEY = 'BLF7uS2YNGoCCtNFFxsBZtie_v_Aeso0zuK2s9s5ZP7vIndi_zZQFkXWuWx8DOCRj304LOzkPFTmaADaTZk1DBo'
+
+    const subscription = async () => {
+      const register = await navigator.serviceWorker.register('/worker.js', {
+        scope: '/'
+      })
+
+      const subscriptionReady = await register.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: NOTIFICATION_PUBLIC_KEY
+      })
+
+      await fetch('/api/notification/subscribe', {
+        method: 'POST',
+        body: JSON.stringify(subscriptionReady),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    }
+
+    subscription()
+  })
+</script>
 
 {{#if localAdmin}}
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
