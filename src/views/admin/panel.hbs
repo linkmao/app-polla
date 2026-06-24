@@ -57,7 +57,8 @@
                         <img src="/img/iconos/profile.png" alt="Usuarios" style="width: 45px;">
                     </div>
                     <h3 class="card-title h4 mb-3">Usuarios</h3>
-                    <p class="card-text text-muted mb-4">Gestiona a los jugadores: actualiza sus datos, contraseñas o gestiona llaves de acceso.</p>
+                    <p class="card-text text-muted mb-4">Gestiona a los jugadores: actualiza sus datos, contraseñas o
+                        gestiona llaves de acceso.</p>
                     <div class="d-grid gap-2">
                         <a href="/admin/users" class="btn btn-info btn-lg text-white">Gestionar Usuarios</a>
                         <a href="/admin/keys" class="btn btn-outline-info">Gestionar Llaves</a>
@@ -86,14 +87,16 @@
 
         <!-- Clasificaciones -->
         <div class="col-md-5">
-            <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-primary border-3">
+            <div
+                class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-primary border-3">
                 <div class="card-body text-center p-4">
                     <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
                         style="width: 80px; height: 80px;">
                         <i class="fas fa-trophy text-primary fs-2"></i>
                     </div>
                     <h3 class="card-title h4 mb-3">Clasificaciones</h3>
-                    <p class="card-text text-muted mb-4">Define los rankings oficiales de cada grupo para calcular los puntos de los jugadores.</p>
+                    <p class="card-text text-muted mb-4">Define los rankings oficiales de cada grupo para calcular los
+                        puntos de los jugadores.</p>
                     <div class="d-grid">
                         <a href="/admin/classifications" class="btn btn-primary btn-lg">Gestionar Clasificaciones</a>
                     </div>
@@ -102,7 +105,7 @@
         </div>
 
         <!-- Estado de Diligenciamiento de Jugadores -->
-        <div class="col-md-12">
+        <div class="col-md-5">
             <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-info border-3">
                 <div class="card-body text-center p-4">
                     <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
@@ -110,52 +113,66 @@
                         <i class="fas fa-tasks text-info fs-2"></i>
                     </div>
                     <h3 class="card-title h4 mb-3">Estado de Diligenciamiento</h3>
-                    <p class="card-text text-muted mb-4">Consulta qué jugadores han diligenciado o no sus apuestas y clasificaciones.</p>
+                    <p class="card-text text-muted mb-4">Consulta qué jugadores han diligenciado o no sus apuestas y
+                        clasificaciones.</p>
                     <div class="d-grid">
-                        <a href="/admin/completion-status" class="btn btn-info btn-lg">Ver Estado de Diligenciamiento</a>
+                        <a href="/admin/completion-status" class="btn btn-info btn-lg">Ver Estado de
+                            Diligenciamiento</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Actualizar Puntajes -->
+        <div class="col-md-5">
+            <div
+                class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-success border-3">
+                <div class="card-body text-center p-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <i class="fas fa-sync-alt text-success fs-2"></i>
+                    </div>
+                    <h3 class="card-title h4 mb-3">Actualizar Puntajes</h3>
+                    <p class="card-text text-muted mb-4">Actualiza los puntajes de todos los jugadores según los
+                        resultados más
+                        recientes.</p>
+                    <div class="d-grid gap-2">
+                        <button id="btn-update-point" class="btn btn-success btn-lg">Actualizar Puntajes</button>
+                        <a href="/detailpointsgamersoptimizated" class="btn btn-info btn-lg text-black">Ver puntajes</a>
+                    </div>
+                    <div id="update-point-message" class="alert alert-success mt-3 d-none" role="alert">
+                        Puntajes actualizados correctamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuración del Sistema -->
+        <div class="col-md-5">
+            <div
+                class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-primary border-3">
+                <div class="card-body text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                        style="width: 80px; height: 80px;">
+                        <i class="fas fa-cogs text-primary fs-2"></i>
+                    </div>
+                    <h3 class="card-title h4 mb-3">Configuración</h3>
+                    <p class="card-text text-muted mb-4">Gestiona puntajes, fechas y parámetros globales del sistema
+                        desde una
+                        interfaz centralizada.</p>
+                    <div class="d-grid">
+                        <a href="/admin/config" class="btn btn-primary btn-lg">Gestionar Sistema</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 </div>
 
-    <!-- Actualizar Puntajes -->
-    <div class="col-md-6">
-        <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-success border-3">
-            <div class="card-body text-center p-4">
-                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
-                    style="width: 80px; height: 80px;">
-                    <i class="fas fa-sync-alt text-success fs-2"></i>
-                </div>
-                <h3 class="card-title h4 mb-3">Actualizar Puntajes</h3>
-                <p class="card-text text-muted mb-4">Actualiza los puntajes de todos los jugadores según los resultados más recientes.</p>
-                <div class="d-grid">
-                    <button id="btn-update-point" class="btn btn-success btn-lg">Actualizar Puntajes</button>
-                </div>
-                <div id="update-point-message" class="alert alert-success mt-3 d-none" role="alert">
-                    Puntajes actualizados correctamente.
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Configuración del Sistema -->
-    <div class="col-md-6">
-        <div class="card h-100 border-0 shadow-sm hover-shadow transition-all border-bottom border-primary border-3">
-            <div class="card-body text-center p-4">
-                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
-                    style="width: 80px; height: 80px;">
-                    <i class="fas fa-cogs text-primary fs-2"></i>
-                </div>
-                <h3 class="card-title h4 mb-3">Configuración</h3>
-                <p class="card-text text-muted mb-4">Gestiona puntajes, fechas y parámetros globales del sistema desde una interfaz centralizada.</p>
-                <div class="d-grid">
-                    <a href="/admin/config" class="btn btn-primary btn-lg">Gestionar Sistema</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <style>
     .hover-shadow:hover {
