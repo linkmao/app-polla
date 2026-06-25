@@ -116,7 +116,7 @@
   "xPointByFourth": 3,
   "viewInitDateTournament": true,
   "initDateTournament": "2026-06-11T14:00:00",
-  "viewCloseBetGroups": true,
+  "viewCloseBetGroups": false,
   "closeBetGroups": "2026-06-10T14:00:00",
   "viewCloseBetPhases": false,
   "closeBetPhases": "2026-07-11T14:00:00",
