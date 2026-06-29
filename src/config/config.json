@@ -124,8 +124,8 @@
   "renderButtonRegister": false,
   "renderBetRoundGroup": false,
   "renderViewOtherBetGroup": true,
-  "enableMenuRoundPhases": false,
+  "enableMenuRoundPhases": true,
   "renderBetRoundPhases": false,
-  "renderViewOtherBetPhases": false,
-  "renderViewOtherBetClassFinal": false
+  "renderViewOtherBetPhases": true,
+  "renderViewOtherBetClassFinal": true
 }

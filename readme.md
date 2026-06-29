@@ -350,7 +350,16 @@ Se da inicio a una serie de modificaiones, esto se trabaja en la rama lab, la ra
 
 ## TODO Prioritarios 
 Atender antes de desplegar
+
+
+- Los partidos en la ronda fases marcado con 0 al inicio no permite poner la tarjeta en verde
+- Implementar agrupar los dos partidos consecutivos para entender que de estos sale una llave
+- Arreglar la visualizacion de algunas sub pantallas
+- Mensaje de notificacion enviada
+- tamaño de las banderas del campeon y cuarto puesto de la vista de clasificación
+ Marcar en la ronda de fase no la palabra Ganador, sino .. mas bien. Elige quien clasifica
 -El boton de ver apuestas de otros jugadores y el boton de ver otras clasificaciones, al parecer tiene un anchor que (necesario para las apuestas) pues devuelve la pantalla. revisar.
+_ implementar una vista desplegable para las tarjetas de puntaje de juego para que se vea menos atosigado
 - Organizar la bandera de republica del conngo
 - No está eliminado los Game (lo intente con el ultimo) como no lo habia intentado entonces esta funcionalidad no se habia verificado. HACER ESTO DE ULTIMAS PARA NO DAÑAR LA ESTRUCTURA DE JUEGOS Y APUESTAS Y SEGUIR HACIENDO OTRAS PRUEBAS
 

@@ -600,7 +600,7 @@ const getOneGame = async (idGame) => {
   analogScore = game[0].analogScore
   visitScore = game[0].visitScore
   // console.log("Id Visitante ", idVisitTeam)
-  if (idVisitTeam != "GENERIC LOCAL TEAM") { //extrañamente el modelo habla de GENRIC VISIT TEAM, PERO LOS GAME QUEDARON CON GENRIC LOCAL TEAM, A CORREGIR
+  if (idVisitTeam != "GENERIC VISIT TEAM") { //extrañamente el modelo habla de GENRIC VISIT TEAM, PERO LOS GAME QUEDARON CON GENRIC LOCAL TEAM, A CORREGIR
     visitTeam = teams.find(t => t._id == idVisitTeam).name
     visitFlag = teams.find(t => t._id == idVisitTeam).flag
   } else {
