@@ -435,14 +435,19 @@ router.get('/admin/games', validar.isAuth, validar.isAdmin, async (req, res) => 
   const games = gamesRaw.map(g => {
     const localTeam = teams.find(t => t._id == g.localTeam)
     const visitTeam = teams.find(t => t._id == g.visitTeam)
+    // La siguiente variable controla la vista de los resultados de las apuestas por partido para la vista del adiminstrador de tal manera que para los juegos donde los jugadores cogen puntaje por cada claseificado se pueda ver desde la vsita admis
+    let renderViewScoreAdmon
+    if (g.phase<=2) {renderViewScoreAdmon= false} else {renderViewScoreAdmon= true}
     return {
       ...g,
+      renderViewScoreAdmon,
       localTeamName: localTeam ? localTeam.name : 'Sin asignar',
       visitTeamName: visitTeam ? visitTeam.name : 'Sin asignar',
       localFlag: localTeam ? localTeam.flag : 'no-flag.png',
       visitFlag: visitTeam ? visitTeam.flag : 'no-flag.png'
     }
   })
+  console.log(games)
   res.render('admin/manage-games', { games })
 })
 

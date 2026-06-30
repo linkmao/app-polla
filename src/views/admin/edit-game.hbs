@@ -160,6 +160,7 @@
     form.addEventListener('submit',  e=>{
      
      e.preventDefault()
+     
      console.log('preparando el terreno')
      console.log('enviando notificacion')
         fetch('/api/notification/send-notification', {
@@ -172,6 +173,8 @@
             message: mensaje
         })
         }
-    )})
+    )}
+    
+    )
    
 </script>
