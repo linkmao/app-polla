@@ -47,12 +47,13 @@
       <th scope="col" style="text-align: center">Pts por L-E-V</th>
       <th scope="col" style="text-align: center">Pts por local</th>
       <th scope="col" style="text-align: center">Pts por visitante</th>
-      <th scope="col" style="text-align: center">TOTAL </th>
+      <th scope="col" style="text-align: center; cursor: pointer;" id="sortTotalHeader">
+        TOTAL <span id="sortIcon" style="font-size: 0.8em;">⇅</span>
+      </th>
     </tr>
   </thead>
-
+  <tbody id="betsBody">
   {{#each dataBet}}
-  <tbody>
     <tr>
       <td></td>
       <td scope="col" style="text-align: center">{{name}}</td>
@@ -85,9 +86,49 @@
       <td scope="col" style="text-align: center">{{pointByAnalogScore}}</td>
       <td scope="col" style="text-align: center">{{pointByLocalEqual}}</td>
       <td scope="col" style="text-align: center">{{pointByVisitEqual}}</td>
-      <td scope="col" style="text-align: center">{{totalByGame}}</td>
+      <td scope="col" style="text-align: center">
+        {{#if (eq totalByGame 0)}}
+          <span style="color: red;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 2)}}
+          <span style="color: blue; font-size: 1.1em;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 3)}}
+          <span style="color: blue; font-size: 1.1em;">{{totalByGame}}</span>
+        {{else if (eq totalByGame 5)}}
+          <span style="color: darkgreen; font-weight: bold; font-size: 1.3em;">{{totalByGame}}</span>
+        {{else}}
+          {{totalByGame}}
+        {{/if}}
+      </td>
     </tr>
-  </tbody>
   {{/each}}
-
+  </tbody>
 </table>
+
+<script>
+  let isSortedAsc = null; // null = sin ordenar, true = ascendente, false = descendente
+
+  document.getElementById('sortTotalHeader').addEventListener('click', function() {
+    const table = this.closest('table');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const sortIcon = document.getElementById('sortIcon');
+
+    if (isSortedAsc === null || isSortedAsc === false) {
+      isSortedAsc = true;
+      sortIcon.textContent = '▲';
+    } else {
+      isSortedAsc = false;
+      sortIcon.textContent = '▼';
+    }
+
+    rows.sort((a, b) => {
+      const aCells = a.querySelectorAll('td');
+      const bCells = b.querySelectorAll('td');
+      const aValue = parseInt(aCells[aCells.length - 1].textContent.trim()) || 0;
+      const bValue = parseInt(bCells[bCells.length - 1].textContent.trim()) || 0;
+      return isSortedAsc ? aValue - bValue : bValue - aValue;
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+  });
+</script>
