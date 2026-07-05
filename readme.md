@@ -351,7 +351,10 @@ Se da inicio a una serie de modificaiones, esto se trabaja en la rama lab, la ra
 ## TODO Prioritarios 
 Atender antes de desplegar
 
-
+- Documentacion del uso de compass
+- Documentacion de la implementacion de notoficaciones
+- Documentacion del despliegue
+- Documentacion del uso de exappy con cloudflare
 - Los partidos en la ronda fases marcado con 0 al inicio no permite poner la tarjeta en verde
 - Implementar agrupar los dos partidos consecutivos para entender que de estos sale una llave
 - Arreglar la visualizacion de algunas sub pantallas
@@ -526,6 +529,11 @@ Abrir la app
 Reinciar la app en heroku
     heroku restart --app [nombre-app]
 
+
+## Uso de dominios personales
+Durante el despliegue y segun la plataforma hay que enlazar el dominio que entrega la plataforma de despliegue con un dominio personal (si se ha adquirido)
+Este por ejemplo es el paso a paso para enlazar el dominio 
+polla2.up.railway.app --> exappy.com
 
 ## Test de tiempo y otros segun donde se despliegua
 ### Seenode + mongodb Atlas

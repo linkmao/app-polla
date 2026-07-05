@@ -30,7 +30,7 @@
   {{/each}}
 
   <tbody id="betsBody">
-  {{#each dataBetClassification}}
+    {{#each dataBetClassification}}
     <tr>
       <td scope="col" style="text-align: center">{{name}}</td>
       <td scope="col" style="text-align: center">
@@ -79,28 +79,32 @@
       <td scope="col" style="text-align: center">{{pointByFourth}}</td>
       <td scope="col" style="text-align: center">
         {{#if (eq total 0)}}
-          <span style="color: red; font-size: 1.0em;">{{total}}</span>
+        <span style="color: red; font-size: 1.0em;">{{total}}</span>
         {{else if (eq total 5)}}
-          <span style="color: blue; font-size: 1.1em;">{{total}}</span>
+        <span style="color: blue; font-size: 1.1em;">{{total}}</span>
         {{else if (eq total 10)}}
-          <span style="color: blue; font-size: 1.1em;">{{total}}</span>
+        <span style="color: blue; font-size: 1.1em;">{{total}}</span>
         {{else if (eq total 15)}}
-          <span style="color: blue; font-size: 1.1em;">{{total}}</span>
+        <span style="color: blue; font-size: 1.1em;">{{total}}</span>
         {{else if (eq total 20)}}
-          <span style="color: green; font-weight: bold; font-size: 1.3em;">{{total}}</span>
+        <span style="color: green; font-weight: bold; font-size: 1.3em;">{{total}}</span>
+        {{else if (eq total 30)}}
+        <span style="color: green; font-weight: bold; font-size: 1.4em;">{{total}}</span>
+        {{else if (eq total 40)}}
+        <span style="color: green; font-weight: bold; font-size: 1.6em;">{{total}}</span>
         {{else}}
-          <span style="font-size: 1.0em;">{{total}}</span>
+        <span style="font-size: 1.0em;">{{total}}</span>
         {{/if}}
       </td>
     </tr>
-  {{/each}}
+    {{/each}}
   </tbody>
 </table>
 
 <script>
   let isSortedAsc = null; // null = sin ordenar, true = ascendente, false = descendente
 
-  document.getElementById('sortTotalHeader').addEventListener('click', function() {
+  document.getElementById('sortTotalHeader').addEventListener('click', function () {
     const table = this.closest('table');
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
