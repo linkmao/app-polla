@@ -1,6 +1,6 @@
 self.addEventListener('push',e=>{
   const data=e.data.json()
-  console.log(data)
+  // console.log(data)
   self.registration.showNotification(data.title,{
     body:data.message,
     icon:'/img/iconos/polla-2026png.png'
@@ -9,5 +9,5 @@ self.addEventListener('push',e=>{
   })
   
   
-  console.log('esta es la data del worker',data)
+  // console.log('esta es la data del worker',data)
 })

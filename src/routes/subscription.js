@@ -22,7 +22,7 @@ router.post('/send-notification', async (req, res) => {
   res.status(200).json({ message: 'Notificación enviada' })
    try {
     await webpush.sendNotification(pushSubscription,payload)
-    console.log('Notificación enviada con éxito')
+    // console.log('Notificación enviada con éxito')
   } catch (error) {
     console.error('Error al enviar la notificación:', error)
   }

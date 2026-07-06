@@ -447,7 +447,7 @@ router.get('/admin/games', validar.isAuth, validar.isAdmin, async (req, res) => 
       visitFlag: visitTeam ? visitTeam.flag : 'no-flag.png'
     }
   })
-  console.log(games)
+  // console.log(games)
   res.render('admin/manage-games', { games })
 })
 
